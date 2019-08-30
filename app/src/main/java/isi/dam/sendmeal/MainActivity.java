@@ -70,10 +70,11 @@ public class MainActivity extends AppCompatActivity {
         grupo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                int progress = credito.getProgress();
                 switch (checkedId){
-                    case R.id.ButtonBase: credito.setProgress(100); break;
-                    case R.id.ButtonPremium: credito.setProgress(250); break;
-                    case R.id.ButtonFull: credito.setProgress(500); break;
+                    case R.id.ButtonBase: if(progress<100) credito.setProgress(100); break;
+                    case R.id.ButtonPremium: if(progress<250) credito.setProgress(250); break;
+                    case R.id.ButtonFull: if(progress<500) credito.setProgress(500); break;
                 }
             }
         });

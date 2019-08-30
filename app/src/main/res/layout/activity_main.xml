@@ -30,15 +30,16 @@
             android:text="@string/NombreString" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/IngresoNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/IngresoNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/etiquetas"
+                android:singleLine="true"
                 android:hint="@string/HintNombreString" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -51,13 +52,14 @@
             android:text="@string/ClaveString" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/IngresoClave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
+            android:singleLine="true"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/IngresoClave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/etiquetas"
@@ -74,13 +76,14 @@
             android:text="@string/RepetirClaveString" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/IngresoClave2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
+            android:singleLine="true"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/IngresoClave2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/etiquetas"
@@ -97,12 +100,13 @@
             android:text="@string/CorreoString" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/IngresoCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/IngresoCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/etiquetas"
@@ -124,13 +128,14 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngresoNumeroTarjeta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
+                android:singleLine="true"
                 android:layout_weight="0.55">
 
                 <com.santalu.maskedittext.MaskEditText
-                    android:id="@+id/IngresoNumeroTarjeta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/HintNumeroTarjetaString"
@@ -142,13 +147,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngresoCCVTarjeta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
+                android:singleLine="true"
                 android:layout_weight="0.1">
 
                 <com.santalu.maskedittext.MaskEditText
-                    android:id="@+id/IngresoCCVTarjeta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/HintCCVTarjetaString"
@@ -160,13 +166,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngresoFechaTarjeta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
+                android:singleLine="true"
                 android:layout_weight="0.35">
 
                 <com.santalu.maskedittext.MaskEditText
-                    android:id="@+id/IngresoFechaTarjeta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/HintVencimientoTarjetaString"
@@ -291,12 +298,13 @@
                 android:text="@string/AliasCBUString" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngresoAliasCBU"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:singleLine="true"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/IngresoAliasCBU"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/etiquetas"
@@ -311,12 +319,13 @@
                 android:text="@string/CBUString" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngresoCBU"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:singleLine="true"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/IngresoCBU"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/etiquetas"
