@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">SendMeal</string>
+    <string name="TituloString">Registrar Usuario</string>
+
+    <string name="NombreString">Nombre</string>
+    <string name="ClaveString">Clave</string>
+    <string name="RepetirClaveString">Repetir Clave</string>
+    <string name="CorreoString">Correo Electrónico</string>
+    <string name="TarjetaString">Tarjeta de Crédito</string>
+
+    <string name="TipoCuentaString">Tipo de Cuenta</string>
+    <string name="TipoCuentaBaseString">Base</string>
+    <string name="TipoCuentaPremiumString">Premium</string>
+    <string name="TipoCuentaFullString">Full</string>
+    <string name="CreditoInicialString">Credito Inicial</string>
+    <string name="NotificarCorreoString">Notificar por Correo Electrónico</string>
+    <string name="NoEnviarNotificacionesBotonString">NO ENVIAR NOTIFICACIONES AL MAIL</string>
+    <string name="EnviarNotificacionesBotonString">ENVIAR NOTIFICACIONES AL MAIL</string>
+    <string name="EsVendedorString">Es Vendedor</string>
+    <string name="AliasCBUString">Alias CBU</string>
+    <string name="CBUString">CBU</string>
+    <string name="TerminosYCondicionesString">Acepta términos y condiciones</string>
+    <string name="RegistrarBotonString">REGISTRAR</string>
+
+    <string name="HintNombreString">Ingrese Nombre</string>
+    <string name="HintClaveString">Ingrese Clave</string>
+    <string name="HintRepetirClaveString">Repita Clave</string>
+    <string name="HintCorreoString">Ingrese Correo Electrónico</string>
+    <string name="HintNumeroTarjetaString">Número</string>
+    <string name="HintCCVTarjetaString">CCV</string>
+    <string name="HintVencimientoTarjetaString">MM/AA</string>
+    <string name="HintAliasCBUString">Ingrese Alias CBU</string>
+    <string name="HintCBUString">Ingrese CBU</string>
+
 </resources>

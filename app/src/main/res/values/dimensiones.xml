@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="titulo">32dp</dimen>
+    <dimen name="etiquetas">16dp</dimen>
+
+</resources>
