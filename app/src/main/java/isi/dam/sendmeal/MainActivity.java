@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
 import android.widget.Switch;
+import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +18,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final DecimalFormat formatoMonto = new DecimalFormat("$0.00");
+
+        SeekBar credito = findViewById(R.id.IngresoCredito);
         Switch esVendedor = findViewById(R.id.ButtonEsVendedor);
+        final TextView montoCredito = findViewById(R.id.MontoCredito);
+
+        montoCredito.setText(formatoMonto.format(0));
 
         esVendedor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 
@@ -27,6 +37,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+        });
+
+        credito.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+                int val = (progress * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
+                montoCredito.setText(formatoMonto.format(val));
+                montoCredito.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
     }
