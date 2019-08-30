@@ -166,11 +166,11 @@
 
             <TextView
                 android:id="@+id/TipoCuenta"
-                android:layout_width="190dp"
+                android:layout_width="145dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.25"
-                android:textSize="@dimen/etiquetas"
-                android:text="@string/TipoCuentaString" />
+                android:text="@string/TipoCuentaString"
+                android:textSize="@dimen/etiquetas" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -178,35 +178,29 @@
                 android:layout_weight="0.75"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <RadioButton
+                    android:id="@+id/ButtonBase"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.3">
+                    android:layout_weight="0.3"
+                    android:textSize="@dimen/etiquetas"
+                    android:text="@string/TipoCuentaBaseString" />
 
-                    <RadioButton
-                        android:id="@+id/ButtonBase"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:textSize="@dimen/etiquetas"
-                        android:text="@string/TipoCuentaBaseString" />
+                <RadioButton
+                    android:id="@+id/ButtonPremium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:textSize="@dimen/etiquetas"
+                    android:text="@string/TipoCuentaPremiumString" />
 
-                    <RadioButton
-                        android:id="@+id/ButtonPremium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:textSize="@dimen/etiquetas"
-                        android:text="@string/TipoCuentaPremiumString" />
-
-                    <RadioButton
-                        android:id="@+id/ButtonFull"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:textSize="@dimen/etiquetas"
-                        android:text="@string/TipoCuentaFullString" />
-                </LinearLayout>
+                <RadioButton
+                    android:id="@+id/ButtonFull"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:textSize="@dimen/etiquetas"
+                    android:text="@string/TipoCuentaFullString" />
 
             </RadioGroup>
 

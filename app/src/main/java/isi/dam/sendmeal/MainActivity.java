@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity {
         credito.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
-                int val = (progress * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
+                int val = progress;//(progress * (seekBar.getWidth() - 2 * seekBar.getThumbOffset())) / seekBar.getMax();
                 montoCredito.setText(formatoMonto.format(val));
-                montoCredito.setX(seekBar.getX() + val + seekBar.getThumbOffset() / 2);
+                montoCredito.setX(seekBar.getThumb().getBounds().left - val/15);
             }
 
             @Override
