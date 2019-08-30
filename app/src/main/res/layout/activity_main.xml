@@ -173,6 +173,7 @@
                 android:textSize="@dimen/etiquetas" />
 
             <RadioGroup
+                android:id="@+id/GrupoBotones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.75"
@@ -183,24 +184,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:textSize="@dimen/etiquetas"
-                    android:text="@string/TipoCuentaBaseString" />
+                    android:text="@string/TipoCuentaBaseString"
+                    android:textSize="@dimen/etiquetas" />
 
                 <RadioButton
                     android:id="@+id/ButtonPremium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:textSize="@dimen/etiquetas"
-                    android:text="@string/TipoCuentaPremiumString" />
+                    android:text="@string/TipoCuentaPremiumString"
+                    android:textSize="@dimen/etiquetas" />
 
                 <RadioButton
                     android:id="@+id/ButtonFull"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
-                    android:textSize="@dimen/etiquetas"
-                    android:text="@string/TipoCuentaFullString" />
+                    android:text="@string/TipoCuentaFullString"
+                    android:textSize="@dimen/etiquetas" />
 
             </RadioGroup>
 
