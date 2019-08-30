@@ -114,51 +114,36 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="151dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/IngresoNumTarjeta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:hint="@string/HintNumeroTarjetaString"
-                    android:inputType="number"
-                    android:textSize="@dimen/etiquetas" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
+            <com.santalu.maskedittext.MaskEditText
+                android:id="@+id/IngresoNumeroTarjeta"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2">
+                android:layout_height="wrap_content"
+                android:hint="@string/HintNumeroTarjetaString"
+                android:textSize="@dimen/etiquetas"
+                android:inputType="number"
+                app:met_mask="####-####-####-####"
+                android:layout_weight="0.7"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/IngresoCCVTarjeta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
-                    android:hint="@string/HintCCVTarjetaString"
-                    android:inputType="number"
-                    android:textSize="@dimen/etiquetas" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
+            <com.santalu.maskedittext.MaskEditText
+                android:id="@+id/IngresoCCVTarjeta"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3">
+                android:layout_height="wrap_content"
+                android:hint="@string/HintCCVTarjetaString"
+                android:textSize="@dimen/etiquetas"
+                android:inputType="number"
+                app:met_mask="###"
+                android:layout_weight="0.1"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/IngresoFechaTarjeta"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    android:hint="@string/HintVencimientoTarjetaString"
-                    android:inputType="date"
-                    android:textSize="@dimen/etiquetas" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <com.santalu.maskedittext.MaskEditText
+                android:id="@+id/IngresoFechaTarjeta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/HintVencimientoTarjetaString"
+                android:textSize="@dimen/etiquetas"
+                android:inputType="date"
+                app:met_mask="##/####"
+                android:layout_weight="0.2"/>
+
         </LinearLayout>
 
         <LinearLayout
