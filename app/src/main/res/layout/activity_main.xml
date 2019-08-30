@@ -124,8 +124,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:textSize="@dimen/etiquetas"
-                    android:hint="@string/HintNumeroTarjetaString" />
+                    android:hint="@string/HintNumeroTarjetaString"
+                    android:inputType="number"
+                    android:textSize="@dimen/etiquetas" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -139,8 +140,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
-                    android:textSize="@dimen/etiquetas"
-                    android:hint="@string/HintCCVTarjetaString" />
+                    android:hint="@string/HintCCVTarjetaString"
+                    android:inputType="number"
+                    android:textSize="@dimen/etiquetas" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -151,10 +153,11 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/IngresoFechaTarjeta"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.3"
-                    android:textSize="@dimen/etiquetas"
-                    android:hint="@string/HintVencimientoTarjetaString" />
+                    android:hint="@string/HintVencimientoTarjetaString"
+                    android:inputType="date"
+                    android:textSize="@dimen/etiquetas" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 

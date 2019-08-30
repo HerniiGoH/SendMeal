@@ -28,7 +28,7 @@
     <string name="HintCorreoString">Ingrese Correo Electrónico</string>
     <string name="HintNumeroTarjetaString">Número</string>
     <string name="HintCCVTarjetaString">CCV</string>
-    <string name="HintVencimientoTarjetaString">MM/AA</string>
+    <string name="HintVencimientoTarjetaString">MM/AAAA</string>
     <string name="HintAliasCBUString">Ingrese Alias CBU</string>
     <string name="HintCBUString">Ingrese CBU</string>
 
