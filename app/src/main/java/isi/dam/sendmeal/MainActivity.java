@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         final SeekBar credito = findViewById(R.id.IngresoCredito);
         Switch esVendedor = findViewById(R.id.ButtonEsVendedor);
         final TextView montoCredito = findViewById(R.id.MontoCredito);
-        RadioGroup grupo = findViewById(R.id.GrupoBotones);
+        final RadioGroup grupo = findViewById(R.id.GrupoBotones);
 
         final DecimalFormat formatoMonto = new DecimalFormat("$0.00");
 
@@ -48,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
         credito.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+                switch (grupo.getCheckedRadioButtonId()){
+                    case R.id.ButtonBase: if(progress<100) progress=100; break;
+                    case R.id.ButtonPremium: if(progress<250) progress=250; break;
+                    case R.id.ButtonFull: if(progress<500) progress=500; break;
+                    default: break;
+                }
+                credito.setProgress(progress);
                 int val = progress;
                 montoCredito.setText(formatoMonto.format(val));
                 montoCredito.setX(seekBar.getThumb().getBounds().left - val/15);
