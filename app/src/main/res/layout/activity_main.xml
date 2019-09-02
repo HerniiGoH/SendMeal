@@ -125,15 +125,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="1">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/IngresoNumeroTarjeta"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:singleLine="true"
-                android:layout_weight="0.55">
+                android:layout_weight="0.60"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp">
 
                 <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/IngresoNumero"
@@ -141,6 +144,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/HintNumeroTarjetaString"
                     android:textSize="@dimen/etiquetas"
+                    android:text=""
                     android:inputType="number"
                     app:errorEnabled="true"
                     app:met_mask="####-####-####-####"/>
@@ -149,11 +153,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/IngresoCCVTarjeta"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:singleLine="true"
-                android:layout_weight="0.1">
+                android:layout_weight="0.15"
+                android:layout_marginRight="10dp">
 
                 <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/IngresoCCV"
@@ -161,6 +166,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/HintCCVTarjetaString"
                     android:textSize="@dimen/etiquetas"
+                    android:text=""
                     android:inputType="number"
                     app:errorEnabled="true"
                     app:met_mask="###"/>
@@ -169,11 +175,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/IngresoFechaTarjeta"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:singleLine="true"
-                android:layout_weight="0.35">
+                android:layout_weight="0.25"
+                android:layout_marginRight="10dp">
 
                 <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/IngresoFecha"
@@ -183,6 +190,7 @@
                     android:textSize="@dimen/etiquetas"
                     android:inputType="date"
                     app:errorEnabled="true"
+                    android:text=""
                     app:met_mask="##/####"/>
             </com.google.android.material.textfield.TextInputLayout>
 
