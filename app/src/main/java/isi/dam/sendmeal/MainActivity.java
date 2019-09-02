@@ -13,12 +13,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.santalu.maskedittext.MaskEditText;
 import java.text.DecimalFormat;
 import java.util.Calendar;
-
 import isi.dam.sendmeal.Domain.CuentaBancaria;
 import isi.dam.sendmeal.Domain.TarjetaCredito;
 import isi.dam.sendmeal.Domain.TipoCuenta;
