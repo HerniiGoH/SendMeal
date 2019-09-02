@@ -283,6 +283,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ToggleButton"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:textSize="@dimen/etiquetas"
             android:textOff="@string/NoEnviarNotificacionesBotonString"
             android:textOn="@string/EnviarNotificacionesBotonString" />
@@ -356,9 +358,12 @@
             android:id="@+id/ButtonRegistrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/etiquetas"
             android:enabled="false"
-            android:text="@string/RegistrarBotonString" />
+            android:text="@string/RegistrarBotonString"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/etiquetas" />
 
     </LinearLayout>
 </ScrollView>
