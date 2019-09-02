@@ -1,18 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/Titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/TituloString"
+            android:textColor="@color/colorTitulo"
+            android:textSize="@dimen/titulo"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/Nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/etiquetas"
+            android:textColor="@color/colorEtiqueta"
+            android:text="@string/NombreString" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/IngresoNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/etiquetas"
+                android:singleLine="true"
+                android:hint="@string/HintNombreString" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/Clave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/etiquetas"
+            android:textColor="@color/colorEtiqueta"
+            android:text="@string/ClaveString" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/IngresoClave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:singleLine="true"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/etiquetas"
+                android:inputType="textPassword"
+                android:hint="@string/HintClaveString" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/RepetirClave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/etiquetas"
+            android:textColor="@color/colorEtiqueta"
+            android:text="@string/RepetirClaveString" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/IngresoClave2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            android:singleLine="true"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/etiquetas"
+                android:inputType="textPassword"
+                android:hint="@string/HintRepetirClaveString" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/Correo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/etiquetas"
+            android:textColor="@color/colorEtiqueta"
+            android:text="@string/CorreoString" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/IngresoCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/etiquetas"
+                android:inputType="textEmailAddress"
+                android:hint="@string/HintCorreoString" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/Tarjeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/etiquetas"
+            android:textColor="@color/colorEtiqueta"
+            android:text="@string/TarjetaString" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngresoNumeroTarjeta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:singleLine="true"
+                android:layout_weight="0.55">
+
+                <com.santalu.maskedittext.MaskEditText
+                    android:id="@+id/IngresoNumero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/HintNumeroTarjetaString"
+                    android:textSize="@dimen/etiquetas"
+                    android:inputType="number"
+                    app:errorEnabled="true"
+                    app:met_mask="####-####-####-####"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngresoCCVTarjeta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:singleLine="true"
+                android:layout_weight="0.1">
+
+                <com.santalu.maskedittext.MaskEditText
+                    android:id="@+id/IngresoCCV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/HintCCVTarjetaString"
+                    android:textSize="@dimen/etiquetas"
+                    android:inputType="number"
+                    app:errorEnabled="true"
+                    app:met_mask="###"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngresoFechaTarjeta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                android:singleLine="true"
+                android:layout_weight="0.35">
+
+                <com.santalu.maskedittext.MaskEditText
+                    android:id="@+id/IngresoFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/HintVencimientoTarjetaString"
+                    android:textSize="@dimen/etiquetas"
+                    android:inputType="date"
+                    app:errorEnabled="true"
+                    app:met_mask="##/####"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/TipoCuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:text="@string/TipoCuentaString"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/etiquetas" />
+
+            <RadioGroup
+                android:id="@+id/GrupoBotones"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.75"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/ButtonBase"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text="@string/TipoCuentaBaseString"
+                    android:textSize="@dimen/etiquetas" />
+
+                <RadioButton
+                    android:id="@+id/ButtonPremium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text="@string/TipoCuentaPremiumString"
+                    android:textSize="@dimen/etiquetas" />
+
+                <RadioButton
+                    android:id="@+id/ButtonFull"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text="@string/TipoCuentaFullString"
+                    android:textSize="@dimen/etiquetas" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/CreditoInicial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/etiquetas"
+            android:textColor="@color/colorEtiqueta"
+            android:text="@string/CreditoInicialString" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <SeekBar
+                android:id="@+id/IngresoCredito"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="1500" />
+
+            <TextView
+                android:id="@+id/MontoCredito"
+                android:textSize="@dimen/etiquetas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/Notificar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/etiquetas"
+            android:text="@string/NotificarCorreoString" />
+
+        <ToggleButton
+            android:id="@+id/ButtonNotificaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ToggleButton"
+            android:textSize="@dimen/etiquetas"
+            android:textOff="@string/NoEnviarNotificacionesBotonString"
+            android:textOn="@string/EnviarNotificacionesBotonString" />
+
+        <Switch
+            android:id="@+id/ButtonEsVendedor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/etiquetas"
+            android:text="@string/EsVendedorString" />
+
+        <LinearLayout
+            android:id="@+id/LayoutDatosBancarios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/AliasCBU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/etiquetas"
+                android:text="@string/AliasCBUString" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngresoAliasCBU"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/etiquetas"
+                    android:hint="@string/HintAliasCBUString" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/CBU"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/etiquetas"
+                android:text="@string/CBUString" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/IngresoCBU"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/etiquetas"
+                    android:hint="@string/HintCBUString" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/ButtonTerminosYCondiciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/etiquetas"
+            android:text="@string/TerminosYCondicionesString" />
+
+        <Button
+            android:id="@+id/ButtonRegistrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/etiquetas"
+            android:enabled="false"
+            android:text="@string/RegistrarBotonString" />
+
+    </LinearLayout>
+</ScrollView>
