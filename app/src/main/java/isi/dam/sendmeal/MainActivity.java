@@ -12,10 +12,17 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
+
 import com.google.android.material.textfield.TextInputLayout;
 import com.santalu.maskedittext.MaskEditText;
 import java.text.DecimalFormat;
 import java.util.Calendar;
+
+import isi.dam.sendmeal.Domain.CuentaBancaria;
+import isi.dam.sendmeal.Domain.TarjetaCredito;
+import isi.dam.sendmeal.Domain.TipoCuenta;
+import isi.dam.sendmeal.Domain.Usuario;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
     private RadioGroup grupo;
 
-    private Button buttonNotif, buttonRegistrar;
+    private Button buttonRegistrar;
+
+    private ToggleButton buttonNotif;
 
     private CheckBox terminos;
 
@@ -121,6 +130,12 @@ public class MainActivity extends AppCompatActivity {
                     ingresoAliasCBU = findViewById(R.id.IngresoAliasCBU);
                     ingresoCBU = findViewById(R.id.IngresoCBU);
                     if(verificarVendedor(ingresoNombre, ingresoClave, ingresoClave2, ingresoCorreo, ingresoNumTarjeta, ingresoCCV, ingresoVencimTarjeta, ingresoAliasCBU, ingresoCBU, grupo)){
+                        CuentaBancaria cuentaBancaria = new CuentaBancaria(ingresoAliasCBU.getEditText().getText().toString().trim(), ingresoCBU.getEditText().getText().toString().trim());
+                        Calendar date = Calendar.getInstance();
+                        date.set(Calendar.MONTH, Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoFecha)).getRawText().toString().trim().substring(0,2)));
+                        date.set(Calendar.YEAR, Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoFecha)).getRawText().toString().trim().substring(2,6)));
+                        TarjetaCredito tarjetaCredito = new TarjetaCredito(Long.valueOf(((MaskEditText)findViewById(R.id.IngresoNumero)).getRawText().toString().trim()), Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoCCV)).getRawText().toString().trim()), date);
+                        Usuario usuario = new Usuario(ingresoNombre.getEditText().getText().toString().trim(), ingresoCorreo.getEditText().getText().toString().trim(), ingresoClave.getEditText().getText().toString().trim(), buttonNotif.isChecked(), Double.valueOf(credito.getProgress()), cuentaBancaria, tarjetaCredito, TipoCuenta.Vendedor);
                         Toast.makeText(getApplicationContext(), "Datos Registrados Exitosamente.", Toast.LENGTH_SHORT).show();
                     }
                     else{
@@ -129,6 +144,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     if(verificarComprador(ingresoNombre, ingresoClave, ingresoClave2, ingresoCorreo, ingresoNumTarjeta, ingresoCCV, ingresoVencimTarjeta, grupo)){
+                        Calendar date = Calendar.getInstance();
+                        date.set(Calendar.MONTH, Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoFecha)).getRawText().toString().trim().substring(0,2)));
+                        date.set(Calendar.YEAR, Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoFecha)).getRawText().toString().trim().substring(2,6)));
+                        TarjetaCredito tarjetaCredito = new TarjetaCredito(Long.valueOf(((MaskEditText)findViewById(R.id.IngresoNumero)).getRawText().toString().trim()), Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoCCV)).getRawText().toString().trim()), date);
+                        Usuario usuario = new Usuario(ingresoNombre.getEditText().getText().toString().trim(), ingresoCorreo.getEditText().getText().toString().trim(), ingresoClave.getEditText().getText().toString().trim(), buttonNotif.isChecked(), Double.valueOf(credito.getProgress()), null, tarjetaCredito, TipoCuenta.Comprador);
                         Toast.makeText(getApplicationContext(), "Datos Registrados Exitosamente.", Toast.LENGTH_SHORT).show();
                     }
                     else{
@@ -141,9 +161,9 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean verificarVendedor(TextInputLayout ingresoNombre, TextInputLayout ingresoClave, TextInputLayout ingresoClave2, TextInputLayout ingresoCorreo, TextInputLayout ingresoNumTarjeta, TextInputLayout ingresoCCVTarjeta, TextInputLayout ingresoFechaTarjeta, TextInputLayout ingresoAliasCBU, TextInputLayout ingresoCBU, RadioGroup grupo){
         if(verificarNombe(ingresoNombre) | verificarClave(ingresoClave, ingresoClave2) | verificarCorreo(ingresoCorreo) | verificarNumTarjeta(ingresoNumTarjeta) | verificarCCVTarjeta(ingresoCCVTarjeta) | verificarFechaTarjeta(ingresoFechaTarjeta) | verificarAliasCBU(ingresoAliasCBU) | verificarCBU(ingresoCBU) | verificarGrupo(grupo)){
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
     private boolean verificarComprador(TextInputLayout ingresoNombre, TextInputLayout ingresoClave, TextInputLayout ingresoClave2, TextInputLayout ingresoCorreo, TextInputLayout ingresoNumTarjeta, TextInputLayout ingresoCCVTarjeta, TextInputLayout ingresoFechaTarjeta, RadioGroup grupo){

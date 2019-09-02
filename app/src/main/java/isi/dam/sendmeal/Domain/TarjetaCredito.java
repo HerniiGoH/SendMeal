@@ -5,20 +5,20 @@ import java.util.Objects;
 
 public class TarjetaCredito {
     private Integer id;
-    private Integer numeroTarjeta;
+    private Long numeroTarjeta;
     private Integer CCV;
     private Calendar date;
 
     public TarjetaCredito() {
     }
 
-    public TarjetaCredito(Integer numeroTarjeta, Integer CCV, Calendar date) {
+    public TarjetaCredito(Long numeroTarjeta, Integer CCV, Calendar date) {
         this.numeroTarjeta = numeroTarjeta;
         this.CCV = CCV;
         this.date = date;
     }
 
-    public TarjetaCredito(Integer id, Integer numeroTarjeta, Integer CCV, Calendar date) {
+    public TarjetaCredito(Integer id, Long numeroTarjeta, Integer CCV, Calendar date) {
         this.id = id;
         this.numeroTarjeta = numeroTarjeta;
         this.CCV = CCV;
@@ -33,11 +33,11 @@ public class TarjetaCredito {
         this.id = id;
     }
 
-    public Integer getNumeroTarjeta() {
+    public Long getNumeroTarjeta() {
         return numeroTarjeta;
     }
 
-    public void setNumeroTarjeta(Integer numeroTarjeta) {
+    public void setNumeroTarjeta(Long numeroTarjeta) {
         this.numeroTarjeta = numeroTarjeta;
     }
 
