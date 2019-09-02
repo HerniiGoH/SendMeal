@@ -11,11 +11,12 @@ public class Usuario {
     private Double credito;
     private CuentaBancaria cuentaBancaria;
     private TarjetaCredito tarjetaCredito;
+    private TipoCuenta tipoCuenta;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String mail, String clave, Boolean notificarMail, Double credito, CuentaBancaria cuentaBancaria, TarjetaCredito tarjetaCredito) {
+    public Usuario(String nombre, String mail, String clave, Boolean notificarMail, Double credito, CuentaBancaria cuentaBancaria, TarjetaCredito tarjetaCredito, TipoCuenta tipoCuenta) {
         this.nombre = nombre;
         this.mail = mail;
         this.clave = clave;
@@ -23,9 +24,10 @@ public class Usuario {
         this.credito = credito;
         this.cuentaBancaria = cuentaBancaria;
         this.tarjetaCredito = tarjetaCredito;
+        this.tipoCuenta = tipoCuenta;
     }
 
-    public Usuario(Integer id, String nombre, String mail, String clave, Boolean notificarMail, Double credito, CuentaBancaria cuentaBancaria, TarjetaCredito tarjetaCredito) {
+    public Usuario(Integer id, String nombre, String mail, String clave, Boolean notificarMail, Double credito, CuentaBancaria cuentaBancaria, TarjetaCredito tarjetaCredito, TipoCuenta tipoCuenta) {
         this.id = id;
         this.nombre = nombre;
         this.mail = mail;
@@ -34,6 +36,7 @@ public class Usuario {
         this.credito = credito;
         this.cuentaBancaria = cuentaBancaria;
         this.tarjetaCredito = tarjetaCredito;
+        this.tipoCuenta = tipoCuenta;
     }
 
     public Integer getId() {
@@ -100,6 +103,14 @@ public class Usuario {
         this.tarjetaCredito = tarjetaCredito;
     }
 
+    public TipoCuenta getTipoCuenta() {
+        return tipoCuenta;
+    }
+
+    public void setTipoCuenta(TipoCuenta tipoCuenta) {
+        this.tipoCuenta = tipoCuenta;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,13 +122,14 @@ public class Usuario {
                 getClave().equals(usuario.getClave()) &&
                 getNotificarMail().equals(usuario.getNotificarMail()) &&
                 getCredito().equals(usuario.getCredito()) &&
-                getCuentaBancaria().equals(usuario.getCuentaBancaria()) &&
-                getTarjetaCredito().equals(usuario.getTarjetaCredito());
+                Objects.equals(getCuentaBancaria(), usuario.getCuentaBancaria()) &&
+                getTarjetaCredito().equals(usuario.getTarjetaCredito()) &&
+                getTipoCuenta() == usuario.getTipoCuenta();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getNombre(), getMail(), getClave(), getNotificarMail(), getCredito(), getCuentaBancaria(), getTarjetaCredito());
+        return Objects.hash(getId(), getNombre(), getMail(), getClave(), getNotificarMail(), getCredito(), getCuentaBancaria(), getTarjetaCredito(), getTipoCuenta());
     }
 
     @Override
@@ -131,6 +143,7 @@ public class Usuario {
                 ", credito=" + credito +
                 ", cuentaBancaria=" + cuentaBancaria +
                 ", tarjetaCredito=" + tarjetaCredito +
+                ", tipoCuenta=" + tipoCuenta +
                 '}';
     }
 }
