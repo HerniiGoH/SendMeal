@@ -136,7 +136,7 @@
                 android:singleLine="true"
                 android:layout_weight="0.60"
                 android:layout_marginRight="10dp"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="7.5dp">
 
                 <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/IngresoNumero"
@@ -158,7 +158,7 @@
                 app:errorEnabled="true"
                 android:singleLine="true"
                 android:layout_weight="0.15"
-                android:layout_marginRight="10dp">
+                android:layout_marginRight="7.5dp">
 
                 <com.santalu.maskedittext.MaskEditText
                     android:id="@+id/IngresoCCV"
@@ -283,6 +283,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ToggleButton"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
             android:textSize="@dimen/etiquetas"
             android:textOff="@string/NoEnviarNotificacionesBotonString"
             android:textOn="@string/EnviarNotificacionesBotonString" />
@@ -356,9 +358,12 @@
             android:id="@+id/ButtonRegistrar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/etiquetas"
             android:enabled="false"
-            android:text="@string/RegistrarBotonString" />
+            android:text="@string/RegistrarBotonString"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/etiquetas" />
 
     </LinearLayout>
 </ScrollView>
