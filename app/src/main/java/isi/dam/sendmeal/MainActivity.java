@@ -1,33 +1,21 @@
 package isi.dam.sendmeal;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.textfield.TextInputLayout;
 import com.santalu.maskedittext.MaskEditText;
-
-import org.w3c.dom.Text;
-
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.Date;
-
-import static java.lang.Math.abs;
 
 public class MainActivity extends AppCompatActivity {
 
