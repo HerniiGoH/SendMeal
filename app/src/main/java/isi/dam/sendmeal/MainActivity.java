@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         CuentaBancaria cuentaBancaria = new CuentaBancaria(ingresoAliasCBU.getEditText().getText().toString().trim(), ingresoCBU.getEditText().getText().toString().trim());
                         Calendar date = Calendar.getInstance();
                         date.set(Calendar.MONTH, Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoFecha)).getRawText().toString().trim().substring(0,2)));
-                        date.set(Calendar.YEAR, Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoFecha)).getRawText().toString().trim().substring(2,6)));
+                        date.set(Calendar.YEAR, Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoFecha)).getRawText().toString().trim().substring(2,4))+2000);
                         TarjetaCredito tarjetaCredito = new TarjetaCredito(Long.valueOf(((MaskEditText)findViewById(R.id.IngresoNumero)).getRawText().toString().trim()), Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoCCV)).getRawText().toString().trim()), date);
                         Usuario usuario = new Usuario(ingresoNombre.getEditText().getText().toString().trim(), ingresoCorreo.getEditText().getText().toString().trim(), ingresoClave.getEditText().getText().toString().trim(), buttonNotif.isChecked(), Double.valueOf(credito.getProgress()), cuentaBancaria, tarjetaCredito, TipoCuenta.Vendedor);
                         Toast.makeText(getApplicationContext(), "Datos Registrados Exitosamente.", Toast.LENGTH_SHORT).show();
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     if(verificarComprador(ingresoNombre, ingresoClave, ingresoClave2, ingresoCorreo, ingresoNumTarjeta, ingresoCCV, ingresoVencimTarjeta, grupo)){
                         Calendar date = Calendar.getInstance();
                         date.set(Calendar.MONTH, Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoFecha)).getRawText().toString().trim().substring(0,2)));
-                        date.set(Calendar.YEAR, Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoFecha)).getRawText().toString().trim().substring(2,6)));
+                        date.set(Calendar.YEAR, Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoFecha)).getRawText().toString().trim().substring(2,4))+2000);
                         TarjetaCredito tarjetaCredito = new TarjetaCredito(Long.valueOf(((MaskEditText)findViewById(R.id.IngresoNumero)).getRawText().toString().trim()), Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoCCV)).getRawText().toString().trim()), date);
                         Usuario usuario = new Usuario(ingresoNombre.getEditText().getText().toString().trim(), ingresoCorreo.getEditText().getText().toString().trim(), ingresoClave.getEditText().getText().toString().trim(), buttonNotif.isChecked(), Double.valueOf(credito.getProgress()), null, tarjetaCredito, TipoCuenta.Comprador);
                         Toast.makeText(getApplicationContext(), "Datos Registrados Exitosamente.", Toast.LENGTH_SHORT).show();
@@ -264,10 +264,10 @@ public class MainActivity extends AppCompatActivity {
         try{
             String fechaTarjeta = ingresoFecha.getRawText().toString().trim();
             int mes = Integer.valueOf(fechaTarjeta.substring(0,2));
-            int anio = Integer.valueOf(fechaTarjeta.substring(2,6));
+            int anio = Integer.valueOf(fechaTarjeta.substring(2,4))+2000;
             Calendar hoy = Calendar.getInstance();
             int anioActual = hoy.get(Calendar.YEAR);
-            int mesActual = hoy.get(Calendar.MONTH);
+            int mesActual = hoy.get(Calendar.MONTH)+1;
             if(mes<1 || mes>12 || anio<anioActual || anio-anioActual>10) {
                 ingresoFechaTarjeta.setError("Fecha Inválida.");
                 return true;
