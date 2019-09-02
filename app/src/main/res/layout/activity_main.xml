@@ -144,9 +144,9 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/HintNumeroTarjetaString"
                     android:textSize="@dimen/etiquetas"
-                    android:text=""
                     android:inputType="number"
                     app:errorEnabled="true"
+                    android:textAlignment="center"
                     app:met_mask="####-####-####-####"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:singleLine="true"
-                android:layout_weight="0.15"
+                android:layout_weight="0.20"
                 android:layout_marginRight="7.5dp">
 
                 <com.santalu.maskedittext.MaskEditText
@@ -166,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/HintCCVTarjetaString"
                     android:textSize="@dimen/etiquetas"
-                    android:text=""
+                    android:textAlignment="center"
                     android:inputType="number"
                     app:errorEnabled="true"
                     app:met_mask="###"/>
@@ -179,7 +179,7 @@
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
                 android:singleLine="true"
-                android:layout_weight="0.25"
+                android:layout_weight="0.20"
                 android:layout_marginRight="10dp">
 
                 <com.santalu.maskedittext.MaskEditText
@@ -188,10 +188,10 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/HintVencimientoTarjetaString"
                     android:textSize="@dimen/etiquetas"
+                    android:textAlignment="center"
                     android:inputType="date"
                     app:errorEnabled="true"
-                    android:text=""
-                    app:met_mask="##/####"/>
+                    app:met_mask="##/##"/>
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
