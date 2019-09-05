@@ -1,6 +1,8 @@
 package isi.dam.sendmeal;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -135,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         TarjetaCredito tarjetaCredito = new TarjetaCredito(Long.valueOf(((MaskEditText)findViewById(R.id.IngresoNumero)).getRawText().toString().trim()), Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoCCV)).getRawText().toString().trim()), date);
                         Usuario usuario = new Usuario(ingresoNombre.getEditText().getText().toString().trim(), ingresoCorreo.getEditText().getText().toString().trim(), ingresoClave.getEditText().getText().toString().trim(), buttonNotif.isChecked(), Double.valueOf(credito.getProgress()), cuentaBancaria, tarjetaCredito, TipoCuenta.Vendedor);
                         Toast.makeText(getApplicationContext(), "Datos Registrados Exitosamente.", Toast.LENGTH_SHORT).show();
+                        launchActivity(usuario);
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Datos Inválidos.", Toast.LENGTH_SHORT).show();
@@ -148,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         TarjetaCredito tarjetaCredito = new TarjetaCredito(Long.valueOf(((MaskEditText)findViewById(R.id.IngresoNumero)).getRawText().toString().trim()), Integer.valueOf(((MaskEditText)findViewById(R.id.IngresoCCV)).getRawText().toString().trim()), date);
                         Usuario usuario = new Usuario(ingresoNombre.getEditText().getText().toString().trim(), ingresoCorreo.getEditText().getText().toString().trim(), ingresoClave.getEditText().getText().toString().trim(), buttonNotif.isChecked(), Double.valueOf(credito.getProgress()), null, tarjetaCredito, TipoCuenta.Comprador);
                         Toast.makeText(getApplicationContext(), "Datos Registrados Exitosamente.", Toast.LENGTH_SHORT).show();
+                        launchActivity(usuario);
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Datos Inválidos.", Toast.LENGTH_SHORT).show();
@@ -155,6 +159,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void launchActivity(Usuario usuario){
+        Intent intent = new Intent(this, PantallaUsuario.class);
+        intent.putExtra("user", usuario);
+        startActivity(intent);
     }
 
     private boolean verificarVendedor(TextInputLayout ingresoNombre, TextInputLayout ingresoClave, TextInputLayout ingresoClave2, TextInputLayout ingresoCorreo, TextInputLayout ingresoNumTarjeta, TextInputLayout ingresoCCVTarjeta, TextInputLayout ingresoFechaTarjeta, TextInputLayout ingresoAliasCBU, TextInputLayout ingresoCBU, RadioGroup grupo){
