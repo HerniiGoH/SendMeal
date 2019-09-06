@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.ButtonBase: if(progress<100) progress=100; break;
                     case R.id.ButtonPremium: if(progress<250) progress=250; break;
                     case R.id.ButtonFull: if(progress<500) progress=500; break;
-                    default: break;
+                    default: progress = 0; break;
                 }
                 credito.setProgress(progress);
                 int val = progress;
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.ButtonBase: if(progress<100) credito.setProgress(100); break;
                     case R.id.ButtonPremium: if(progress<250) credito.setProgress(250); break;
                     case R.id.ButtonFull: if(progress<500) credito.setProgress(500); break;
+                    default: credito.setProgress(0);
                 }
             }
         });
@@ -159,6 +160,41 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        ingresoNombre = findViewById(R.id.IngresoNombre);
+        ingresoClave = findViewById(R.id.IngresoClave);
+        ingresoClave2 = findViewById(R.id.IngresoClave2);
+        ingresoCorreo = findViewById(R.id.IngresoCorreo);
+        ingresoNumTarjeta = findViewById(R.id.IngresoNumeroTarjeta);
+        ingresoCCV = findViewById(R.id.IngresoCCVTarjeta);
+        ingresoVencimTarjeta = findViewById(R.id.IngresoFechaTarjeta);
+        buttonNotif = findViewById(R.id.ButtonNotificaciones);
+        esVendedor = findViewById(R.id.ButtonEsVendedor);
+        credito = findViewById(R.id.IngresoCredito);
+        grupo = findViewById(R.id.GrupoBotones);
+        ingresoAliasCBU = findViewById(R.id.IngresoAliasCBU);
+        ingresoCBU = findViewById(R.id.IngresoCBU);
+        terminos = findViewById(R.id.ButtonTerminosYCondiciones);
+
+        ingresoNombre.getEditText().setText("");
+        ingresoClave.getEditText().setText("");
+        ingresoClave2.getEditText().setText("");
+        ingresoCorreo.getEditText().setText("");
+        ingresoNumTarjeta.getEditText().setText("");
+        ingresoCCV.getEditText().setText("");
+        ingresoVencimTarjeta.getEditText().setText("");
+        buttonNotif.setChecked(false);
+        esVendedor.setChecked(false);
+        grupo.clearCheck();
+        credito.setProgress(0);
+        ingresoAliasCBU.getEditText().setText("");
+        ingresoCBU.getEditText().setText("");
+        terminos.setChecked(false);
+
     }
 
     private void launchActivity(Usuario usuario){
