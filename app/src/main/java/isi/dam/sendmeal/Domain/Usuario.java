@@ -60,6 +60,7 @@ public class Usuario implements Parcelable {
         }
         cuentaBancaria = in.readParcelable(CuentaBancaria.class.getClassLoader());
         tarjetaCredito = in.readParcelable(TarjetaCredito.class.getClassLoader());
+        tipoCuenta = TipoCuenta.valueOf(in.readString());
     }
 
     public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
@@ -207,5 +208,6 @@ public class Usuario implements Parcelable {
         }
         parcel.writeParcelable(cuentaBancaria, i);
         parcel.writeParcelable(tarjetaCredito, i);
+        parcel.writeString(tipoCuenta.name());
     }
 }

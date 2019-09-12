@@ -20,4 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Volver" />
+
+    <Button
+        android:id="@+id/Ver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver usuario" />
 </LinearLayout>

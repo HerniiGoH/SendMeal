@@ -16,10 +16,21 @@ public class PantallaUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pantalla_usuario);
         Button btn = findViewById(R.id.button);
+        Button btn2 = findViewById(R.id.Ver);
 
-        Usuario user = getIntent().getParcelableExtra("user");
+        final Usuario user = getIntent().getParcelableExtra("user");
 
-        Toast.makeText(this, user.getNombre(), Toast.LENGTH_SHORT).show();
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(user == null){
+                    Toast.makeText(getApplicationContext(), "Error cargando Usuario", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         btn.setOnClickListener(new View.OnClickListener(){
             @Override

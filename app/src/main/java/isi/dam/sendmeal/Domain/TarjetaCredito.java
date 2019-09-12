@@ -2,9 +2,11 @@ package isi.dam.sendmeal.Domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.TimeZone;
 
 public class TarjetaCredito implements Parcelable {
     private Integer id;
@@ -43,6 +45,13 @@ public class TarjetaCredito implements Parcelable {
             CCV = null;
         } else {
             CCV = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            date = null;
+        }
+        else{
+            date = Calendar.getInstance();
+            date.setTimeInMillis(in.readLong());
         }
     }
 
@@ -112,7 +121,7 @@ public class TarjetaCredito implements Parcelable {
                 "id=" + id +
                 ", numeroTarjeta=" + numeroTarjeta +
                 ", CCV=" + CCV +
-                ", date=" + date +
+                ", date=" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR) +
                 '}';
     }
 
@@ -140,6 +149,13 @@ public class TarjetaCredito implements Parcelable {
         } else {
             parcel.writeByte((byte) 1);
             parcel.writeInt(CCV);
+        }
+        if (date == null) {
+            parcel.writeByte((byte) 0);
+        }
+        else{
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(date.getTimeInMillis());
         }
     }
 }
