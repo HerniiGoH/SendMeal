@@ -1,8 +1,11 @@
 package isi.dam.sendmeal.Domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Objects;
 
-public class Usuario {
+public class Usuario implements Parcelable {
     private Integer id;
     private String nombre;
     private String mail;
@@ -38,6 +41,39 @@ public class Usuario {
         this.tarjetaCredito = tarjetaCredito;
         this.tipoCuenta = tipoCuenta;
     }
+
+    protected Usuario(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        nombre = in.readString();
+        mail = in.readString();
+        clave = in.readString();
+        byte tmpNotificarMail = in.readByte();
+        notificarMail = tmpNotificarMail == 0 ? null : tmpNotificarMail == 1;
+        if (in.readByte() == 0) {
+            credito = null;
+        } else {
+            credito = in.readDouble();
+        }
+        cuentaBancaria = in.readParcelable(CuentaBancaria.class.getClassLoader());
+        tarjetaCredito = in.readParcelable(TarjetaCredito.class.getClassLoader());
+        tipoCuenta = TipoCuenta.valueOf(in.readString());
+    }
+
+    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel in) {
+            return new Usuario(in);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -145,5 +181,33 @@ public class Usuario {
                 ", tarjetaCredito=" + tarjetaCredito +
                 ", tipoCuenta=" + tipoCuenta +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        if (id == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(id);
+        }
+        parcel.writeString(nombre);
+        parcel.writeString(mail);
+        parcel.writeString(clave);
+        parcel.writeByte((byte) (notificarMail == null ? 0 : notificarMail ? 1 : 2));
+        if (credito == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(credito);
+        }
+        parcel.writeParcelable(cuentaBancaria, i);
+        parcel.writeParcelable(tarjetaCredito, i);
+        parcel.writeString(tipoCuenta.name());
     }
 }

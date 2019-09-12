@@ -1,9 +1,14 @@
 package isi.dam.sendmeal.Domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.widget.Toast;
+
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.TimeZone;
 
-public class TarjetaCredito {
+public class TarjetaCredito implements Parcelable {
     private Integer id;
     private Long numeroTarjeta;
     private Integer CCV;
@@ -24,6 +29,43 @@ public class TarjetaCredito {
         this.CCV = CCV;
         this.date = date;
     }
+
+    protected TarjetaCredito(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            numeroTarjeta = null;
+        } else {
+            numeroTarjeta = in.readLong();
+        }
+        if (in.readByte() == 0) {
+            CCV = null;
+        } else {
+            CCV = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            date = null;
+        }
+        else{
+            date = Calendar.getInstance();
+            date.setTimeInMillis(in.readLong());
+        }
+    }
+
+    public static final Creator<TarjetaCredito> CREATOR = new Creator<TarjetaCredito>() {
+        @Override
+        public TarjetaCredito createFromParcel(Parcel in) {
+            return new TarjetaCredito(in);
+        }
+
+        @Override
+        public TarjetaCredito[] newArray(int size) {
+            return new TarjetaCredito[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -79,7 +121,41 @@ public class TarjetaCredito {
                 "id=" + id +
                 ", numeroTarjeta=" + numeroTarjeta +
                 ", CCV=" + CCV +
-                ", date=" + date +
+                ", date=" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR) +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        if (id == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(id);
+        }
+        if (numeroTarjeta == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(numeroTarjeta);
+        }
+        if (CCV == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(CCV);
+        }
+        if (date == null) {
+            parcel.writeByte((byte) 0);
+        }
+        else{
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(date.getTimeInMillis());
+        }
     }
 }
