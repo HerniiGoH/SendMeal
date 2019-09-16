@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">SendMeal</string>
-    <string name="TituloString">Registrar Usuario</string>
+    <string name="app_name">Send Meal</string>
+    <string name="HomeString">Home</string>
+    <string name="RegistrarString">Registrar Usuario</string>
 
     <string name="NombreString">Nombre</string>
     <string name="ClaveString">Clave</string>

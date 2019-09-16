@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="op_01"
+        android:id="@+id/op_01"
         android:title="@string/menu_op_01"
         app:showAsAction="never"
         android:orderInCategory="1">
 
     </item>
     <item
-        android:id="op_02"
+        android:id="@+id/op_02"
         android:title="@string/menu_op_02"
         app:showAsAction="never"
         android:orderInCategory="2">
 
     </item>
     <item
-        android:id="op_03"
+        android:id="@+id/op_03"
         android:title="@string/menu_op_03"
         app:showAsAction="never"
         android:orderInCategory="3">
