@@ -86,7 +86,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            android:singleLine="true"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -94,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/etiquetas"
                 android:inputType="textPassword"
+                android:singleLine="true"
                 android:hint="@string/HintClaveString" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,7 +110,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
-            android:singleLine="true"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -118,6 +117,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/etiquetas"
                 android:inputType="textPassword"
+                android:singleLine="true"
                 android:hint="@string/HintRepetirClaveString" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -133,7 +133,6 @@
             android:id="@+id/IngresoCorreo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="true"
             app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -141,6 +140,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/etiquetas"
                 android:inputType="textEmailAddress"
+                android:singleLine="true"
                 android:hint="@string/HintCorreoString" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,7 +163,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
-                android:singleLine="true"
                 android:layout_weight="0.60"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="7.5dp">
@@ -186,7 +185,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
-                android:singleLine="true"
                 android:layout_weight="0.20"
                 android:layout_marginRight="7.5dp">
 
@@ -208,7 +206,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
-                android:singleLine="true"
                 android:layout_weight="0.20"
                 android:layout_marginRight="10dp">
 
@@ -345,12 +342,12 @@
                 android:id="@+id/IngresoAliasCBU"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:singleLine="true"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:textSize="@dimen/etiquetas"
                     android:hint="@string/HintAliasCBUString" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -367,12 +364,12 @@
                 android:id="@+id/IngresoCBU"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:singleLine="true"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:singleLine="true"
                     android:textSize="@dimen/etiquetas"
                     android:hint="@string/HintCBUString" />
             </com.google.android.material.textfield.TextInputLayout>

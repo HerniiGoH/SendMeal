@@ -32,7 +32,10 @@ public class HOME extends AppCompatActivity {
                 startActivity(i1);
                 return true;
 
-            case R.id.op_02: return true;
+            case R.id.op_02:
+                Intent i2 = new Intent(this, CrearItem.class);
+                startActivity(i2);
+                return true;
 
             case R.id.op_03: return true;
 

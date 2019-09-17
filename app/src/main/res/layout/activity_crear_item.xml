@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CrearItem">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_crear_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="?attr/homeAsUpIndicator">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/TituloApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/SubtituloRegistro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/CrearPlatoString"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/etiquetas"
+        android:textColor="@color/colorEtiqueta"
+        android:text="@string/PlatoNombreString" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ingresoNombrePlato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="@string/HintPlatoNombreString" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/etiquetas"
+        android:textColor="@color/colorEtiqueta"
+        android:text="@string/PlatoDescripcionString" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ingresoDescripcionPlato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:hint="@string/HintPlatoDescripcionString" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/etiquetas"
+        android:textColor="@color/colorEtiqueta"
+        android:text="@string/PlatoPrecioString" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ingresoPrecioPlato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:hint="@string/HintPlatoPrecioString" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/etiquetas"
+        android:textColor="@color/colorEtiqueta"
+        android:text="@string/PlatoCaloriasString" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ingresoCaloriasPlato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:hint="@string/HintPlatoCaloriasString" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buttonRegistrarPlato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/PlatoGuardarString" />
+</LinearLayout>

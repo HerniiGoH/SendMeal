@@ -2,13 +2,13 @@
     <string name="app_name">Send Meal</string>
     <string name="HomeString">Home</string>
     <string name="RegistrarString">Registrar Usuario</string>
+    <string name="CrearPlatoString">Crear Plato</string>
 
     <string name="NombreString">Nombre</string>
     <string name="ClaveString">Clave</string>
     <string name="RepetirClaveString">Repetir Clave</string>
     <string name="CorreoString">Correo Electrónico</string>
     <string name="TarjetaString">Tarjeta de Crédito</string>
-
     <string name="TipoCuentaString">Tipo de Cuenta</string>
     <string name="TipoCuentaBaseString">Base</string>
     <string name="TipoCuentaPremiumString">Premium</string>
@@ -32,6 +32,17 @@
     <string name="HintVencimientoTarjetaString">MM/AA</string>
     <string name="HintAliasCBUString">Ingrese Alias CBU</string>
     <string name="HintCBUString">Ingrese CBU</string>
+
+    <string name="PlatoNombreString">Nombre del Plato</string>
+    <string name="PlatoDescripcionString">Descrioción del Plato</string>
+    <string name="PlatoPrecioString">Precio del Plato</string>
+    <string name="PlatoCaloriasString">Calorías del Plato</string>
+    <string name="PlatoGuardarString">Guardar</string>
+
+    <string name="HintPlatoNombreString">Ingrese Nombre del Plato</string>
+    <string name="HintPlatoDescripcionString">Ingrese Descrioción del Plato</string>
+    <string name="HintPlatoPrecioString">Ingrese Precio del Plato</string>
+    <string name="HintPlatoCaloriasString">Ingrese Calorías del Plato</string>
 
     <string name="menu_op_01">Registrar</string>
     <string name="menu_op_02">Crear Item</string>
