@@ -3,9 +3,14 @@ package isi.dam.sendmeal.Domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Usuario implements Parcelable {
+    public static List<Usuario>usuarios = new ArrayList<Usuario>();
+    private static Integer id_sec = 0;
+
     private Integer id;
     private String nombre;
     private String mail;
@@ -19,7 +24,24 @@ public class Usuario implements Parcelable {
     public Usuario() {
     }
 
+    public static List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    private static void setUsuarios(List<Usuario> usuarios) {
+        Usuario.usuarios = usuarios;
+    }
+
+    public static Integer getId_sec() {
+        return id_sec;
+    }
+
+    private static void setId_sec(Integer id_sec) {
+        Usuario.id_sec = id_sec;
+    }
+
     public Usuario(String nombre, String mail, String clave, Boolean notificarMail, Double credito, CuentaBancaria cuentaBancaria, TarjetaCredito tarjetaCredito, TipoCuenta tipoCuenta) {
+        this.id = Usuario.getId_sec();
         this.nombre = nombre;
         this.mail = mail;
         this.clave = clave;
@@ -28,6 +50,8 @@ public class Usuario implements Parcelable {
         this.cuentaBancaria = cuentaBancaria;
         this.tarjetaCredito = tarjetaCredito;
         this.tipoCuenta = tipoCuenta;
+        Usuario.setId_sec(id+1);
+        Usuario.usuarios.add(this);
     }
 
     public Usuario(Integer id, String nombre, String mail, String clave, Boolean notificarMail, Double credito, CuentaBancaria cuentaBancaria, TarjetaCredito tarjetaCredito, TipoCuenta tipoCuenta) {
