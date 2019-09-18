@@ -5,8 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import isi.dam.sendmeal.Domain.Plato;
 
@@ -39,6 +42,17 @@ public class ListaItems extends AppCompatActivity {
 
         mAdapter = new PlatoRecyclerAdapter(Plato.platos);
         mRecyclerView.setAdapter(mAdapter);
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.agregar_flotante);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i2 = new Intent(view.getContext(), CrearItem.class);
+                startActivity(i2);
+            }
+        });
 
     }
 
