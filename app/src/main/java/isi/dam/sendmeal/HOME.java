@@ -37,7 +37,10 @@ public class HOME extends AppCompatActivity {
                 startActivity(i2);
                 return true;
 
-            case R.id.op_03: return true;
+            case R.id.op_03:
+                Intent i3 = new Intent(this, ListaItems.class);
+                startActivity(i3);
+                return true;
 
             default: return false;
         }

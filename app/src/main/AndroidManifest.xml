@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CrearItem"
-            android:parentActivityName=".HOME"></activity>
+        <activity android:name=".ListaItems"></activity>
+        <activity
+            android:name=".CrearItem"
+            android:parentActivityName=".HOME" />
         <activity android:name=".HOME">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +25,7 @@
             android:parentActivityName=".HOME" />
         <activity
             android:name=".MainActivity"
-            android:parentActivityName=".HOME"></activity>
+            android:parentActivityName=".HOME" />
     </application>
 
 </manifest>
