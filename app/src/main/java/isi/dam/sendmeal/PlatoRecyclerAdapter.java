@@ -28,7 +28,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
 
         Plato plato = dataSet.get(position);
         holder.titPlato.setText(plato.getNombre());
-        holder.precPlato.setText(plato.getPrecio().toString());
+        holder.precPlato.setText("$"+plato.getPrecio().toString());
 
     }
 

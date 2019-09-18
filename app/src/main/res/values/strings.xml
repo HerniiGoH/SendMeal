@@ -3,6 +3,7 @@
     <string name="HomeString">Home</string>
     <string name="RegistrarString">Registrar Usuario</string>
     <string name="CrearPlatoString">Crear Plato</string>
+    <string name="ListaPlatoString">Lista Plato</string>
 
     <string name="NombreString">Nombre</string>
     <string name="ClaveString">Clave</string>
