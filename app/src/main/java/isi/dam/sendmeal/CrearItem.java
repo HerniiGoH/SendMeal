@@ -3,6 +3,7 @@ package isi.dam.sendmeal;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -110,5 +111,11 @@ public class CrearItem extends AppCompatActivity {
     public boolean onSupportNavigateUp(){
         onBackPressed();
         return true;
+    }
+    @Override
+    public void onBackPressed()
+    {
+        Intent i3 = new Intent(this, ListaItems.class);
+        startActivity(i3);
     }
 }
