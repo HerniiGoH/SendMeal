@@ -134,9 +134,26 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/buttonRegistrarPlato"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/PlatoGuardarString" />
+        android:layout_height="match_parent"
+        android:baselineAligned="false">
+
+        <ImageView
+            android:id="@+id/fondo_crear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitEnd"
+            android:visibility="visible"
+            tools:srcCompat="@drawable/fondo" />
+
+        <Button
+            android:id="@+id/buttonRegistrarPlato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/PlatoGuardarString"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center" />
+
+    </RelativeLayout>
 </LinearLayout>
