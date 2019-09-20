@@ -57,6 +57,13 @@ public class ListaItems extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public boolean onSupportNavigateUp(){
         onBackPressed();
         return true;

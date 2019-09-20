@@ -112,10 +112,6 @@ public class CrearItem extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-    @Override
-    public void onBackPressed()
-    {
-        Intent i3 = new Intent(this, ListaItems.class);
-        startActivity(i3);
-    }
+
+
 }
