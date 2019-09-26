@@ -8,7 +8,8 @@
     android:fadingEdge="horizontal|vertical"
     android:focusable="true"
     app:cardCornerRadius="20dp"
-    android:foreground="@drawable/ripple_bg">
+    android:foreground="@drawable/ripple_bg"
+    android:id="@+id/cardViewPlato">
 
     <RelativeLayout
         android:layout_width="wrap_content"

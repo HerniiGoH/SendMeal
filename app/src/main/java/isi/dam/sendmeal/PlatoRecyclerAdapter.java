@@ -1,17 +1,27 @@
 package isi.dam.sendmeal;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
 import isi.dam.sendmeal.Domain.Plato;
+
 
 public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdapter.PlatoViewHolder> {
 
@@ -41,17 +51,33 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
 
         ImageView imgPlato;
         TextView titPlato, precPlato;
-        public PlatoViewHolder(@NonNull View itemView) {
+        CardView cardView;
+        public PlatoViewHolder(@NonNull final View itemView) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.cardViewPlato);
             imgPlato = itemView.findViewById(R.id.imagenPlato);
             titPlato = itemView.findViewById(R.id.ListaPlatoNombre);
             precPlato = itemView.findViewById(R.id.ListaPlatoPrecio);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showPopup(itemView);
+                }
+            });
         }
 
     }
-    private List<Plato> dataSet;
 
-    public PlatoRecyclerAdapter(List<Plato>dataSet){
+    public void showPopup(View view){
+
+    }
+
+    private List<Plato> dataSet;
+    private Context context;
+
+    public PlatoRecyclerAdapter(List<Plato>dataSet, Context context){
         this.dataSet=dataSet;
+        this.context=context;
     }
 }

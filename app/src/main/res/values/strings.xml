@@ -45,6 +45,11 @@
     <string name="HintPlatoPrecioString">Ingrese Precio del Plato</string>
     <string name="HintPlatoCaloriasString">Ingrese Calorías del Plato</string>
 
+    <string name="popup_nombre_plato">Nombre: </string>
+    <string name="popup_descripcion_plato">Descripcion: </string>
+    <string name="popup_precio_plato">Precio: </string>
+    <string name="popup_calorias_plato">Calorias: </string>
+
     <string name="menu_op_01">Registrar</string>
     <string name="menu_op_02">Crear Item</string>
     <string name="menu_op_03">Lista de Items</string>
