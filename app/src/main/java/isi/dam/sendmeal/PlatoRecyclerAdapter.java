@@ -1,6 +1,7 @@
 
 package isi.dam.sendmeal;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,7 +34,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
     @Override
     public void onBindViewHolder(@NonNull final PlatoViewHolder holder, final int position) {
 
-        Plato plato = dataSet.get(position);
+        final Plato plato = dataSet.get(position);
         holder.titPlato.setText(plato.getNombre());
         holder.precPlato.setText("$"+plato.getPrecio().toString());
         holder.btnOferta.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +65,31 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
                 Intent intent = new Intent(context, EditarItem.class);
                 intent.putExtra("position", holder.getAdapterPosition());
                 context.startActivity(intent);
+                notifyItemChanged(holder.getAdapterPosition());
                 notifyDataSetChanged();
+            }
+        });
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View popup = LayoutInflater.from(context).inflate(R.layout.popup_plato,null);
+                TextView nombrePop = popup.findViewById(R.id.nombrePlatoPopup);
+                nombrePop.append(" "+plato.getNombre());
+                TextView descripcionPop = popup.findViewById(R.id.descripcionPlatoPopup);
+                descripcionPop.append(" "+plato.getDescripcion());
+                TextView precioPopup = popup.findViewById(R.id.precioPlatoPopup);
+                precioPopup.append(" $"+plato.getPrecio().toString());
+                TextView caloriasPopup = popup.findViewById(R.id.caloriasPlatoPopup);
+                caloriasPopup.append(" "+plato.getCalorias().toString()+" cal.");
+                final PopupWindow popupWindow = new PopupWindow(popup, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        popupWindow.dismiss();
+                    }
+                });
+                popupWindow.showAsDropDown(view, 0, -view.getHeight()+popup.getHeight());
             }
         });
 
