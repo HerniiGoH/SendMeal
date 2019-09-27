@@ -4,9 +4,13 @@ package isi.dam.sendmeal;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.text.Layout;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -19,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import isi.dam.sendmeal.Domain.Plato;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 
 public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdapter.PlatoViewHolder> {
@@ -72,7 +78,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 View popup = LayoutInflater.from(context).inflate(R.layout.popup_plato,null);
                 TextView nombrePop = popup.findViewById(R.id.nombrePlatoPopup);
                 nombrePop.append(" "+plato.getNombre());
@@ -85,11 +91,20 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
                 final PopupWindow popupWindow = new PopupWindow(popup, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 popup.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public void onClick(View v) {
                         popupWindow.dismiss();
                     }
                 });
-                popupWindow.showAsDropDown(view, 0, -view.getHeight()+popup.getHeight());
+                popupWindow.setFocusable(true);
+                popupWindow.setTouchable(true);
+                popupWindow.setOutsideTouchable(false);
+                popupWindow.showAtLocation(view.getRootView(), Gravity.CENTER,0,0);
+                View container = (View) popupWindow.getContentView().getParent();
+                WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
+                p.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+                p.dimAmount = 0.7f;
+                wm.updateViewLayout(container, p);
             }
         });
 
