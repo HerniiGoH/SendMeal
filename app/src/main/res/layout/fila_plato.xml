@@ -22,20 +22,31 @@
             android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:src="@drawable/plato_01" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SALE"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="30dp"
+            android:id="@+id/textoOferta"
+            android:visibility="invisible">
+        </TextView>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/imagenPlato"
+            android:layout_above="@id/ofertaButton"
             android:layout_marginStart="15dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/layoutFila">
 
             <TextView
                 android:id="@+id/ListaPlatoNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textSize="25dp" />
+                android:textSize="25dp"/>
 
             <TextView
                 android:id="@+id/ListaPlatoPrecio"
@@ -44,6 +55,32 @@
                 android:text="TextView"
                 android:textSize="25dp" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/ofertaButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ofertarString"
+            android:layout_alignBottom="@id/imagenPlato"
+            android:layout_marginLeft="10dp"/>
+
+        <Button
+            android:id="@+id/editarButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/ofertaButton"
+            android:text="@string/editarString"
+            android:layout_alignBottom="@id/imagenPlato"
+            android:layout_marginLeft="10dp" />
+
+        <Button
+            android:id="@+id/eliminarButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eliminarString"
+            android:layout_toRightOf="@id/editarButton"
+            android:layout_alignBottom="@id/imagenPlato"
+            android:layout_marginLeft="10dp"/>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

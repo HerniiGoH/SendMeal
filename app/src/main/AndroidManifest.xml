@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".EditarItem">
+        </activity>
         <activity android:name=".ListaItems"></activity>
         <activity
             android:name=".CrearItem"

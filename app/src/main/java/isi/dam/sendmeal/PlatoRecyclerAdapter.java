@@ -2,9 +2,11 @@
 package isi.dam.sendmeal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,11 +30,42 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlatoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final PlatoViewHolder holder, final int position) {
 
         Plato plato = dataSet.get(position);
         holder.titPlato.setText(plato.getNombre());
         holder.precPlato.setText("$"+plato.getPrecio().toString());
+        holder.btnOferta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Boolean b = !dataSet.get(position).getEnOferta();
+                dataSet.get(position).setEnOferta(b);
+                if(b){
+                    holder.textoOferta.setVisibility(View.VISIBLE);
+                }
+                else{
+                    holder.textoOferta.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dataSet.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
+                notifyItemRangeChanged(holder.getAdapterPosition(), dataSet.size());
+            }
+        });
+
+        holder.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, EditarItem.class);
+                intent.putExtra("position", holder.getAdapterPosition());
+                context.startActivity(intent);
+                notifyDataSetChanged();
+            }
+        });
 
     }
 
@@ -44,21 +77,19 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
     public class PlatoViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imgPlato;
-        TextView titPlato, precPlato;
+        TextView titPlato, precPlato, textoOferta;
         CardView cardView;
+        Button btnOferta, btnEditar, btnEliminar;
         public PlatoViewHolder(@NonNull final View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardViewPlato);
             imgPlato = itemView.findViewById(R.id.imagenPlato);
             titPlato = itemView.findViewById(R.id.ListaPlatoNombre);
             precPlato = itemView.findViewById(R.id.ListaPlatoPrecio);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showPopup(itemView);
-                }
-            });
+            btnOferta = itemView.findViewById(R.id.ofertaButton);
+            btnEditar = itemView.findViewById(R.id.editarButton);
+            btnEliminar = itemView.findViewById(R.id.eliminarButton);
+            textoOferta = itemView.findViewById(R.id.textoOferta);
         }
 
     }

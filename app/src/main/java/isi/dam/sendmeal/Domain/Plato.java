@@ -17,6 +17,7 @@ public class Plato implements Parcelable {
     private String descripcion;
     private Float precio;
     private Float calorias;
+    private Boolean enOferta;
 
     public Plato(Integer id, String nombre, String descripcion, Float precio, Float calorias) {
         this.id = id;
@@ -24,6 +25,7 @@ public class Plato implements Parcelable {
         this.descripcion = descripcion;
         this.precio = precio;
         this.calorias = calorias;
+        this.enOferta = false;
     }
 
     public Plato(String nombre, String descripcion, Float precio, Float calorias) {
@@ -32,6 +34,7 @@ public class Plato implements Parcelable {
         this.descripcion = descripcion;
         this.precio = precio;
         this.calorias = calorias;
+        this.enOferta = false;
         Plato.setId_sec(id+1);
         Plato.platos.add(this);
     }
@@ -67,6 +70,14 @@ public class Plato implements Parcelable {
             return new Plato[size];
         }
     };
+
+    public Boolean getEnOferta() {
+        return enOferta;
+    }
+
+    public void setEnOferta(Boolean enOferta) {
+        this.enOferta = enOferta;
+    }
 
     public static List<Plato> getPlatos() {
         return platos;
