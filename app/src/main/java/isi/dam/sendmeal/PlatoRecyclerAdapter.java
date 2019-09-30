@@ -46,13 +46,14 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
         holder.btnOferta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Boolean b = !dataSet.get(position).getEnOferta();
                 dataSet.get(position).setEnOferta(b);
                 if(b){
-                    holder.textoOferta.setVisibility(View.VISIBLE);
+                    holder.imagenOferta.setVisibility(View.VISIBLE);
                 }
                 else{
-                    holder.textoOferta.setVisibility(View.INVISIBLE);
+                    holder.imagenOferta.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -117,12 +118,13 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
 
     public class PlatoViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView imgPlato;
-        TextView titPlato, precPlato, textoOferta;
+        ImageView imgPlato, imagenOferta;
+        TextView titPlato, precPlato;
         CardView cardView;
         Button btnOferta, btnEditar, btnEliminar;
         public PlatoViewHolder(@NonNull final View itemView) {
             super(itemView);
+            imagenOferta = itemView.findViewById(R.id.imagenOferta);
             cardView = itemView.findViewById(R.id.cardViewPlato);
             imgPlato = itemView.findViewById(R.id.imagenPlato);
             titPlato = itemView.findViewById(R.id.ListaPlatoNombre);
@@ -130,7 +132,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
             btnOferta = itemView.findViewById(R.id.ofertaButton);
             btnEditar = itemView.findViewById(R.id.editarButton);
             btnEliminar = itemView.findViewById(R.id.eliminarButton);
-            textoOferta = itemView.findViewById(R.id.textoOferta);
+
         }
 
     }
