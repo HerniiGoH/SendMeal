@@ -171,17 +171,15 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
 
         @Override
         public void run(){
-            try {
+            /*try {
                 sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
             Intent intentMy = new Intent();
             intentMy.setAction("android.intent.action.myreceiver");
             intentMy.putExtra("whatever", oferta);
             context.sendBroadcast(intentMy);
-
         }
-
     }
 }

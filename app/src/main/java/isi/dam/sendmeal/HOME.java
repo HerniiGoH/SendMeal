@@ -2,10 +2,13 @@ package isi.dam.sendmeal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +32,8 @@ public class HOME extends AppCompatActivity {
         myReceiver = new MyReceiver();
 
         registerReceiver(myReceiver, new IntentFilter("android.intent.action.myreceiver"));
+
+        createNotificationChannel();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -63,6 +68,22 @@ public class HOME extends AppCompatActivity {
         }
     }
 
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Canal 1";
+            String description = "Canal de notificacion-Testing";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("001", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
     public class MyReceiver extends BroadcastReceiver {
 
         @Override
@@ -74,32 +95,29 @@ public class HOME extends AppCompatActivity {
 
                         Toast.makeText(context, "Esta en oferta", Toast.LENGTH_LONG).show();
 
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, DEFAULT_CHANNEL_ID)
-                                .setSmallIcon(R.drawable.ic_launcher_background)
-                                .setContentTitle("titulo")
-                                .setContentText("un plato esta en oferta")
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "001")
+                                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                                .setContentTitle("NUEVA OFERTA")
+                                .setContentText("Un plato esta en oferta.")
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
                         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 
                         // notificationId is a unique int for each notification that you must define
                         notificationManager.notify(4, builder.build());
-
                     }
                     else{
-                        Toast.makeText(context, "No esta en oferta", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "No esta en oferta.", Toast.LENGTH_LONG).show();
 
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, DEFAULT_CHANNEL_ID)
-                                .setSmallIcon(R.drawable.ic_launcher_background)
-                                .setContentTitle("titulo")
-                                .setContentText("un plato no esta en oferta")
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "001")
+                                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                                .setContentTitle("NUEVA OFERTA")
+                                .setContentText("Un plato ya no esta en oferta.")
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
                         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
 
                         // notificationId is a unique int for each notification that you must define
                         notificationManager.notify(5, builder.build());
-
-
                     }
                 }
             } catch (Exception e) {
