@@ -18,6 +18,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import isi.dam.sendmeal.Domain.Plato;
+
 import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 
 public class HOME extends AppCompatActivity {
@@ -89,39 +91,32 @@ public class HOME extends AppCompatActivity {
         @Override
         public void onReceive(final Context context, final Intent intent) {
 
+            String titulo, descripcion;
+            titulo = "NUEVA OFERTA";
+            Plato plato = intent.getParcelableExtra("whatever");
             try {
                 if (intent.getAction().equals("android.intent.action.myreceiver")) {
-                    if(intent.getExtras().getBoolean("whatever")){
-
-                        Toast.makeText(context, "Esta en oferta", Toast.LENGTH_LONG).show();
-
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "001")
-                                .setSmallIcon(R.mipmap.ic_launcher_foreground)
-                                .setContentTitle("NUEVA OFERTA")
-                                .setContentText("Un plato esta en oferta.")
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-
-                        // notificationId is a unique int for each notification that you must define
-                        notificationManager.notify(4, builder.build());
+                    if(plato.getEnOferta()){
+                        descripcion = "Un plato esta en oferta.";
                     }
                     else{
-                        Toast.makeText(context, "No esta en oferta.", Toast.LENGTH_LONG).show();
-
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "001")
-                                .setSmallIcon(R.mipmap.ic_launcher_foreground)
-                                .setContentTitle("NUEVA OFERTA")
-                                .setContentText("Un plato ya no esta en oferta.")
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-
-                        // notificationId is a unique int for each notification that you must define
-                        notificationManager.notify(5, builder.build());
+                        descripcion = "Un no plato esta en oferta.";
                     }
+
+                    Toast.makeText(context, descripcion, Toast.LENGTH_LONG).show();
+
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "001")
+                            .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                            .setContentTitle(titulo)
+                            .setContentText(descripcion)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                    notificationManager.notify(plato.getId(), builder.build());
+
                 }
             } catch (Exception e) {
-                Toast.makeText(context, "algonollego", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Algo no llego.", Toast.LENGTH_LONG).show();
+                e.printStackTrace();
             }
         }
 

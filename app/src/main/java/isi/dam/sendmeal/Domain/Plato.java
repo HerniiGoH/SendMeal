@@ -57,6 +57,11 @@ public class Plato implements Parcelable {
         } else {
             calorias = in.readFloat();
         }
+        if (in.readByte() == 0) {
+            enOferta = null;
+        } else {
+            enOferta = new Boolean(in.readString());
+        }
     }
 
     public static final Creator<Plato> CREATOR = new Creator<Plato>() {
@@ -178,6 +183,12 @@ public class Plato implements Parcelable {
         } else {
             parcel.writeByte((byte) 1);
             parcel.writeFloat(calorias);
+        }
+        if (enOferta == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeString(enOferta.toString());
         }
     }
 

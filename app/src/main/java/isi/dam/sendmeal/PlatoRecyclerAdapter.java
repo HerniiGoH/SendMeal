@@ -62,7 +62,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
                     holder.imagenOferta.setVisibility(View.INVISIBLE);
                 }
 
-                Mihilo hilo = new Mihilo(b);
+                Mihilo hilo = new Mihilo(dataSet.get(position));
 
                 hilo.start();
             }
@@ -163,10 +163,10 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
 
     public class Mihilo extends Thread{
 
-        private Boolean oferta;
+        private Plato plato;
 
-        public Mihilo(Boolean b){
-            this.oferta=b;
+        public Mihilo(Plato p){
+            this.plato=p;
         }
 
         @Override
@@ -178,7 +178,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
             }*/
             Intent intentMy = new Intent();
             intentMy.setAction("android.intent.action.myreceiver");
-            intentMy.putExtra("whatever", oferta);
+            intentMy.putExtra("whatever", plato);
             context.sendBroadcast(intentMy);
         }
     }
