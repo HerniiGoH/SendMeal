@@ -2,8 +2,10 @@
 package isi.dam.sendmeal;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.PorterDuff;
 import android.text.Layout;
 import android.view.Gravity;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -25,6 +28,8 @@ import java.util.List;
 import isi.dam.sendmeal.Domain.Plato;
 
 import static androidx.core.content.ContextCompat.getSystemService;
+
+
 
 
 public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdapter.PlatoViewHolder> {
@@ -55,6 +60,10 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
                 else{
                     holder.imagenOferta.setVisibility(View.INVISIBLE);
                 }
+
+                Mihilo hilo = new Mihilo(b);
+
+                hilo.start();
             }
         });
         holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +125,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
         return dataSet.size();
     }
 
+
     public class PlatoViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imgPlato, imagenOferta;
@@ -147,5 +157,29 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
     public PlatoRecyclerAdapter(List<Plato>dataSet, Context context){
         this.dataSet=dataSet;
         this.context=context;
+    }
+
+    public class Mihilo extends Thread{
+
+        private Boolean oferta;
+
+        public Mihilo(Boolean b){
+            this.oferta=b;
+        }
+
+        @Override
+        public void run(){
+            try {
+                sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Intent intentMy = new Intent();
+            intentMy.setAction("android.intent.action.myreceiver");
+            intentMy.putExtra("whatever", oferta);
+            context.sendBroadcast(intentMy);
+
+        }
+
     }
 }
