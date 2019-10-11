@@ -27,6 +27,7 @@ import java.util.List;
 
 import isi.dam.sendmeal.Domain.Plato;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 
@@ -79,6 +80,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, EditarItem.class);
+                intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("position", holder.getAdapterPosition());
                 context.startActivity(intent);
                 notifyItemChanged(holder.getAdapterPosition());

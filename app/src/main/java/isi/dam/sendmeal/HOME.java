@@ -12,6 +12,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
+import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 
 public class HOME extends AppCompatActivity {
 
@@ -69,9 +73,33 @@ public class HOME extends AppCompatActivity {
                     if(intent.getExtras().getBoolean("whatever")){
 
                         Toast.makeText(context, "Esta en oferta", Toast.LENGTH_LONG).show();
+
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, DEFAULT_CHANNEL_ID)
+                                .setSmallIcon(R.drawable.ic_launcher_background)
+                                .setContentTitle("titulo")
+                                .setContentText("un plato esta en oferta")
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(4, builder.build());
+
                     }
                     else{
                         Toast.makeText(context, "No esta en oferta", Toast.LENGTH_LONG).show();
+
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, DEFAULT_CHANNEL_ID)
+                                .setSmallIcon(R.drawable.ic_launcher_background)
+                                .setContentTitle("titulo")
+                                .setContentText("un plato no esta en oferta")
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(5, builder.build());
+
+
                     }
                 }
             } catch (Exception e) {
