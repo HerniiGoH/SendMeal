@@ -62,7 +62,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
                     holder.imagenOferta.setVisibility(View.INVISIBLE);
                 }
 
-                Mihilo hilo = new Mihilo(dataSet.get(position));
+                Mihilo hilo = new Mihilo(dataSet.get(position), true);
 
                 hilo.start();
             }
@@ -70,6 +70,9 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
         holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Mihilo hilo = new Mihilo(dataSet.get(position), false);
+
+                hilo.start();
                 dataSet.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
                 notifyItemRangeChanged(holder.getAdapterPosition(), dataSet.size());
@@ -164,22 +167,31 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
     public class Mihilo extends Thread{
 
         private Plato plato;
+        private Boolean b;
 
-        public Mihilo(Plato p){
-            this.plato=p;
+        public Mihilo(Plato p, Boolean b){
+            this.plato=p; this.b = b;
         }
 
         @Override
         public void run(){
+            Intent intentMy = new Intent();
+            if(b){
+                intentMy.putExtra("whatever", plato);
+            }
+            else{
+                intentMy.putExtra("idPlato", plato.getId());
+                intentMy.putExtra("nombrePlato", plato.getNombre());
+            }
             /*try {
                 sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }*/
-            Intent intentMy = new Intent();
             intentMy.setAction("android.intent.action.myreceiver");
-            intentMy.putExtra("whatever", plato);
+            intentMy.putExtra("boolean",b);
             context.sendBroadcast(intentMy);
+
         }
     }
 }

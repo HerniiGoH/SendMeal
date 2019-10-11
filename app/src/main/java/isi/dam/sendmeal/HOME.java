@@ -92,27 +92,43 @@ public class HOME extends AppCompatActivity {
         public void onReceive(final Context context, final Intent intent) {
 
             String titulo, descripcion;
-            titulo = "NUEVA OFERTA";
-            Plato plato = intent.getParcelableExtra("whatever");
             try {
-                if (intent.getAction().equals("android.intent.action.myreceiver")) {
-                    if(plato.getEnOferta()){
-                        descripcion = "Un plato esta en oferta.";
+                if(intent.getAction().equals("android.intent.action.myreceiver")){
+                    if (intent.getBooleanExtra("boolean", true)) {
+                        Plato plato = intent.getParcelableExtra("whatever");
+                        titulo = "NUEVA OFERTA";
+                        if(plato.getEnOferta()){
+                            descripcion = "Un plato esta en oferta.";
+                        }
+                        else{
+                            descripcion = "Un no plato esta en oferta.";
+                        }
+
+                        Toast.makeText(context, descripcion, Toast.LENGTH_LONG).show();
+
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "001")
+                                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                                .setContentTitle(titulo)
+                                .setContentText(descripcion)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                        notificationManager.notify(plato.getId(), builder.build());
+
                     }
                     else{
-                        descripcion = "Un no plato esta en oferta.";
+                        titulo = "PLATO ELIMINADO";
+                        descripcion = "Plato "+intent.getStringExtra("nombrePlato")+" ha sido borrado.";
+
+                        Toast.makeText(context, descripcion, Toast.LENGTH_LONG).show();
+
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "001")
+                                .setSmallIcon(R.mipmap.ic_launcher_foreground)
+                                .setContentTitle(titulo)
+                                .setContentText(descripcion)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                        notificationManager.notify(intent.getIntExtra("idPlato", 0), builder.build());
                     }
-
-                    Toast.makeText(context, descripcion, Toast.LENGTH_LONG).show();
-
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "001")
-                            .setSmallIcon(R.mipmap.ic_launcher_foreground)
-                            .setContentTitle(titulo)
-                            .setContentText(descripcion)
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-                    notificationManager.notify(plato.getId(), builder.build());
-
                 }
             } catch (Exception e) {
                 Toast.makeText(context, "Algo no llego.", Toast.LENGTH_LONG).show();
