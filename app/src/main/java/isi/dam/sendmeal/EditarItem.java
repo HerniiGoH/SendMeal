@@ -51,6 +51,22 @@ public class EditarItem extends AppCompatActivity {
         subtitulo.setText("Editar Plato");
 
         btnRegistrar = findViewById(R.id.buttonRegistrarPlato);
+
+        if(getIntent().getExtras().getBoolean("Bool")){
+            ingresoNombre.setEnabled(false);
+            ingresoDescripcion.setEnabled(false);
+            ingresoCalorias.setEnabled(false);
+            ingresoPrecio.setEnabled(false);
+            btnRegistrar.setVisibility(View.INVISIBLE);
+        }
+        else{
+            ingresoNombre.setEnabled(true);
+            ingresoDescripcion.setEnabled(true);
+            ingresoCalorias.setEnabled(true);
+            ingresoPrecio.setEnabled(true);
+            btnRegistrar.setVisibility(View.VISIBLE);
+        }
+
         btnRegistrar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

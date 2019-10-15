@@ -85,6 +85,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
                 Intent intent = new Intent(context, EditarItem.class);
                 intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("position", holder.getAdapterPosition());
+                intent.putExtra("Bool", false);
                 context.startActivity(intent);
                 notifyItemChanged(holder.getAdapterPosition());
                 notifyDataSetChanged();

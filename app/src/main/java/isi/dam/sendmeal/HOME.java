@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -106,11 +107,16 @@ public class HOME extends AppCompatActivity {
 
                         Toast.makeText(context, descripcion, Toast.LENGTH_LONG).show();
 
+                        Intent intent_1 = new Intent(context,EditarItem.class);
+                        intent_1.putExtra("Bool", true);
+                        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent_1,0);
                         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "001")
                                 .setSmallIcon(R.mipmap.ic_launcher_foreground)
                                 .setContentTitle(titulo)
                                 .setContentText(descripcion)
-                                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setAutoCancel(true)
+                                .setContentIntent(pendingIntent);
                         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
                         notificationManager.notify(plato.getId(), builder.build());
 
