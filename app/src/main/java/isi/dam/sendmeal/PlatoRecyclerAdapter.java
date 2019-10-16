@@ -1,7 +1,6 @@
 
 package isi.dam.sendmeal;
 
-
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PorterDuff;
 import android.text.Layout;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,22 +77,22 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
         holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Mihilo hilo = new Mihilo(dataSet.get(position), false);
-
-                hilo.start();
-                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(context);
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.myDialog));
                 dialogo1.setTitle("Importante");
                 dialogo1.setMessage("¿ Está seguro que desea eliminar el plato ?");
                 dialogo1.setCancelable(false);
                 dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
+                        Mihilo hilo = new Mihilo(dataSet.get(position), false);
+
+                        hilo.start();
                         dataSet.remove(holder.getAdapterPosition());
                         notifyItemRemoved(holder.getAdapterPosition());
                         notifyItemRangeChanged(holder.getAdapterPosition(), dataSet.size());
                     }
                 });
                 dialogo1.setNegativeButton(android.R.string.no, null);
-                dialogo1.show();
+                dialogo1.create().show();
 
             }
         });

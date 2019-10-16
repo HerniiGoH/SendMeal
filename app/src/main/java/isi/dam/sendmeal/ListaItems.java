@@ -40,7 +40,7 @@ public class ListaItems extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new PlatoRecyclerAdapter(Plato.platos, getApplicationContext());
+        mAdapter = new PlatoRecyclerAdapter(Plato.platos, this);
         mRecyclerView.setAdapter(mAdapter);
 
 
