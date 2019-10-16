@@ -1,9 +1,12 @@
 
 package isi.dam.sendmeal;
 
+
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PorterDuff;
@@ -20,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +53,9 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
         final Plato plato = dataSet.get(position);
         holder.titPlato.setText(plato.getNombre());
         holder.precPlato.setText("$"+plato.getPrecio().toString());
+        if( dataSet.get(position).getEnOferta()){
+            holder.imagenOferta.setVisibility(View.VISIBLE);
+        }
         holder.btnOferta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,15 +80,27 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
                 Mihilo hilo = new Mihilo(dataSet.get(position), false);
 
                 hilo.start();
-                dataSet.remove(holder.getAdapterPosition());
-                notifyItemRemoved(holder.getAdapterPosition());
-                notifyItemRangeChanged(holder.getAdapterPosition(), dataSet.size());
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(context);
+                dialogo1.setTitle("Importante");
+                dialogo1.setMessage("¿ Está seguro que desea eliminar el plato ?");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        dataSet.remove(holder.getAdapterPosition());
+                        notifyItemRemoved(holder.getAdapterPosition());
+                        notifyItemRangeChanged(holder.getAdapterPosition(), dataSet.size());
+                    }
+                });
+                dialogo1.setNegativeButton(android.R.string.no, null);
+                dialogo1.show();
+
             }
         });
 
         holder.btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(context, EditarItem.class);
                 intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("position", holder.getAdapterPosition());
@@ -139,6 +158,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
         Button btnOferta, btnEditar, btnEliminar;
         public PlatoViewHolder(@NonNull final View itemView) {
             super(itemView);
+
             imagenOferta = itemView.findViewById(R.id.imagenOferta);
             cardView = itemView.findViewById(R.id.cardViewPlato);
             imgPlato = itemView.findViewById(R.id.imagenPlato);
