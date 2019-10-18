@@ -67,6 +67,10 @@ public class HOME extends AppCompatActivity {
                 startActivity(i3);
                 return true;
 
+            case R.id.op_04:
+                Intent i4 = new Intent(this, BusquedaItem.class);
+                startActivity(i4);
+                return true;
             default: return false;
         }
     }

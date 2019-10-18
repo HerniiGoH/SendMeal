@@ -22,5 +22,11 @@
         app:showAsAction="never"
         android:orderInCategory="3">
     </item>
+    <item
+        android:id="@+id/op_04"
+        android:title="Buscar Item"
+        app:showAsAction="never"
+        android:orderInCategory="4">
+    </item>
 
 </menu>
