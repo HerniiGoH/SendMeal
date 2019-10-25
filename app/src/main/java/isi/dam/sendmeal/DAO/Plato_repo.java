@@ -1,5 +1,7 @@
 package isi.dam.sendmeal.DAO;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import com.google.gson.internal.bind.ArrayTypeAdapter;
@@ -9,14 +11,24 @@ import java.util.List;
 
 import isi.dam.sendmeal.DAO.rest.PlatoRest;
 import isi.dam.sendmeal.Domain.Plato;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Plato_repo {
-    public static String _SERVER = "http://10.15.155.37:5000/";
+    public static String _SERVER = "http://10.15.150.120:5000/";
     private static Plato_repo _INSTANCIA;
     private Retrofit rf;
     private PlatoRest platoRest;
+
+    public static final int _ALTA_PLATO = 1;
+    public static final int _UPDATE_PLATO =2;
+    public static final int _BORRADO_PLATO =3;
+    public static final int _CONSULTA_PLATO =4;
+    public static final int _ERROR_PLATO =9;
+
 
 
 
@@ -34,7 +46,6 @@ public class Plato_repo {
         return _INSTANCIA;
     }
 
-
     private void configurarRetroFit(){
         this.rf = new Retrofit.Builder()
                 .baseUrl(_SERVER)
@@ -44,5 +55,123 @@ public class Plato_repo {
         Log.d("APP_JUANO","INSTANCIA CREADA");
 
         this.platoRest = this.rf.create(PlatoRest.class);
+    }
+
+    public void crearPlato (Plato a , final Handler h){
+        Call<Plato> llamada = this.platoRest.crear(a);
+        llamada.enqueue(new Callback<Plato>() {
+            @Override
+            public void onResponse(Call<Plato> call, Response<Plato> response) {
+                Log.d("PLATOREPO","ANDA BIEN "+ response.isSuccessful());
+                Log.d("PLATOREPO", "codigo" + response.code());
+
+                if(response.isSuccessful()){
+                Log.d("PLATOREPO", "ejecuto bien");
+                listaPlatos.add(response.body());
+                Message m = new Message();
+                m.arg1 = _ALTA_PLATO;
+                h.sendMessage(m);
+                }
+            }
+            @Override
+            public void onFailure(Call<Plato> call, Throwable t) {
+            Log.d("PLATOREPO","ERROR"+ t.getMessage());
+            Message m = new Message();
+            m.arg1= _ERROR_PLATO;
+            h.sendMessage(m);
+            }
+        });
+
+    }
+
+    public void actualizarPlato (final Plato a ,final Handler h){
+        Call<Plato> llamada = this.platoRest.actualizar(a.getId(),a);
+        llamada.enqueue(new Callback<Plato>() {
+            @Override
+            public void onResponse(Call<Plato> call, Response<Plato> response) {
+                Log.d("PLATOREPO","DESpues de ejecutar"+ response.isSuccessful());
+                Log.d("PLATOREPO" ,"CODIGO" + response.code());
+
+                if(response.isSuccessful()){
+                    Log.d("PLATOREPO", "EJECUTO");
+                    listaPlatos.remove(a);
+                    listaPlatos.add(response.body());
+                    Message m = new Message();
+                    m.arg1= _UPDATE_PLATO;
+                    h.sendMessage(m);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Plato> call, Throwable t) {
+                Log.d("PLATOREPO","ERROR"+ t.getMessage());
+                Message m = new Message();
+                m.arg1= _ERROR_PLATO;
+                h.sendMessage(m);
+            }
+        });
+    }
+
+    public void borrarPlato(final Plato a, final Handler h){
+        Call<Void> llamada = this.platoRest.borrar(a.getId());
+        llamada.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("PLATOREPO", "Despues que ejecuta"+ response.isSuccessful());
+                Log.d("PLATOREPO", "Codigo"+response.code());
+
+                if(response.isSuccessful()){
+                    Log.d("PLATOREPO", "Ejecuta");
+                    for(Plato a : listaPlatos){
+                        Log.d("PLATOREPO", "Plato"+ a.getId());
+                    }
+                    Log.d("PLATOREPO", "Borrar Plato"+ a.getId());
+                    listaPlatos.remove(a);
+                    for(Plato a : listaPlatos){
+                        Log.d("PLATOREPO", "Plato"+ a.getId());
+                    }
+                    Message m = new Message();
+                    m.arg1= _BORRADO_PLATO;
+                    h.sendMessage(m);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("PLATOREPO","ERROR"+ t.getMessage());
+                Message m = new Message();
+                m.arg1= _ERROR_PLATO;
+                h.sendMessage(m);
+            }
+        });
+    }
+
+    public void listarPlato(final Handler h){
+        Call<List<Plato>> llamada = this.platoRest.buscarTodos();
+        llamada.enqueue(new Callback<List<Plato>>() {
+            @Override
+            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
+                if(response.isSuccessful()){
+                    Log.d("PLATOREPOS", "ENTRO AL IF");
+                    listaPlatos.clear();
+                    listaPlatos.addAll(response.body());
+                    Message m = new Message();
+                    m.arg1 = _CONSULTA_PLATO;
+                    h.sendMessage(m);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Plato>> call, Throwable t) {
+                Log.d("PLATOREPO","ERROR"+ t.getMessage());
+                Message m = new Message();
+                m.arg1= _ERROR_PLATO;
+                h.sendMessage(m);
+            }
+        });
+    }
+
+    public List<Plato> getListaPlatos(){
+        return listaPlatos;
     }
 }

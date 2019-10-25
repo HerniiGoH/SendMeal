@@ -5,6 +5,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,6 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.w3c.dom.Text;
 
+import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.Plato;
 
 public class EditarItem extends AppCompatActivity {
@@ -36,7 +41,8 @@ public class EditarItem extends AppCompatActivity {
             }
         });
 
-        final Plato plato = Plato.platos.get(getIntent().getExtras().getInt("position"));
+       // final Plato plato = Plato.platos.get(getIntent().getExtras().getInt("position"));
+        final Plato plato = Plato_repo.getInstance().getListaPlatos().get(getIntent().getExtras().getInt("position"));
 
         ingresoNombre = findViewById(R.id.ingresoNombrePlato);
         ingresoNombre.getEditText().setText(plato.getNombre());
@@ -80,6 +86,8 @@ public class EditarItem extends AppCompatActivity {
                     plato.setDescripcion(ingresoDescripcion.getEditText().getText().toString());
                     plato.setPrecio(Float.valueOf(ingresoPrecio.getEditText().getText().toString()));
                     plato.setCalorias(Float.valueOf(ingresoCalorias.getEditText().getText().toString()));
+
+                    Plato_repo.getInstance().actualizarPlato(plato,miHandler);
                     Toast.makeText(getApplicationContext(), plato.toString(), Toast.LENGTH_LONG).show();
                     finish();
                 }
@@ -145,6 +153,18 @@ public class EditarItem extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+    Handler miHandler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage (Message m){
+            Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
+            switch ( m.arg1){
+                case Plato_repo._ALTA_PLATO:
+                    break;
+                case Plato_repo._UPDATE_PLATO:
+                    break;
+            }
+        }
+    };
 
 
 }

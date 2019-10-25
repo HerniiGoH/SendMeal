@@ -9,7 +9,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PorterDuff;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.Layout;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.Plato;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -62,11 +67,15 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
 
                 Boolean b = !dataSet.get(position).getEnOferta();
                 dataSet.get(position).setEnOferta(b);
+
+                Plato_repo.getInstance().actualizarPlato(dataSet.get(position),miHandler);
                 if(b){
                     holder.imagenOferta.setVisibility(View.VISIBLE);
+
                 }
                 else{
                     holder.imagenOferta.setVisibility(View.INVISIBLE);
+
                 }
 
                 Mihilo hilo = new Mihilo(dataSet.get(position), true);
@@ -86,7 +95,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
                         Mihilo hilo = new Mihilo(dataSet.get(position), false);
 
                         hilo.start();
-                        dataSet.remove(holder.getAdapterPosition());
+                        Plato_repo.getInstance().borrarPlato(dataSet.get(position),miHandler);
                         notifyItemRemoved(holder.getAdapterPosition());
                         notifyItemRangeChanged(holder.getAdapterPosition(), dataSet.size());
                     }
@@ -215,4 +224,18 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
 
         }
     }
+    Handler miHandler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage (Message m){
+            Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
+            switch ( m.arg1){
+                case Plato_repo._BORRADO_PLATO:
+                    notifyDataSetChanged();
+                    break;
+                case Plato_repo._UPDATE_PLATO:
+                    notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
 }

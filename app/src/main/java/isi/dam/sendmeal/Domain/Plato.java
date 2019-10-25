@@ -9,8 +9,7 @@ import java.util.Objects;
 
 public class Plato implements Parcelable {
 
-    public static List<Plato> platos = new ArrayList<Plato>();
-    private static Integer id_sec = 0;
+    private static Integer id_sec;
 
     private Integer id;
     private String nombre;
@@ -36,7 +35,10 @@ public class Plato implements Parcelable {
         this.calorias = calorias;
         this.enOferta = false;
         Plato.setId_sec(id+1);
-        Plato.platos.add(this);
+    }
+
+    public static void setIdSeq(Integer id){
+        id_sec = id;
     }
 
     protected Plato(Parcel in) {
@@ -82,14 +84,6 @@ public class Plato implements Parcelable {
 
     public void setEnOferta(Boolean enOferta) {
         this.enOferta = enOferta;
-    }
-
-    public static List<Plato> getPlatos() {
-        return platos;
-    }
-
-    public static void setPlatos(List<Plato> platos) {
-        Plato.platos = platos;
     }
 
     public static Integer getId_sec() {

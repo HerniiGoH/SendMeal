@@ -11,6 +11,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -19,6 +23,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import java.util.List;
+
+import isi.dam.sendmeal.DAO.Plato_repo;
+import isi.dam.sendmeal.DAO.rest.PlatoRest;
 import isi.dam.sendmeal.Domain.Plato;
 
 import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
@@ -31,6 +39,27 @@ public class HOME extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        Handler miHandler = new Handler(Looper.myLooper()){
+            @Override
+            public void handleMessage (Message m){
+                Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
+                switch ( m.arg1){
+                    case Plato_repo._ALTA_PLATO:
+                        break;
+                    case Plato_repo._CONSULTA_PLATO:
+                        break;
+                }
+            }
+        };
+
+        Plato_repo.getInstance().listarPlato(miHandler);
+        List<Plato> platos = Plato_repo.getInstance().getListaPlatos();
+        if(platos.size()!=0){
+            Plato.setIdSeq(platos.get(platos.size()-1).getId()+1);
+        }
+        else{
+            Plato.setIdSeq(0);
+        }
 
         myReceiver = new MyReceiver();
 
@@ -42,6 +71,7 @@ public class HOME extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         toolbar = findViewById(R.id.toolbar_01);
         setSupportActionBar(toolbar);
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -145,7 +175,6 @@ public class HOME extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
     }
 
 

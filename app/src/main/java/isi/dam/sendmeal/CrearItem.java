@@ -5,6 +5,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,6 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.w3c.dom.Text;
 
+import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.Plato;
 
 public class CrearItem extends AppCompatActivity {
@@ -20,6 +25,7 @@ public class CrearItem extends AppCompatActivity {
     Toolbar toolbar;
     TextInputLayout ingresoNombre, ingresoDescripcion, ingresoPrecio, ingresoCalorias;
     Button btnRegistrar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,7 @@ public class CrearItem extends AppCompatActivity {
             else{
                 Toast.makeText(getApplicationContext(), "Datos Registrados Exitosamente", Toast.LENGTH_SHORT).show();
                 Plato plato = new Plato(ingresoNombre.getEditText().getText().toString(), ingresoDescripcion.getEditText().getText().toString(), Float.valueOf(ingresoPrecio.getEditText().getText().toString()), Float.valueOf(ingresoCalorias.getEditText().getText().toString()));
+                Plato_repo.getInstance().crearPlato(plato,miHandler);
                 Toast.makeText(getApplicationContext(), plato.toString(), Toast.LENGTH_LONG).show();
             }
             }
@@ -112,6 +119,18 @@ public class CrearItem extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-
+ Handler miHandler = new Handler(Looper.myLooper()){
+  @Override
+  public void handleMessage (Message m){
+      Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
+      switch ( m.arg1){
+          case Plato_repo._ALTA_PLATO:
+              finish();
+              break;
+          case Plato_repo._UPDATE_PLATO:
+              break;
+      }
+  }
+ };
 
 }

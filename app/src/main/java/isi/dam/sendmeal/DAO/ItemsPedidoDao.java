@@ -1,5 +1,6 @@
 package isi.dam.sendmeal.DAO;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -9,7 +10,7 @@ import java.util.List;
 
 import isi.dam.sendmeal.Domain.ItemsPedido;
 import isi.dam.sendmeal.Domain.Pedido;
-
+@Dao
 public interface ItemsPedidoDao {
 
 
