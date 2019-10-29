@@ -4,8 +4,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import com.google.gson.internal.bind.ArrayTypeAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +16,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Plato_repo {
-    public static String _SERVER = "http://10.15.150.120:5000/";
+    public static String _SERVER = "http://10.15.159.237:5000/";
     private static Plato_repo _INSTANCIA;
     private Retrofit rf;
     private PlatoRest platoRest;
@@ -157,6 +155,32 @@ public class Plato_repo {
                     listaPlatos.addAll(response.body());
                     Message m = new Message();
                     m.arg1 = _CONSULTA_PLATO;
+                    h.sendMessage(m);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Plato>> call, Throwable t) {
+                Log.d("PLATOREPO","ERROR"+ t.getMessage());
+                Message m = new Message();
+                m.arg1= _ERROR_PLATO;
+                h.sendMessage(m);
+            }
+        });
+    }
+
+    public void buscarPlatos(final Handler h, Float precio_min, Float precio_max, String titulo){
+        Call<List<Plato>> llamada = this.platoRest.listaPlatos(precio_max, precio_min, titulo);
+        llamada.enqueue(new Callback<List<Plato>>() {
+            @Override
+            public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
+                if(response.isSuccessful()){
+                    Log.d("PLATOREPOS", "ENTRO AL IF");
+                    List<Plato> lista = new ArrayList<>();
+                    lista.addAll(response.body());
+                    Message m = new Message();
+                    m.arg1 = _CONSULTA_PLATO;
+                    m.obj = lista;
                     h.sendMessage(m);
                 }
             }

@@ -68,7 +68,7 @@ android:layout_height="match_parent">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint" />
+                android:hint="Nombre del plato" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,7 +87,8 @@ android:layout_height="match_parent">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint" />
+                android:hint="Precio Minimo"
+                android:inputType="numberDecimal"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -104,7 +105,8 @@ android:layout_height="match_parent">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="hint" />
+                android:hint="Precio Maximo"
+                android:inputType="numberDecimal"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

@@ -25,6 +25,23 @@ public class ListaItems extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     Toolbar toolbar;
 
+    Handler miHandler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage (Message m){
+            Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
+            switch ( m.arg1){
+                case Plato_repo._ALTA_PLATO:
+                    mAdapter.notifyDataSetChanged();
+                    break;
+                case Plato_repo._CONSULTA_PLATO:
+                    mAdapter = new PlatoRecyclerAdapter(Plato_repo.getInstance().getListaPlatos(), ListaItems.this);
+                    mRecyclerView.setAdapter(mAdapter);
+                    mAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +65,7 @@ public class ListaItems extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i2 = new Intent(view.getContext(), CrearItem.class);
+                Intent i2 = new Intent(ListaItems.this, CrearItem.class);
                 startActivity(i2);
             }
         });
@@ -58,6 +75,7 @@ public class ListaItems extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Plato_repo.getInstance().listarPlato(miHandler);
         if(mAdapter!=null){
             mAdapter.notifyDataSetChanged();
         }
@@ -68,19 +86,4 @@ public class ListaItems extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-    Handler miHandler = new Handler(Looper.myLooper()){
-        @Override
-        public void handleMessage (Message m){
-            Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
-            switch ( m.arg1){
-                case Plato_repo._ALTA_PLATO:
-                    break;
-                case Plato_repo._CONSULTA_PLATO:
-                    mAdapter = new PlatoRecyclerAdapter(Plato_repo.getInstance().getListaPlatos(), ListaItems.this);
-                    mRecyclerView.setAdapter(mAdapter);
-                    mAdapter.notifyDataSetChanged();
-                    break;
-            }
-        }
-    };
 }

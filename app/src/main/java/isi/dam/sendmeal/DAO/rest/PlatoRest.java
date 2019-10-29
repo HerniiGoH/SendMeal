@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface PlatoRest {
 
@@ -26,6 +27,7 @@ public interface PlatoRest {
     @POST("platos/")
     Call<Plato> crear (@Body Plato plato);
 
-
+    @GET("platos/")
+    Call<List<Plato>> listaPlatos (@Query("precio_lte") Float precioMax, @Query("precio_gte") Float precioMin, @Query("nombre_like") String titulo);
 
 }

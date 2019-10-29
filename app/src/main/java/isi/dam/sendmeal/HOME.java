@@ -36,21 +36,21 @@ public class HOME extends AppCompatActivity {
     Toolbar toolbar;
     private MyReceiver myReceiver;
 
+    Handler miHandler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage (Message m){
+            Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
+            switch ( m.arg1){
+                case Plato_repo._ALTA_PLATO:
+                    break;
+                case Plato_repo._CONSULTA_PLATO:
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        Handler miHandler = new Handler(Looper.myLooper()){
-            @Override
-            public void handleMessage (Message m){
-                Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
-                switch ( m.arg1){
-                    case Plato_repo._ALTA_PLATO:
-                        break;
-                    case Plato_repo._CONSULTA_PLATO:
-                        break;
-                }
-            }
-        };
 
         Plato_repo.getInstance().listarPlato(miHandler);
         List<Plato> platos = Plato_repo.getInstance().getListaPlatos();
