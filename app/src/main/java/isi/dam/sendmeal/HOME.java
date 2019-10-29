@@ -44,6 +44,14 @@ public class HOME extends AppCompatActivity {
                 case Plato_repo._ALTA_PLATO:
                     break;
                 case Plato_repo._CONSULTA_PLATO:
+                    List<Plato> platos = Plato_repo.getInstance().getListaPlatos();
+                    Log.d("ALGO", ""+platos.size());
+                    if(platos.size()!=0){
+                        Plato.setIdSeq(platos.get(platos.size()-1).getId()+1);
+                    }
+                    else{
+                        Plato.setIdSeq(1);
+                    }
                     break;
             }
         }
@@ -53,13 +61,6 @@ public class HOME extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         Plato_repo.getInstance().listarPlato(miHandler);
-        List<Plato> platos = Plato_repo.getInstance().getListaPlatos();
-        if(platos.size()!=0){
-            Plato.setIdSeq(platos.get(platos.size()-1).getId()+1);
-        }
-        else{
-            Plato.setIdSeq(0);
-        }
 
         myReceiver = new MyReceiver();
 

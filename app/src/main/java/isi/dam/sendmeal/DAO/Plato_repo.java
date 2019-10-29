@@ -158,9 +158,10 @@ public class Plato_repo {
             @Override
             public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
                 if(response.isSuccessful()){
-                    Log.d("PLATOREPOS", "ENTRO AL IF");
+                    Log.d("PLATOREPOS", "ENTRO AL IF"+response.body().size());
                     listaPlatos.clear();
                     listaPlatos.addAll(response.body());
+                    Log.d("PLATOREPOS",""+listaPlatos.size());
                     Message m = new Message();
                     m.arg1 = _CONSULTA_PLATO;
                     h.sendMessage(m);
