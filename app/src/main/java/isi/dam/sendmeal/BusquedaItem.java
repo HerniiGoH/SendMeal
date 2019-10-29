@@ -26,7 +26,7 @@ public class BusquedaItem extends AppCompatActivity {
     String titulo;
     TextInputLayout ingresoTitulo, ingresoPrecioMin, ingresoPrecioMax;
     Button btnBuscar;
-    ArrayList<Plato> platos;
+    ArrayList<Plato> platoResultados;
     Toolbar toolbar;
 
     final Handler miHandler = new Handler(Looper.myLooper()){
@@ -35,9 +35,9 @@ public class BusquedaItem extends AppCompatActivity {
             Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
             switch ( m.arg1){
                 case Plato_repo._CONSULTA_PLATO:
-                    platos = (ArrayList<Plato>) Plato_repo.getInstance().getListaResultados();
-                    if(platos!= null){
-                        Log.d("QUE ANDE", ""+platos.size());
+                    platoResultados = (ArrayList<Plato>) Plato_repo.getInstance().getListaResultados();
+                    if(platoResultados!= null){
+                        Log.d("QUE ANDE", ""+platoResultados.size());
                         Intent intent = new Intent(BusquedaItem.this, ListaResultados.class);
                         startActivity(intent);
                     }
