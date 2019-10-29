@@ -41,8 +41,15 @@ public class EditarItem extends AppCompatActivity {
             }
         });
 
+        final Plato plato;
+
        // final Plato plato = Plato.platos.get(getIntent().getExtras().getInt("position"));
-        final Plato plato = Plato_repo.getInstance().getListaPlatos().get(getIntent().getExtras().getInt("position"));
+        if(getIntent().getExtras().getBoolean("Bool_2")){
+            plato = Plato_repo.getInstance().getListaPlatos().get(getIntent().getExtras().getInt("position"));
+        }
+        else{
+            plato = Plato_repo.getInstance().getListaResultados().get(getIntent().getExtras().getInt("position"));
+        }
 
         ingresoNombre = findViewById(R.id.ingresoNombrePlato);
         ingresoNombre.getEditText().setText(plato.getNombre());

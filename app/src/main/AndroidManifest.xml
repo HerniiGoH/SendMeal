@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".BusquedaItem"></activity>
+        <activity android:name=".ListaResultados"></activity>
         <activity android:name=".EditarItem"></activity>
         <activity android:name=".ListaItems" />
         <activity

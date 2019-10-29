@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,35 +14,20 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import isi.dam.sendmeal.DAO.Plato_repo;
+import isi.dam.sendmeal.Domain.Plato;
 
-public class ListaItems extends AppCompatActivity {
+public class ListaResultados extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     Toolbar toolbar;
 
-    Handler miHandler = new Handler(Looper.myLooper()){
-        @Override
-        public void handleMessage (Message m){
-            Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
-            switch ( m.arg1){
-                case Plato_repo._ALTA_PLATO:
-                    mAdapter.notifyDataSetChanged();
-                    break;
-                case Plato_repo._CONSULTA_PLATO:
-                    mAdapter = new PlatoRecyclerAdapter(Plato_repo.getInstance().getListaPlatos(), ListaItems.this, true);
-                    mRecyclerView.setAdapter(mAdapter);
-                    mAdapter.notifyDataSetChanged();
-                    break;
-            }
-        }
-    };
-
-
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,28 +39,22 @@ public class ListaItems extends AppCompatActivity {
                 finish();
             }
         });
-        Plato_repo.getInstance().listarPlato(miHandler);
+
+        FloatingActionButton floatingActionButton = findViewById(R.id.agregar_flotante);
+        floatingActionButton.setVisibility(View.GONE);
 
         mRecyclerView = findViewById(R.id.rvPlatos);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        FloatingActionButton fab = findViewById(R.id.agregar_flotante);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i2 = new Intent(ListaItems.this, CrearItem.class);
-                startActivity(i2);
-            }
-        });
-
+        mAdapter = new PlatoRecyclerAdapter(Plato_repo.getInstance().getListaResultados(), ListaResultados.this, false);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Plato_repo.getInstance().listarPlato(miHandler);
         if(mAdapter!=null){
             mAdapter.notifyDataSetChanged();
         }

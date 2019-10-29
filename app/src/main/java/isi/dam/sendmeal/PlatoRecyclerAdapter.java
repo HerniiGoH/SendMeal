@@ -44,6 +44,21 @@ import static androidx.core.content.ContextCompat.getSystemService;
 
 public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdapter.PlatoViewHolder> {
 
+    Handler miHandler = new Handler(Looper.myLooper()){
+        @Override
+        public void handleMessage (Message m){
+            Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
+            switch ( m.arg1){
+                case Plato_repo._BORRADO_PLATO:
+                    notifyDataSetChanged();
+                    break;
+                case Plato_repo._UPDATE_PLATO:
+                    notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
+
     @NonNull
     @Override
     public PlatoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -114,6 +129,7 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
                 intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("position", holder.getAdapterPosition());
                 intent.putExtra("Bool", false);
+                intent.putExtra("Bool_2", bool);
                 context.startActivity(intent);
                 notifyItemChanged(holder.getAdapterPosition());
                 notifyDataSetChanged();
@@ -188,10 +204,12 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
 
     private List<Plato> dataSet;
     private Context context;
+    private Boolean bool;
 
-    public PlatoRecyclerAdapter(List<Plato>dataSet, Context context){
+    public PlatoRecyclerAdapter(List<Plato>dataSet, Context context, Boolean bool){
         this.dataSet=dataSet;
         this.context=context;
+        this.bool = bool;
     }
 
     public class Mihilo extends Thread{
@@ -224,18 +242,4 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
 
         }
     }
-    Handler miHandler = new Handler(Looper.myLooper()){
-        @Override
-        public void handleMessage (Message m){
-            Log.d("APP_2", "VUELVE AL HANDLER"+ m.arg1);
-            switch ( m.arg1){
-                case Plato_repo._BORRADO_PLATO:
-                    notifyDataSetChanged();
-                    break;
-                case Plato_repo._UPDATE_PLATO:
-                    notifyDataSetChanged();
-                    break;
-            }
-        }
-    };
 }

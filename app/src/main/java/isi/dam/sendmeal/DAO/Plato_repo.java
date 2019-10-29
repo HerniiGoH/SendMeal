@@ -28,7 +28,7 @@ public class Plato_repo {
     public static final int _ERROR_PLATO =9;
 
 
-
+    private List<Plato> listaResultados;
 
     private List<Plato> listaPlatos;
 
@@ -40,6 +40,7 @@ public class Plato_repo {
             _INSTANCIA = new Plato_repo();
             _INSTANCIA.configurarRetroFit();
             _INSTANCIA.listaPlatos = new ArrayList<>();
+            _INSTANCIA.listaResultados = new ArrayList<>();
         }
         return _INSTANCIA;
     }
@@ -94,6 +95,10 @@ public class Plato_repo {
                     Log.d("PLATOREPO", "EJECUTO");
                     listaPlatos.remove(a);
                     listaPlatos.add(response.body());
+                    if(listaResultados.contains(a)){
+                        listaResultados.remove(a);
+                        listaResultados.add(response.body());
+                    }
                     Message m = new Message();
                     m.arg1= _UPDATE_PLATO;
                     h.sendMessage(m);
@@ -125,6 +130,9 @@ public class Plato_repo {
                     }
                     Log.d("PLATOREPO", "Borrar Plato"+ a.getId());
                     listaPlatos.remove(a);
+                    if(listaResultados.contains(a)){
+                        listaResultados.remove(a);
+                    }
                     for(Plato a : listaPlatos){
                         Log.d("PLATOREPO", "Plato"+ a.getId());
                     }
@@ -176,11 +184,10 @@ public class Plato_repo {
             public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
                 if(response.isSuccessful()){
                     Log.d("PLATOREPOS", "ENTRO AL IF");
-                    List<Plato> lista = new ArrayList<>();
-                    lista.addAll(response.body());
+                    listaResultados.clear();
+                    listaResultados.addAll(response.body());
                     Message m = new Message();
                     m.arg1 = _CONSULTA_PLATO;
-                    m.obj = lista;
                     h.sendMessage(m);
                 }
             }
@@ -197,5 +204,8 @@ public class Plato_repo {
 
     public List<Plato> getListaPlatos(){
         return listaPlatos;
+    }
+    public List<Plato> getListaResultados(){
+        return listaResultados;
     }
 }
