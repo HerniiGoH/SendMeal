@@ -36,19 +36,19 @@
             app:srcCompat="@drawable/oferta" />
 
         <LinearLayout
+            android:id="@+id/layoutFila"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:orientation="vertical"
-            android:layout_alignBottom="@+id/imagenPlato"
-            android:id="@+id/layoutFila">
+            android:layout_marginTop="60dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/ListaPlatoNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textSize="25dp"/>
+                android:textSize="25dp" />
 
             <TextView
                 android:id="@+id/ListaPlatoPrecio"
@@ -56,15 +56,68 @@
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:textSize="25dp" />
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/agregar_button"
+        <LinearLayout
+            android:id="@+id/layoutFila3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/layoutFila"
+            android:layout_alignStart="@id/layoutFila"
             android:layout_alignBottom="@id/imagenPlato"
-            android:layout_alignEnd="@id/imagenPlato"
-            android:text="@string/agregar_plato_pedido" />
+            android:layout_marginStart="113dp"
+            android:background="#A30E0303"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="#001A1414"
+                android:text="Cantidad"
+                android:textColor="#FFFFFF" />
+
+            <LinearLayout
+                android:id="@+id/layoutFila2"
+                android:layout_width="243dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/mas_platos"
+                    android:layout_width="53dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text="+" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ingreso_cantidad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="44dp"
+                    android:layout_weight="0.4"
+                    android:gravity="center_horizontal|center_vertical"
+                    app:boxBackgroundColor="#FFFFFF"
+                    app:boxBackgroundMode="filled">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal|center_vertical" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/menos_platos"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:text="-" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
