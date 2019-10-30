@@ -56,6 +56,8 @@
     <string name="ofertarString">Ofertar</string>
     <string name="editarString">Editar</string>
     <string name="eliminarString">Eliminar</string>
+    <string name="crearPedido_subtitulo">Crear Pedido</string>
+    <string name="agregar_plato_pedido">Agregar Plato</string>
 
 
 </resources>

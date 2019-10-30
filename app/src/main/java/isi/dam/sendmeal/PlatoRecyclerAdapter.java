@@ -76,22 +76,17 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
         if( dataSet.get(position).getEnOferta()){
             holder.imagenOferta.setVisibility(View.VISIBLE);
         }
+        else{
+            holder.imagenOferta.setVisibility(View.INVISIBLE);
+        }
         holder.btnOferta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Boolean b = !dataSet.get(position).getEnOferta();
+
                 dataSet.get(position).setEnOferta(b);
-
                 Plato_repo.getInstance().actualizarPlato(dataSet.get(position),miHandler);
-                if(b){
-                    holder.imagenOferta.setVisibility(View.VISIBLE);
-
-                }
-                else{
-                    holder.imagenOferta.setVisibility(View.INVISIBLE);
-
-                }
 
                 Mihilo hilo = new Mihilo(dataSet.get(position), true);
 

@@ -93,11 +93,13 @@ public class Plato_repo {
 
                 if(response.isSuccessful()){
                     Log.d("PLATOREPO", "EJECUTO");
+                    int pos = listaPlatos.indexOf(a);
                     listaPlatos.remove(a);
-                    listaPlatos.add(response.body());
+                    listaPlatos.add(pos, response.body());
                     if(listaResultados.contains(a)){
+                        pos = listaResultados.indexOf(a);
                         listaResultados.remove(a);
-                        listaResultados.add(response.body());
+                        listaResultados.add(pos, response.body());
                     }
                     Message m = new Message();
                     m.arg1= _UPDATE_PLATO;

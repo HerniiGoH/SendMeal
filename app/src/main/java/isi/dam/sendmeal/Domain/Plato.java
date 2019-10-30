@@ -3,6 +3,8 @@ package isi.dam.sendmeal.Domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.Ignore;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +28,7 @@ public class Plato implements Parcelable {
         this.calorias = calorias;
         this.enOferta = false;
     }
-
+    @Ignore
     public Plato(String nombre, String descripcion, Float precio, Float calorias) {
         this.id = Plato.getId_sec();
         this.nombre = nombre;

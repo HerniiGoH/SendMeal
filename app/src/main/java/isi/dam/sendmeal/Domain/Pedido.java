@@ -1,6 +1,7 @@
 package isi.dam.sendmeal.Domain;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
@@ -12,40 +13,53 @@ import java.util.List;
 
 @Entity
 public class Pedido {
-   @PrimaryKey
-   private Integer id;
-    /*@ColumnInfo
-   private Date fecha_creacion;
+    @PrimaryKey(autoGenerate = true)
+    private Integer idPedido;
     @ColumnInfo
-    private EstadoPedido estado;*/
+    private Date fecha_creacion;
+    @ColumnInfo
+    private EstadoPedido estado;
     @ColumnInfo
     private Double lat;
     @ColumnInfo
     private Double lng;
-  /*  @ColumnInfo
-    private ArrayList<ItemsPedido> items;*/
+    @Embedded
+    private ArrayList<ItemsPedido> items;
 
-
-
-    /*public class DateConverter {
-
+    public static class Converter {
         @TypeConverter
-        public Date toDate(Long dateLong){
-            return dateLong == null ? null: new Date(dateLong);
+        public static Date toDate(Long dateLong) {
+            return dateLong == null ? null : new Date(dateLong);
         }
 
         @TypeConverter
-        public Long fromDate(Date date){
+        public static Long fromDate(Date date) {
             return date == null ? null : date.getTime();
         }
-    }*/
+    }
+
+    public Date getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public void setFecha_creacion(Date fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public EstadoPedido getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoPedido estado) {
+        this.estado = estado;
+    }
 
     public Integer getId() {
-        return id;
+        return idPedido;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idPedido = id;
     }
 
     public Double getLat() {
@@ -63,12 +77,21 @@ public class Pedido {
     public void setLng(Double lng) {
         this.lng = lng;
     }
-/*
+
     public ArrayList<ItemsPedido> getItems() {
         return items;
     }
 
     public void setItems(ArrayList<ItemsPedido> items) {
         this.items = items;
-    }*/
+    }
+
+    public Integer getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Integer idPedido) {
+        this.idPedido = idPedido;
+    }
 }
+

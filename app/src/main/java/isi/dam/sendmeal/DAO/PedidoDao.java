@@ -10,9 +10,6 @@ import androidx.room.Update;
 import java.util.List;
 
 import isi.dam.sendmeal.Domain.Pedido;
-
-
-
 @Dao
 public interface PedidoDao {
 

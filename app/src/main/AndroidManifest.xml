@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="isi.dam.sendmeal">
-<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -11,9 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BusquedaItem"></activity>
-        <activity android:name=".ListaResultados"></activity>
-        <activity android:name=".EditarItem"></activity>
+        <activity android:name=".activity_crear_pedido"></activity>
+        <activity android:name=".BusquedaItem" />
+        <activity android:name=".ListaResultados" />
+        <activity android:name=".EditarItem" />
         <activity android:name=".ListaItems" />
         <activity
             android:name=".CrearItem"
@@ -32,5 +32,7 @@
             android:name=".MainActivity"
             android:parentActivityName=".HOME" />
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

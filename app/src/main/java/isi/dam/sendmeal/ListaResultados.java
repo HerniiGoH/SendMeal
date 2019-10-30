@@ -13,6 +13,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,6 +43,9 @@ public class ListaResultados extends AppCompatActivity {
 
         FloatingActionButton floatingActionButton = findViewById(R.id.agregar_flotante);
         floatingActionButton.setVisibility(View.GONE);
+
+        TextView subtitulo = findViewById(R.id.SubtituloLista);
+        subtitulo.setText("Resultados de la Busqueda");
 
         mRecyclerView = findViewById(R.id.rvPlatos);
         mRecyclerView.setHasFixedSize(true);
