@@ -22,7 +22,7 @@
         tools:context=".ListaItems">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_crear_item"
+            android:id="@+id/toolbar_lista_pedidos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/ListaPlatoString"
+                    android:text="Lista Pedidos"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -65,10 +65,10 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvPlatos"
+                android:id="@+id/rvPedido"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/fila_plato">
+                tools:listitem="@layout/fila_pedido">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -76,8 +76,8 @@
                 android:id="@+id/agregar_flotante"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignEnd="@+id/rvPlatos"
-                android:layout_alignBottom="@+id/rvPlatos"
+                android:layout_alignEnd="@+id/rvPedido"
+                android:layout_alignBottom="@+id/rvPedido"
                 android:layout_gravity="bottom|end"
                 android:layout_marginEnd="15dp"
                 android:layout_marginBottom="15dp"
