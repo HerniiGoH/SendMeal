@@ -10,9 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity_crear_pedido"></activity>
+        <activity android:name=".ListaItemsPedido"></activity>
         <activity android:name=".BusquedaItem" />
         <activity android:name=".ListaResultados" />
+
         <activity android:name=".EditarItem" />
         <activity android:name=".ListaItems" />
         <activity

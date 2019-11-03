@@ -27,7 +27,7 @@ public class ListaItemsPedido extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_items);
+        setContentView(R.layout.activity_crear_pedido);
         toolbar = findViewById(R.id.toolbar_crear_item);
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
@@ -36,19 +36,9 @@ public class ListaItemsPedido extends AppCompatActivity {
             }
         });
 
-
         mRecyclerView = findViewById(R.id.rvItemsPedido);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        FloatingActionButton fab = findViewById(R.id.agregar_flotante);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i2 = new Intent(ListaItemsPedido.this, CrearItem.class);
-                startActivity(i2);
-            }
-        });
 
     }
 
