@@ -67,7 +67,7 @@
                 android:id="@+id/rvItemsPedido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/fila_plato_pedido">
+                tools:listitem="@layout/fila_item_pedido">
 
             </androidx.recyclerview.widget.RecyclerView>
 

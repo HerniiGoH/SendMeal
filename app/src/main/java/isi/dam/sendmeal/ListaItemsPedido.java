@@ -15,9 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 import isi.dam.sendmeal.DAO.Plato_repo;
+import isi.dam.sendmeal.Domain.ItemsPedido;
+import isi.dam.sendmeal.Domain.Pedido;
+import isi.dam.sendmeal.Domain.Plato;
 
 public class ListaItemsPedido extends AppCompatActivity {
+
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -36,10 +42,25 @@ public class ListaItemsPedido extends AppCompatActivity {
             }
         });
 
+
         mRecyclerView = findViewById(R.id.rvItemsPedido);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        Pedido pedido = new Pedido();
 
+
+        ArrayList<ItemsPedido> listaItemsP = new ArrayList<>();
+        for (Plato p : Plato_repo.getInstance().getListaPlatos()){
+            ItemsPedido a = new ItemsPedido();
+            a.setId(p.getId());
+            a.setPedido();
+
+        }
+
+
+        mAdapter = new PlatoRecyclerAdapter(null, ListaItemsPedido.this, true);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
