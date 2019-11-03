@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.List;
 
 import isi.dam.sendmeal.DAO.Plato_repo;
@@ -53,13 +55,26 @@ public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedido
 
         final ItemsPedido plato = dataSet.get(position);
         holder.titPlato.setText(plato.getPlato().getNombre());
-        holder.precPlato.setText("$"+plato.getPrecio().toString());
+        holder.precPlato.setText("$"+plato.getPrecioPlato().toString());
 
+        if( dataSet.get(position).getPlato().getEnOferta()){
+            holder.imagenOferta.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.imagenOferta.setVisibility(View.INVISIBLE);
+        }
+        holder.cantidad.getEditText().setText(dataSet.get(position).getCantidad().toString());
 
         holder.btnMas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                dataSet.get(position).setCantidad(dataSet.get(position).getCantidad()+1);
+                holder.cantidad.getEditText().setText(dataSet.get(position).getCantidad().toString());
+
+                dataSet.get(position).setPrecioPlato(dataSet.get(position).getPlato().getPrecio()*dataSet.get(position).getCantidad());
+                total.setText(String.valueOf(Double.valueOf(total.getText().toString())+dataSet.get(position).getPlato().getPrecio()));
+                notifyDataSetChanged();
             }
         });
 
@@ -67,7 +82,13 @@ public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedido
             @Override
             public void onClick(View view) {
 
-
+                if(dataSet.get(position).getCantidad()>0){
+                dataSet.get(position).setCantidad(dataSet.get(position).getCantidad()-1);
+                holder.cantidad.getEditText().setText(dataSet.get(position).getCantidad().toString());
+                    dataSet.get(position).setPrecioPlato(dataSet.get(position).getPlato().getPrecio()*dataSet.get(position).getCantidad());
+                    total.setText(String.valueOf(Double.valueOf(total.getText().toString())-dataSet.get(position).getPlato().getPrecio()));
+                    notifyDataSetChanged();
+                }
             }
         });
 
@@ -85,6 +106,7 @@ public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedido
         TextView titPlato, precPlato;
         CardView cardView;
         Button btnMas, btnMenos;
+        TextInputLayout cantidad;
         public ItemsPedidoViewHolder(@NonNull final View itemView) {
             super(itemView);
 
@@ -93,26 +115,21 @@ public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedido
             imgPlato = itemView.findViewById(R.id.imagenPlato);
             titPlato = itemView.findViewById(R.id.ListaPlatoNombre);
             precPlato = itemView.findViewById(R.id.ListaPlatoPrecio);
-            btnMas = itemView.findViewById(R.id.ofertaButton);
-            btnMenos = itemView.findViewById(R.id.editarButton);
-
-
+            btnMas = itemView.findViewById(R.id.mas_platos);
+            btnMenos = itemView.findViewById(R.id.menos_platos);
+            cantidad = itemView.findViewById(R.id.ingreso_cantidad);
         }
-
-    }
-
-    public void showPopup(View view){
 
     }
 
     private List<ItemsPedido> dataSet;
     private Context context;
-    private Boolean bool;
+    private TextView total;
 
-    public ItemsPedidoRecyclerAdapter(List<ItemsPedido>dataSet, Context context, Boolean bool){
+    public ItemsPedidoRecyclerAdapter(List<ItemsPedido>dataSet, Context context, TextView total){
         this.dataSet=dataSet;
         this.context=context;
-        this.bool = bool;
+        this.total = total;
     }
 
 }

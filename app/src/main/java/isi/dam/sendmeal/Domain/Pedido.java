@@ -25,6 +25,9 @@ public class Pedido {
     private Double lng;
     @Embedded
     private ArrayList<ItemsPedido> items;
+    public Pedido (){
+        items = new ArrayList<ItemsPedido>();
+    }
 
     public static class Converter {
         @TypeConverter
@@ -37,7 +40,6 @@ public class Pedido {
             return date == null ? null : date.getTime();
         }
     }
-
     public Date getFecha_creacion() {
         return fecha_creacion;
     }

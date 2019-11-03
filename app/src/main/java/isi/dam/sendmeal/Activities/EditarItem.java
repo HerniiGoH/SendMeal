@@ -92,7 +92,7 @@ public class EditarItem extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Datos Registrados Exitosamente", Toast.LENGTH_SHORT).show();
                     plato.setNombre(ingresoNombre.getEditText().getText().toString());
                     plato.setDescripcion(ingresoDescripcion.getEditText().getText().toString());
-                    plato.setPrecio(Float.valueOf(ingresoPrecio.getEditText().getText().toString()));
+                    plato.setPrecio(Double.valueOf(ingresoPrecio.getEditText().getText().toString()));
                     plato.setCalorias(Float.valueOf(ingresoCalorias.getEditText().getText().toString()));
 
                     Plato_repo.getInstance().actualizarPlato(plato,miHandler);

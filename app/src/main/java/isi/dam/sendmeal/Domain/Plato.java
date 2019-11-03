@@ -16,11 +16,11 @@ public class Plato implements Parcelable {
     private Integer id;
     private String nombre;
     private String descripcion;
-    private Float precio;
+    private Double precio;
     private Float calorias;
     private Boolean enOferta;
 
-    public Plato(Integer id, String nombre, String descripcion, Float precio, Float calorias) {
+    public Plato(Integer id, String nombre, String descripcion, Double precio, Float calorias) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -29,7 +29,7 @@ public class Plato implements Parcelable {
         this.enOferta = false;
     }
     @Ignore
-    public Plato(String nombre, String descripcion, Float precio, Float calorias) {
+    public Plato(String nombre, String descripcion, Double precio, Float calorias) {
         this.id = Plato.getId_sec();
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -54,7 +54,7 @@ public class Plato implements Parcelable {
         if (in.readByte() == 0) {
             precio = null;
         } else {
-            precio = in.readFloat();
+            precio = in.readDouble();
         }
         if (in.readByte() == 0) {
             calorias = null;
@@ -120,11 +120,11 @@ public class Plato implements Parcelable {
         this.descripcion = descripcion;
     }
 
-    public Float getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Float precio) {
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
@@ -172,7 +172,7 @@ public class Plato implements Parcelable {
             parcel.writeByte((byte) 0);
         } else {
             parcel.writeByte((byte) 1);
-            parcel.writeFloat(precio);
+            parcel.writeDouble(precio);
         }
         if (calorias == null) {
             parcel.writeByte((byte) 0);

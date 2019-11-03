@@ -19,14 +19,6 @@ public class ItemsPedido {
     @ColumnInfo
     private Double precioPlato;
 
-    public Integer getId() {
-        return idItemPedido;
-    }
-
-    public void setId(Integer id) {
-        this.idItemPedido = id;
-    }
-
     public Integer getCantidad() {
         return cantidad;
     }
@@ -35,13 +27,6 @@ public class ItemsPedido {
         this.cantidad = cantidad;
     }
 
-    public Double getPrecio() {
-        return precioPlato;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precioPlato = precio;
-    }
 
     public Pedido getPedido() {
         return pedido;

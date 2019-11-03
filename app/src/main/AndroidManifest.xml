@@ -16,7 +16,6 @@
 
         <activity android:name=".Activities.EditarItem" />
         <activity android:name=".Activities.ListaItems" />
-        <activity android:name=".Activities.ListaItemsPedido" />
         <activity android:name=".Activities.ListaPedido" />
         <activity
             android:name=".Activities.CrearItem"
