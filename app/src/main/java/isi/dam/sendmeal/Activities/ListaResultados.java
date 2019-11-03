@@ -1,4 +1,4 @@
-package isi.dam.sendmeal;
+package isi.dam.sendmeal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -6,20 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import isi.dam.sendmeal.DAO.Plato_repo;
-import isi.dam.sendmeal.Domain.Plato;
+import isi.dam.sendmeal.R;
+import isi.dam.sendmeal.RecyclerAdapters.PlatoRecyclerAdapter;
 
 public class ListaResultados extends AppCompatActivity {
 

@@ -1,18 +1,13 @@
 
-package isi.dam.sendmeal;
+package isi.dam.sendmeal.RecyclerAdapters;
 
-import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.PorterDuff;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.text.Layout;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -24,7 +19,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -35,11 +29,10 @@ import java.util.List;
 
 import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.Plato;
+import isi.dam.sendmeal.Activities.EditarItem;
+import isi.dam.sendmeal.R;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-import static androidx.core.content.ContextCompat.getSystemService;
-
-
 
 
 public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdapter.PlatoViewHolder> {

@@ -1,4 +1,4 @@
-package isi.dam.sendmeal;
+package isi.dam.sendmeal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import isi.dam.sendmeal.Domain.Usuario;
+import isi.dam.sendmeal.R;
 
 public class PantallaUsuario extends AppCompatActivity {
 

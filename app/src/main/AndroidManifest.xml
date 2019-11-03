@@ -10,18 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ListaItemsPedido"></activity>
-        <activity android:name=".BusquedaItem" />
-        <activity android:name=".ListaResultados" />
+        <activity android:name=".Activities.ListaItemsPedido"></activity>
+        <activity android:name=".Activities.BusquedaItem" />
+        <activity android:name=".Activities.ListaResultados" />
 
-        <activity android:name=".EditarItem" />
-        <activity android:name=".ListaItems" />
-        <activity android:name=".ListaItemsPedido" />
-        <activity android:name=".ListaPedido" />
+        <activity android:name=".Activities.EditarItem" />
+        <activity android:name=".Activities.ListaItems" />
+        <activity android:name=".Activities.ListaItemsPedido" />
+        <activity android:name=".Activities.ListaPedido" />
         <activity
-            android:name=".CrearItem"
-            android:parentActivityName=".HOME" />
-        <activity android:name=".HOME">
+            android:name=".Activities.CrearItem"
+            android:parentActivityName=".Activities.HOME" />
+        <activity android:name=".Activities.HOME">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,11 +29,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PantallaUsuario"
-            android:parentActivityName=".HOME" />
+            android:name=".Activities.PantallaUsuario"
+            android:parentActivityName=".Activities.HOME" />
         <activity
-            android:name=".MainActivity"
-            android:parentActivityName=".HOME" />
+            android:name=".Activities.MainActivity"
+            android:parentActivityName=".Activities.HOME" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

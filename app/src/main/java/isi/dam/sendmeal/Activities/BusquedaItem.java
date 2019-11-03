@@ -1,4 +1,4 @@
-package isi.dam.sendmeal;
+package isi.dam.sendmeal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,10 +15,10 @@ import android.widget.Button;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.Plato;
+import isi.dam.sendmeal.R;
 
 public class BusquedaItem extends AppCompatActivity {
 

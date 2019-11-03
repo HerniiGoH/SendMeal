@@ -13,7 +13,7 @@ android:layout_height="match_parent">
     android:layout_height="match_parent"
     android:backgroundTint="@android:color/background_light"
     android:orientation="vertical"
-    tools:context=".HOME">
+    tools:context=".Activities.HOME">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_01"

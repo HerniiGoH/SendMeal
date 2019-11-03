@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppTheme"
-    tools:context=".ListaPedido">
+    tools:context=".Activities.ListaPedido">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ListaItems">
+        tools:context=".Activities.ListaItems">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_lista_pedidos"

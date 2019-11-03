@@ -1,12 +1,9 @@
-package isi.dam.sendmeal;
+package isi.dam.sendmeal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +24,7 @@ import isi.dam.sendmeal.Domain.CuentaBancaria;
 import isi.dam.sendmeal.Domain.TarjetaCredito;
 import isi.dam.sendmeal.Domain.TipoCuenta;
 import isi.dam.sendmeal.Domain.Usuario;
+import isi.dam.sendmeal.R;
 
 public class MainActivity extends AppCompatActivity {
 

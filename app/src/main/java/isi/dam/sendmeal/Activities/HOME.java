@@ -1,4 +1,4 @@
-package isi.dam.sendmeal;
+package isi.dam.sendmeal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,10 +26,8 @@ import androidx.core.app.NotificationManagerCompat;
 import java.util.List;
 
 import isi.dam.sendmeal.DAO.Plato_repo;
-import isi.dam.sendmeal.DAO.rest.PlatoRest;
 import isi.dam.sendmeal.Domain.Plato;
-
-import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
+import isi.dam.sendmeal.R;
 
 public class HOME extends AppCompatActivity {
 

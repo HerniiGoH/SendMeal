@@ -1,4 +1,4 @@
-package isi.dam.sendmeal;
+package isi.dam.sendmeal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,6 +16,8 @@ import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import isi.dam.sendmeal.DAO.Plato_repo;
+import isi.dam.sendmeal.R;
+import isi.dam.sendmeal.RecyclerAdapters.PlatoRecyclerAdapter;
 
 public class ListaItems extends AppCompatActivity {
 

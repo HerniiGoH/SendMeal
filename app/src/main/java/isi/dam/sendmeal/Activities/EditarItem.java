@@ -1,4 +1,4 @@
-package isi.dam.sendmeal;
+package isi.dam.sendmeal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,6 +20,7 @@ import org.w3c.dom.Text;
 
 import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.Plato;
+import isi.dam.sendmeal.R;
 
 public class EditarItem extends AppCompatActivity {
 
