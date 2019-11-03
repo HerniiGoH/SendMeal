@@ -64,10 +64,10 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvPlatos"
+                android:id="@+id/rvItemsPedido"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/fila_plato">
+                tools:listitem="@layout/fila_plato_pedido">
 
             </androidx.recyclerview.widget.RecyclerView>
 

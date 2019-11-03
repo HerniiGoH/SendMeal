@@ -67,7 +67,7 @@
             android:layout_alignStart="@id/layoutFila"
             android:layout_alignBottom="@id/imagenPlato"
             android:layout_marginStart="113dp"
-            android:background="#A30E0303"
+            android:background="#720E0303"
             android:gravity="end"
             android:orientation="vertical">
 
