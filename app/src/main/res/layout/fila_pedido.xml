@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:clickable="true"
+    android:fadingEdge="horizontal|vertical"
+    android:focusable="true"
+    app:cardCornerRadius="20dp"
+    android:foreground="@drawable/ripple_bg"
+    android:id="@+id/cardViewPedido">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pedido: "
+            android:textAlignment="viewStart"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="24sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imagenPedido"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitEnd"
+            android:src="@drawable/bolsa_rappi"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
