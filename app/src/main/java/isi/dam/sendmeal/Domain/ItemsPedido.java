@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class ItemsPedido {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Integer idItemPedido;
     @Embedded
     private Pedido pedido;

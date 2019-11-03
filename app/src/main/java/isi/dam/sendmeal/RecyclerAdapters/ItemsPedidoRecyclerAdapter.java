@@ -1,25 +1,18 @@
-package isi.dam.sendmeal;
+package isi.dam.sendmeal.RecyclerAdapters;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,9 +20,7 @@ import java.util.List;
 
 import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.ItemsPedido;
-import isi.dam.sendmeal.Domain.Plato;
-
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import isi.dam.sendmeal.R;
 
 public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedidoRecyclerAdapter.ItemsPedidoViewHolder>  {
 

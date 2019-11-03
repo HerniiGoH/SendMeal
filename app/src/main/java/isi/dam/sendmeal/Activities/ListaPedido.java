@@ -6,12 +6,16 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
+import isi.dam.sendmeal.Domain.Pedido;
 import isi.dam.sendmeal.R;
-import isi.dam.sendmeal.RecyclerAdapters.PlatoRecyclerAdapter;
+import isi.dam.sendmeal.RecyclerAdapters.PedidoRecyclerAdapter;
 
 public class ListaPedido extends AppCompatActivity {
 
@@ -34,11 +38,13 @@ public class ListaPedido extends AppCompatActivity {
         });
 
 
-        mRecyclerView = findViewById(R.id.rvItemsPedido);
+        mRecyclerView = findViewById(R.id.rvPedido);
         mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new PlatoRecyclerAdapter(null, ListaPedido.this, true);
+
+        mAdapter = new PedidoRecyclerAdapter(new ArrayList<Pedido>(), ListaPedido.this);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 
