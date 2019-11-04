@@ -17,11 +17,14 @@ public interface ItemsPedidoDao {
     @Query("SELECT * FROM itemspedido")
     List<ItemsPedido> getall();
 
+    @Query("SELECT * FROM ItemsPedido WHERE idPedido_Child=:idPedido")
+    List<ItemsPedido> getAllFromPedido(final int idPedido);
+
     @Insert
     void insert(ItemsPedido itemspedido);
 
     @Insert
-    void insertAll (ItemsPedido... itemspedido);
+    void insertAll (List<ItemsPedido> itemsPedidos);
 
     @Delete
     void delete(ItemsPedido itemspedido);

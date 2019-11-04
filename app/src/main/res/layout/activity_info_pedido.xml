@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/crearPedido_subtitulo"
+                    android:text="@string/infoPedido_subtitulo"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -56,7 +56,7 @@
             android:layout_height="573dp">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvItemsPedido"
+                android:id="@+id/rvInfoPedido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/fila_item_info_pedido">

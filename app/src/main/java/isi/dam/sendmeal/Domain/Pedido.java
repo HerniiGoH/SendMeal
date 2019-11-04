@@ -96,7 +96,7 @@ public class Pedido {
         this.items = items;
     }
 
-    public static class PedidoYTodosItemsPedido{
+    /*public static class PedidoYTodosItemsPedido{
 
         public PedidoYTodosItemsPedido() {
         }
@@ -127,6 +127,6 @@ public class Pedido {
     public interface PedidoItemPedidoDao{
         @Query("select * from Pedido")
         public List<PedidoYTodosItemsPedido> cargarPedidoEItemsPedido();
-    }
+    }*/
 }
 

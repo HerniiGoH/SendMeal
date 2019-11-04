@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import isi.dam.sendmeal.DAO.DBClient;
 import isi.dam.sendmeal.DAO.PedidoDao;
@@ -23,6 +24,7 @@ import isi.dam.sendmeal.Domain.ItemsPedido;
 import isi.dam.sendmeal.Domain.Pedido;
 import isi.dam.sendmeal.Domain.Plato;
 import isi.dam.sendmeal.R;
+import isi.dam.sendmeal.RecyclerAdapters.ItemsPedidoInfoRecyclerAdapter;
 import isi.dam.sendmeal.RecyclerAdapters.ItemsPedidoRecyclerAdapter;
 
 public class Info_Pedido extends AppCompatActivity {
@@ -36,7 +38,7 @@ public class Info_Pedido extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_pedido);
+        setContentView(R.layout.activity_info_pedido);
         toolbar = findViewById(R.id.toolbar_crear_item);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,18 +47,20 @@ public class Info_Pedido extends AppCompatActivity {
             }
         });
 
-        mRecyclerView = findViewById(R.id.rvItemsPedido);
+        mRecyclerView = findViewById(R.id.rvInfoPedido);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Pedido.PedidoYTodosItemsPedido pedidoYTodosItemsPedido = DBClient.getInstance(Info_Pedido.this).getPedidoDB().pedidoItemPedidoDao().cargarPedidoEItemsPedido().get(getIntent().getExtras().getInt("pos"));
+        Pedido pedidoSeleccionado = DBClient.getInstance(Info_Pedido.this).getPedidoDB().pedidoDao().getall().get(getIntent().getExtras().getInt("pos"));
 
-        Pedido pedidoSeleccionado = pedidoYTodosItemsPedido.pedido;
+        List<ItemsPedido> listaItems =DBClient.getInstance(Info_Pedido.this).getPedidoDB().itemsPedidoDao().getAllFromPedido(pedidoSeleccionado.getIdPedido());
 
-        Log.d("DEBUGGEANDO", ""+pedidoSeleccionado.getIdPedido()+" "+pedidoYTodosItemsPedido.itemsPedidos.size());
+        pedidoSeleccionado.setItems((ArrayList<ItemsPedido>) listaItems);
 
-        mAdapter = new ItemsPedidoRecyclerAdapter(pedidoYTodosItemsPedido.itemsPedidos, Info_Pedido.this, total);
+        Log.d("DEBUGGEANDO", ""+pedidoSeleccionado.getIdPedido()+" "+pedidoSeleccionado.getItems().size());
+
+        mAdapter = new ItemsPedidoInfoRecyclerAdapter(pedidoSeleccionado.getItems(), Info_Pedido.this, total);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 

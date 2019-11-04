@@ -14,5 +14,5 @@ import isi.dam.sendmeal.Domain.Pedido;
 public abstract class PedidoDB extends RoomDatabase {
 public abstract PedidoDao pedidoDao();
 public abstract ItemsPedidoDao itemsPedidoDao();
-public abstract Pedido.PedidoItemPedidoDao pedidoItemPedidoDao();
+/*public abstract Pedido.PedidoItemPedidoDao pedidoItemPedidoDao();*/
 }
