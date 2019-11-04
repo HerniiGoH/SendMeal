@@ -34,7 +34,7 @@ public class PedidoRecyclerAdapter extends RecyclerView.Adapter<PedidoRecyclerAd
     public void onBindViewHolder(@NonNull final PedidoViewHolder holder, final int position) {
 
         final Pedido pedido = dataSet.get(position);
-        holder.textView.setText("Pedido: "+pedido.getId());
+        holder.textView.setText("Pedido: "+pedido.getIdPedido());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

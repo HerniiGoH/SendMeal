@@ -73,7 +73,6 @@ public class ListaItemsPedido extends AppCompatActivity {
 
         for(Plato p : Plato_repo.getInstance().getListaPlatos()){
             ItemsPedido item = new ItemsPedido();
-            item.setPedido(pedido);
             item.setCantidad(0);
             item.setPlato(p);
             item.setPrecioPlato(0.0);
@@ -92,6 +91,7 @@ public class ListaItemsPedido extends AppCompatActivity {
                         lista.remove(i);
                     }
                 }
+                Log.d("DEBUGGEANDO", ""+lista.size());
                 pedido.setItems(lista);
                 pedido.setFecha_creacion(new Date());
                 GuardarPedido guardarPedido = new GuardarPedido();
@@ -106,7 +106,7 @@ class GuardarPedido extends AsyncTask<Pedido, Void, Void>{
     @Override
     protected Void doInBackground(Pedido... pedidos) {
         PedidoDao pedidoDao = DBClient.getInstance(ListaItemsPedido.this).getPedidoDB().pedidoDao();
-        if(pedidos[0].getId()!=null){
+        if(pedidos[0].getIdPedido()!=null){
             pedidoDao.actualizar(pedidos[0]);
         }
         else{

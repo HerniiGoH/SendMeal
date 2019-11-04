@@ -1,9 +1,14 @@
 package isi.dam.sendmeal.Domain;
 
+import android.content.Intent;
+
 import androidx.room.ColumnInfo;
+import androidx.room.Dao;
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.Query;
 import androidx.room.Relation;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
@@ -24,8 +29,8 @@ public class Pedido {
     private Double lat;
     @ColumnInfo
     private Double lng;
-    @Embedded
-    private ArrayList<ItemsPedido> items;
+    @Ignore
+    private List<ItemsPedido> items;
 
     public Pedido (){
         items = new ArrayList<ItemsPedido>();
@@ -42,6 +47,15 @@ public class Pedido {
             return date == null ? null : date.getTime();
         }
     }
+
+    public Integer getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(Integer idPedido) {
+        this.idPedido = idPedido;
+    }
+
     public Date getFecha_creacion() {
         return fecha_creacion;
     }
@@ -56,14 +70,6 @@ public class Pedido {
 
     public void setEstado(EstadoPedido estado) {
         this.estado = estado;
-    }
-
-    public Integer getId() {
-        return idPedido;
-    }
-
-    public void setId(Integer id) {
-        this.idPedido = id;
     }
 
     public Double getLat() {
@@ -83,19 +89,44 @@ public class Pedido {
     }
 
     public ArrayList<ItemsPedido> getItems() {
-        return items;
+        return (ArrayList<ItemsPedido>) items;
     }
 
     public void setItems(ArrayList<ItemsPedido> items) {
         this.items = items;
     }
 
-    public Integer getIdPedido() {
-        return idPedido;
+    public static class PedidoYTodosItemsPedido{
+
+        public PedidoYTodosItemsPedido() {
+        }
+
+        @Embedded
+        public Pedido pedido;
+        @Relation(parentColumn = "idPedido", entityColumn = "idPedido_Child", entity = ItemsPedido.class)
+        public List<ItemsPedido>itemsPedidos;
+
+        public Pedido getPedido() {
+            return pedido;
+        }
+
+        public void setPedido(Pedido pedido) {
+            this.pedido = pedido;
+        }
+
+        public List<ItemsPedido> getItemsPedidos() {
+            return itemsPedidos;
+        }
+
+        public void setItemsPedidos(List<ItemsPedido> itemsPedidos) {
+            this.itemsPedidos = itemsPedidos;
+        }
     }
 
-    public void setIdPedido(Integer idPedido) {
-        this.idPedido = idPedido;
+    @Dao
+    public interface PedidoItemPedidoDao{
+        @Query("select * from Pedido")
+        public List<PedidoYTodosItemsPedido> cargarPedidoEItemsPedido();
     }
 }
 

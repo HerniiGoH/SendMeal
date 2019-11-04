@@ -50,11 +50,13 @@ public class Info_Pedido extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Pedido pedidoSeleccionado = DBClient.getInstance(Info_Pedido.this).getPedidoDB().pedidoDao().getall().get(getIntent().getExtras().getInt("pos"));
+        Pedido.PedidoYTodosItemsPedido pedidoYTodosItemsPedido = DBClient.getInstance(Info_Pedido.this).getPedidoDB().pedidoItemPedidoDao().cargarPedidoEItemsPedido().get(getIntent().getExtras().getInt("pos"));
 
-        Log.d("DEBUGGEANDO", ""+pedidoSeleccionado.getId()+" "+pedidoSeleccionado.getItems().size());
+        Pedido pedidoSeleccionado = pedidoYTodosItemsPedido.pedido;
 
-        mAdapter = new ItemsPedidoRecyclerAdapter(pedidoSeleccionado.getItems(), Info_Pedido.this, total);
+        Log.d("DEBUGGEANDO", ""+pedidoSeleccionado.getIdPedido()+" "+pedidoYTodosItemsPedido.itemsPedidos.size());
+
+        mAdapter = new ItemsPedidoRecyclerAdapter(pedidoYTodosItemsPedido.itemsPedidos, Info_Pedido.this, total);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 
