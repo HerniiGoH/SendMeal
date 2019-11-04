@@ -5,8 +5,6 @@ import android.os.Parcelable;
 
 import androidx.room.Ignore;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Plato implements Parcelable {

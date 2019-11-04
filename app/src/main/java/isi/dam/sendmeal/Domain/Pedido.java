@@ -1,6 +1,8 @@
 package isi.dam.sendmeal.Domain;
 
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Dao;
@@ -16,9 +18,10 @@ import androidx.room.TypeConverters;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-public class Pedido {
+public class Pedido implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     private Integer idPedido;
     @ColumnInfo
@@ -32,8 +35,91 @@ public class Pedido {
     @Ignore
     private List<ItemsPedido> items;
 
-    public Pedido (){
+    public Pedido() {
         items = new ArrayList<ItemsPedido>();
+    }
+
+    protected Pedido(Parcel in) {
+        if (in.readByte() == 0) {
+            idPedido = null;
+        } else {
+            idPedido = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            fecha_creacion = null;
+        } else {
+            Date date = new Date();
+            date.setTime(in.readLong());
+            fecha_creacion = date;
+        }
+        if (in.readByte() == 0) {
+            estado = null;
+        } else {
+            estado = EstadoPedido.valueOf(in.readString());
+        }
+        if (in.readByte() == 0) {
+            lat = null;
+        } else {
+            lat = in.readDouble();
+        }
+        if (in.readByte() == 0) {
+            lng = null;
+        } else {
+            lng = in.readDouble();
+        }
+        items = in.createTypedArrayList(ItemsPedido.CREATOR);
+    }
+
+    public static final Creator<Pedido> CREATOR = new Creator<Pedido>() {
+        @Override
+        public Pedido createFromParcel(Parcel in) {
+            return new Pedido(in);
+        }
+
+        @Override
+        public Pedido[] newArray(int size) {
+            return new Pedido[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        if (idPedido == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(idPedido);
+        }
+        if (fecha_creacion == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeLong(fecha_creacion.getTime());
+        }
+        if (estado == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeString(estado.name());
+        }
+        if (lat == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(lat);
+        }
+        if (lng == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeDouble(lng);
+        }
+        parcel.writeTypedList(items);
     }
 
     public static class Converter {
@@ -96,37 +182,22 @@ public class Pedido {
         this.items = items;
     }
 
-    /*public static class PedidoYTodosItemsPedido{
-
-        public PedidoYTodosItemsPedido() {
-        }
-
-        @Embedded
-        public Pedido pedido;
-        @Relation(parentColumn = "idPedido", entityColumn = "idPedido_Child", entity = ItemsPedido.class)
-        public List<ItemsPedido>itemsPedidos;
-
-        public Pedido getPedido() {
-            return pedido;
-        }
-
-        public void setPedido(Pedido pedido) {
-            this.pedido = pedido;
-        }
-
-        public List<ItemsPedido> getItemsPedidos() {
-            return itemsPedidos;
-        }
-
-        public void setItemsPedidos(List<ItemsPedido> itemsPedidos) {
-            this.itemsPedidos = itemsPedidos;
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pedido)) return false;
+        Pedido pedido = (Pedido) o;
+        return getIdPedido().equals(pedido.getIdPedido()) &&
+                getFecha_creacion().equals(pedido.getFecha_creacion()) &&
+                getEstado() == pedido.getEstado() &&
+                getLat().equals(pedido.getLat()) &&
+                getLng().equals(pedido.getLng()) &&
+                getItems().equals(pedido.getItems());
     }
 
-    @Dao
-    public interface PedidoItemPedidoDao{
-        @Query("select * from Pedido")
-        public List<PedidoYTodosItemsPedido> cargarPedidoEItemsPedido();
-    }*/
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIdPedido(), getFecha_creacion(), getEstado(), getLat(), getLng(), getItems());
+    }
 }
 
