@@ -32,13 +32,13 @@
         android:id="@+id/op_05"
         android:title="Crear Pedido"
         app:showAsAction="never"
-        android:orderInCategory="4">
+        android:orderInCategory="5">
     </item>
     <item
         android:id="@+id/op_06"
         android:title="Lista Pedidos"
         app:showAsAction="never"
-        android:orderInCategory="4">
+        android:orderInCategory="6">
     </item>
 
 </menu>
