@@ -35,9 +35,9 @@ public class ListaPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_pedidos);
         toolbar = findViewById(R.id.toolbar_lista_pedidos);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 finish();
             }
         });
@@ -47,7 +47,7 @@ public class ListaPedido extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        final  Runnable cargarPedidos = new Runnable() {
+        final Runnable cargarPedidos = new Runnable() {
             @Override
             public void run() {
                 PedidoDao pedidoDao = DBClient.getInstance(ListaPedido.this).getPedidoDB().pedidoDao();
@@ -59,22 +59,6 @@ public class ListaPedido extends AppCompatActivity {
         };
         Thread t1 = new Thread(cargarPedidos);
         t1.start();
-
-        class BorrarPedidoAsyncTask extends AsyncTask<Pedido,Void,Void>{
-            @Override
-            protected Void doInBackground(Pedido... pedidos) {
-                PedidoDao pedidoDao = DBClient.getInstance(ListaPedido.this).getPedidoDB().pedidoDao();
-                pedidoDao.delete(pedidos[0]);
-                listaPedidos.clear();
-                listaPedidos.addAll(pedidoDao.getall());
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute (Void aVoid){
-                mAdapter.notifyDataSetChanged();
-            }
-        }
 
         FloatingActionButton fab = findViewById(R.id.agregar_flotante);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -88,17 +72,18 @@ public class ListaPedido extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(mAdapter!=null){
+        if (mAdapter != null) {
             PedidoDao pedidoDao = DBClient.getInstance(ListaPedido.this).getPedidoDB().pedidoDao();
             listaPedidos.clear();
             listaPedidos.addAll(pedidoDao.getall());
-        mAdapter.notifyDataSetChanged();}
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }

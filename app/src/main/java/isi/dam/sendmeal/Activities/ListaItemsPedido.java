@@ -21,6 +21,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import isi.dam.sendmeal.DAO.DBClient;
@@ -89,7 +90,13 @@ public class ListaItemsPedido extends AppCompatActivity {
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Iterator<ItemsPedido> iterator = lista.iterator();
+                while(iterator.hasNext()){
+                    ItemsPedido i = iterator.next();
+                    if(i.getCantidad()==0){
+                        iterator.remove();
+                    }
+                }
                 pedido.setFecha_creacion(new Date());
                 GuardarPedido guardarPedido = new GuardarPedido();
                 guardarPedido.execute(pedido);
@@ -107,12 +114,7 @@ public class ListaItemsPedido extends AppCompatActivity {
             List<Pedido> pedidos = pedidoDao.getall();
             Integer id = pedidos.get(pedidos.size()-1).getIdPedido();
             for(ItemsPedido i : lists[0]){
-                if(i.getCantidad()==0){
-                    lists[0].remove(i);
-                }
-                else{
-                    i.setIdPedido_Child(id);
-                }
+                i.setIdPedido_Child(id);
             }
             itemsPedidoDao.insertAll(lists[0]);
             return null;
@@ -142,8 +144,6 @@ public class ListaItemsPedido extends AppCompatActivity {
             super.onPostExecute(aVoid);
             GuardarItemsPedido guardarItemsPedido = new GuardarItemsPedido();
             guardarItemsPedido.execute(lista);
-        /*Intent i = new Intent(ListaItemsPedido.this, ListaPedido.class);
-        startActivity(i);*/
         }
     }
 

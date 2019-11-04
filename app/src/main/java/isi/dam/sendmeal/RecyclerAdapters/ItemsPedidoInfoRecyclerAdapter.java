@@ -61,6 +61,7 @@ public class ItemsPedidoInfoRecyclerAdapter extends RecyclerView.Adapter<ItemsPe
         else{
             holder.imagenOferta.setVisibility(View.INVISIBLE);
         }
+        holder.cantidad.setEnabled(false);
         holder.cantidad.getEditText().setText(dataSet.get(position).getCantidad().toString());
 
     }

@@ -14,11 +14,11 @@ import androidx.room.Relation;
 import java.util.List;
 
 
-@Entity
+@Entity(foreignKeys = @ForeignKey(parentColumns = "idPedido", childColumns = "idPedido_Child", entity = Pedido.class, onDelete = ForeignKey.CASCADE))
 public class ItemsPedido {
     @PrimaryKey(autoGenerate = true)
     private Integer idItemPedido;
-    @ForeignKey(parentColumns = "idPedido", childColumns = "idPedido_Child", entity = Pedido.class, onDelete = ForeignKey.CASCADE)
+
     private Integer idPedido_Child;
     @Embedded
     private Plato plato;

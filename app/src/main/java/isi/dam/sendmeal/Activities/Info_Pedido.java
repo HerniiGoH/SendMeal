@@ -12,12 +12,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.nio.channels.AsynchronousChannelGroup;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import isi.dam.sendmeal.DAO.DBClient;
+import isi.dam.sendmeal.DAO.ItemsPedidoDao;
 import isi.dam.sendmeal.DAO.PedidoDao;
 import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.EstadoPedido;
@@ -33,8 +35,11 @@ public class Info_Pedido extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    Toolbar toolbar;
-    TextView total;
+    private Toolbar toolbar;
+    private TextView total;
+    protected Pedido pedidoSeleccionado;
+    protected List<ItemsPedido> listaItems;
+    private Button btnEnviar, btnEliminar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +53,17 @@ public class Info_Pedido extends AppCompatActivity {
             }
         });
 
+        btnEnviar = findViewById(R.id.button_enviar_pedido);
+        btnEliminar = findViewById(R.id.button_borrar_pedido);
+
         mRecyclerView = findViewById(R.id.rvInfoPedido);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Pedido pedidoSeleccionado = DBClient.getInstance(Info_Pedido.this).getPedidoDB().pedidoDao().getall().get(getIntent().getExtras().getInt("pos"));
+        pedidoSeleccionado = DBClient.getInstance(Info_Pedido.this).getPedidoDB().pedidoDao().getall().get(getIntent().getExtras().getInt("pos"));
 
-        List<ItemsPedido> listaItems =DBClient.getInstance(Info_Pedido.this).getPedidoDB().itemsPedidoDao().getAllFromPedido(pedidoSeleccionado.getIdPedido());
+        listaItems =DBClient.getInstance(Info_Pedido.this).getPedidoDB().itemsPedidoDao().getAllFromPedido(pedidoSeleccionado.getIdPedido());
 
         pedidoSeleccionado.setItems((ArrayList<ItemsPedido>) listaItems);
 
@@ -72,6 +80,32 @@ public class Info_Pedido extends AppCompatActivity {
         }
         total.setText(formatoMonto.format(totalD));
 
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BorrarPedido borrarPedido = new BorrarPedido();
+                borrarPedido.execute(pedidoSeleccionado);
+            }
+        });
+
+    }
+
+    class BorrarPedido extends AsyncTask<Pedido,Void,Void>{
+        @Override
+        protected Void doInBackground(Pedido... pedidos) {
+            Integer id = pedidos[0].getIdPedido();
+            PedidoDao pedidoDao = DBClient.getInstance(Info_Pedido.this).getPedidoDB().pedidoDao();
+            pedidoDao.delete(pedidos[0]);
+            ItemsPedidoDao itemsPedidoDao = DBClient.getInstance(Info_Pedido.this).getPedidoDB().itemsPedidoDao();
+            Log.d("DEBUGGEANDO",""+itemsPedidoDao.getAllFromPedido(id).size());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute (Void aVoid){
+            super.onPostExecute(aVoid);
+            finish();
+        }
     }
 
     @Override
