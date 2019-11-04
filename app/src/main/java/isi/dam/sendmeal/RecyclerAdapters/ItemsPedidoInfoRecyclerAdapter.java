@@ -24,9 +24,7 @@ import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.ItemsPedido;
 import isi.dam.sendmeal.R;
 
-public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedidoRecyclerAdapter.ItemsPedidoViewHolder>  {
-
-
+public class ItemsPedidoInfoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedidoInfoRecyclerAdapter.ItemsPedidoInfoViewHolder> {
     Handler miHandler = new Handler(Looper.myLooper()){
         @Override
         public void handleMessage (Message m){
@@ -44,14 +42,14 @@ public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedido
 
     @NonNull
     @Override
-    public ItemsPedidoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fila_item_pedido, parent, false);
-        ItemsPedidoViewHolder pvh = new ItemsPedidoViewHolder(v);
+    public ItemsPedidoInfoRecyclerAdapter.ItemsPedidoInfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fila_item_info_pedido, parent, false);
+        ItemsPedidoInfoRecyclerAdapter.ItemsPedidoInfoViewHolder pvh = new ItemsPedidoInfoRecyclerAdapter.ItemsPedidoInfoViewHolder(v);
         return pvh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ItemsPedidoViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ItemsPedidoInfoRecyclerAdapter.ItemsPedidoInfoViewHolder holder, final int position) {
 
         final ItemsPedido plato = dataSet.get(position);
         holder.titPlato.setText(plato.getPlato().getNombre());
@@ -65,33 +63,6 @@ public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedido
         }
         holder.cantidad.getEditText().setText(dataSet.get(position).getCantidad().toString());
 
-        holder.btnMas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                dataSet.get(position).setCantidad(dataSet.get(position).getCantidad()+1);
-                holder.cantidad.getEditText().setText(dataSet.get(position).getCantidad().toString());
-
-                dataSet.get(position).setPrecioPlato(dataSet.get(position).getPlato().getPrecio()*dataSet.get(position).getCantidad());
-                total.setText(String.valueOf(Double.valueOf(total.getText().toString())+dataSet.get(position).getPlato().getPrecio()));
-                notifyDataSetChanged();
-            }
-        });
-
-        holder.btnMenos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(dataSet.get(position).getCantidad()>0){
-                dataSet.get(position).setCantidad(dataSet.get(position).getCantidad()-1);
-                holder.cantidad.getEditText().setText(dataSet.get(position).getCantidad().toString());
-                    dataSet.get(position).setPrecioPlato(dataSet.get(position).getPlato().getPrecio()*dataSet.get(position).getCantidad());
-                    total.setText(String.valueOf(Double.valueOf(total.getText().toString())-dataSet.get(position).getPlato().getPrecio()));
-                    notifyDataSetChanged();
-                }
-            }
-        });
-
     }
 
     @Override
@@ -100,23 +71,20 @@ public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedido
     }
 
 
-    public class ItemsPedidoViewHolder extends RecyclerView.ViewHolder{
+    public class ItemsPedidoInfoViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imgPlato, imagenOferta;
         TextView titPlato, precPlato;
         CardView cardView;
-        Button btnMas, btnMenos;
         TextInputLayout cantidad;
-        public ItemsPedidoViewHolder(@NonNull final View itemView) {
-            super(itemView);
 
+        public ItemsPedidoInfoViewHolder(@NonNull final View itemView) {
+            super(itemView);
             imagenOferta = itemView.findViewById(R.id.imagenOferta);
             cardView = itemView.findViewById(R.id.cardViewPlato);
             imgPlato = itemView.findViewById(R.id.imagenPlato);
             titPlato = itemView.findViewById(R.id.ListaPlatoNombre);
             precPlato = itemView.findViewById(R.id.ListaPlatoPrecio);
-            btnMas = itemView.findViewById(R.id.mas_platos);
-            btnMenos = itemView.findViewById(R.id.menos_platos);
             cantidad = itemView.findViewById(R.id.ingreso_cantidad);
         }
 
@@ -127,10 +95,11 @@ public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedido
     private TextView total;
 
 
-    public ItemsPedidoRecyclerAdapter(List<ItemsPedido>dataSet, Context context, TextView total){
+    public ItemsPedidoInfoRecyclerAdapter(List<ItemsPedido>dataSet, Context context, TextView total){
         this.dataSet=dataSet;
         this.context=context;
         this.total = total;
     }
+
 
 }

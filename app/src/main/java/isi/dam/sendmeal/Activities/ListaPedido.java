@@ -1,6 +1,7 @@
 package isi.dam.sendmeal.Activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import isi.dam.sendmeal.DAO.DBClient;
+import isi.dam.sendmeal.DAO.PedidoDao;
 import isi.dam.sendmeal.Domain.Pedido;
 import isi.dam.sendmeal.R;
 import isi.dam.sendmeal.RecyclerAdapters.PedidoRecyclerAdapter;
@@ -23,6 +27,7 @@ public class ListaPedido extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     Toolbar toolbar;
+    List<Pedido> listaPedidos;
 
 
     @Override
@@ -37,16 +42,39 @@ public class ListaPedido extends AppCompatActivity {
             }
         });
 
-
         mRecyclerView = findViewById(R.id.rvPedido);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        final  Runnable cargarPedidos = new Runnable() {
+            @Override
+            public void run() {
+                PedidoDao pedidoDao = DBClient.getInstance(ListaPedido.this).getPedidoDB().pedidoDao();
+                listaPedidos = pedidoDao.getall();
+                mAdapter = new PedidoRecyclerAdapter(listaPedidos, ListaPedido.this);
+                mRecyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+            }
+        };
+        Thread t1 = new Thread(cargarPedidos);
+        t1.start();
 
-        mAdapter = new PedidoRecyclerAdapter(new ArrayList<Pedido>(), ListaPedido.this);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
+        class BorrarPedidoAsyncTask extends AsyncTask<Pedido,Void,Void>{
+            @Override
+            protected Void doInBackground(Pedido... pedidos) {
+                PedidoDao pedidoDao = DBClient.getInstance(ListaPedido.this).getPedidoDB().pedidoDao();
+                pedidoDao.delete(pedidos[0]);
+                listaPedidos.clear();
+                listaPedidos.addAll(pedidoDao.getall());
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute (Void aVoid){
+                mAdapter.notifyDataSetChanged();
+            }
+        }
 
         FloatingActionButton fab = findViewById(R.id.agregar_flotante);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +85,16 @@ public class ListaPedido extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(mAdapter!=null){
+            PedidoDao pedidoDao = DBClient.getInstance(ListaPedido.this).getPedidoDB().pedidoDao();
+            listaPedidos.clear();
+            listaPedidos.addAll(pedidoDao.getall());
+        mAdapter.notifyDataSetChanged();}
     }
 
     @Override

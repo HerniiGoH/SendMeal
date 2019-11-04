@@ -34,5 +34,11 @@
         app:showAsAction="never"
         android:orderInCategory="4">
     </item>
+    <item
+        android:id="@+id/op_06"
+        android:title="Lista Pedidos"
+        app:showAsAction="never"
+        android:orderInCategory="4">
+    </item>
 
 </menu>

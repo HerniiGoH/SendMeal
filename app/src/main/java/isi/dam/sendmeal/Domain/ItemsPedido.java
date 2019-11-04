@@ -4,13 +4,14 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.Relation;
 
 
 @Entity
 public class ItemsPedido {
     @PrimaryKey(autoGenerate = true)
     private Integer idItemPedido;
-    @Embedded
+    @Relation(entity = Pedido.class, parentColumn = "idPedido", entityColumn = "idItemPedido")
     private Pedido pedido;
     @Embedded
     private Plato plato;

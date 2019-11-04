@@ -17,6 +17,7 @@
         <activity android:name=".Activities.EditarItem" />
         <activity android:name=".Activities.ListaItems" />
         <activity android:name=".Activities.ListaPedido" />
+        <activity android:name=".Activities.Info_Pedido"></activity>
         <activity
             android:name=".Activities.CrearItem"
             android:parentActivityName=".Activities.HOME" />

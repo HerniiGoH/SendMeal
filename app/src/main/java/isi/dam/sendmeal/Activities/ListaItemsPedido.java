@@ -1,12 +1,14 @@
 package isi.dam.sendmeal.Activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +20,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Date;
 
+import isi.dam.sendmeal.DAO.DBClient;
+import isi.dam.sendmeal.DAO.PedidoDao;
 import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.EstadoPedido;
 import isi.dam.sendmeal.Domain.ItemsPedido;
@@ -34,12 +39,14 @@ public class ListaItemsPedido extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     Toolbar toolbar;
     TextView total;
+    Button crear;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_pedido);
+        crear = findViewById(R.id.boton_crear_pedido);
         toolbar = findViewById(R.id.toolbar_crear_item);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,13 +63,13 @@ public class ListaItemsPedido extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Pedido pedido = new Pedido();
+        final Pedido pedido = new Pedido();
         pedido.setEstado(EstadoPedido.PENDIENTE);
         pedido.setFecha_creacion(null);
         pedido.setLat(0.0);
         pedido.setLng(0.0);
 
-        ArrayList<ItemsPedido> lista = new ArrayList<>();
+        final ArrayList<ItemsPedido> lista = new ArrayList<>();
 
         for(Plato p : Plato_repo.getInstance().getListaPlatos()){
             ItemsPedido item = new ItemsPedido();
@@ -73,12 +80,49 @@ public class ListaItemsPedido extends AppCompatActivity {
             lista.add(item);
         }
 
-
         mAdapter = new ItemsPedidoRecyclerAdapter(lista, ListaItemsPedido.this, total);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
 
+        crear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(ItemsPedido i : lista){
+                    if(i.getCantidad()==0){
+                        lista.remove(i);
+                    }
+                }
+                pedido.setItems(lista);
+                pedido.setFecha_creacion(new Date());
+                GuardarPedido guardarPedido = new GuardarPedido();
+                guardarPedido.execute(pedido);
+            }
+        });
+
     }
+
+class GuardarPedido extends AsyncTask<Pedido, Void, Void>{
+
+    @Override
+    protected Void doInBackground(Pedido... pedidos) {
+        PedidoDao pedidoDao = DBClient.getInstance(ListaItemsPedido.this).getPedidoDB().pedidoDao();
+        if(pedidos[0].getId()!=null){
+            pedidoDao.actualizar(pedidos[0]);
+        }
+        else{
+            pedidoDao.insert(pedidos[0]);
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void aVoid){
+        super.onPostExecute(aVoid);
+        finish();
+        /*Intent i = new Intent(ListaItemsPedido.this, ListaPedido.class);
+        startActivity(i);*/
+    }
+}
 
     @Override
     public boolean onSupportNavigateUp(){

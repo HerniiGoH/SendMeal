@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.Relation;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
@@ -23,8 +24,14 @@ public class Pedido {
     private Double lat;
     @ColumnInfo
     private Double lng;
-    @Embedded
-    private ArrayList<ItemsPedido> items;
+
+ public class ListaItemsPedido {
+
+
+ }
+   /* @Relation(entity = ItemsPedido.class, parentColumn = "idPedido", entityColumn = "idItemPedido")
+    private ArrayList<ItemsPedido> items;*/
+
     public Pedido (){
         items = new ArrayList<ItemsPedido>();
     }

@@ -1,6 +1,7 @@
 package isi.dam.sendmeal.RecyclerAdapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import isi.dam.sendmeal.Activities.Info_Pedido;
+import isi.dam.sendmeal.DAO.DBClient;
 import isi.dam.sendmeal.Domain.Pedido;
 import isi.dam.sendmeal.R;
 
@@ -31,8 +34,16 @@ public class PedidoRecyclerAdapter extends RecyclerView.Adapter<PedidoRecyclerAd
     public void onBindViewHolder(@NonNull final PedidoViewHolder holder, final int position) {
 
         final Pedido pedido = dataSet.get(position);
-        holder.textView.append(pedido.getId().toString());
-
+        holder.textView.setText("Pedido: "+pedido.getId());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Info_Pedido.class);
+                intent.putExtra("pos", dataSet.indexOf(pedido));
+                context.startActivity(intent);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
