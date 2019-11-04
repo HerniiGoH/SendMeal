@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -63,13 +64,13 @@ public class Info_Pedido extends AppCompatActivity {
         mAdapter = new ItemsPedidoInfoRecyclerAdapter(pedidoSeleccionado.getItems(), Info_Pedido.this, total);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
-
+        final DecimalFormat formatoMonto = new DecimalFormat("$0.00");
         total= findViewById(R.id.Precio_total_pedido);
         Double totalD = 0.0;
         for(ItemsPedido i : pedidoSeleccionado.getItems()){
             totalD+=i.getPrecioPlato();
         }
-        total.setText(""+totalD);
+        total.setText(formatoMonto.format(totalD));
 
     }
 
