@@ -24,13 +24,8 @@ public class Pedido {
     private Double lat;
     @ColumnInfo
     private Double lng;
-
- public class ListaItemsPedido {
-
-
- }
-   /* @Relation(entity = ItemsPedido.class, parentColumn = "idPedido", entityColumn = "idItemPedido")
-    private ArrayList<ItemsPedido> items;*/
+    @Embedded
+    private ArrayList<ItemsPedido> items;
 
     public Pedido (){
         items = new ArrayList<ItemsPedido>();
