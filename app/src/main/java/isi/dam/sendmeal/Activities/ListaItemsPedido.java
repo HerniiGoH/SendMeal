@@ -42,7 +42,7 @@ public class ListaItemsPedido extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     Toolbar toolbar;
     TextView total;
-    Button crear;
+    Button crear, agregarLocalidad;
     ArrayList<ItemsPedido> lista;
 
 
@@ -51,6 +51,7 @@ public class ListaItemsPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_pedido);
         crear = findViewById(R.id.boton_crear_pedido);
+        agregarLocalidad = findViewById(R.id.Btn_Localidad);
         toolbar = findViewById(R.id.toolbar_crear_item);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +101,14 @@ public class ListaItemsPedido extends AppCompatActivity {
                 pedido.setFecha_creacion(new Date());
                 GuardarPedido guardarPedido = new GuardarPedido();
                 guardarPedido.execute(pedido);
+            }
+        });
+
+        agregarLocalidad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListaItemsPedido.this, VisualizadorMapa.class);
+                startActivity(intent);
             }
         });
 
