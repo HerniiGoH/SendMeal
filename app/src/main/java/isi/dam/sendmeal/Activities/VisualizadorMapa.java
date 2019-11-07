@@ -3,8 +3,12 @@ package isi.dam.sendmeal.Activities;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,15 +25,27 @@ import isi.dam.sendmeal.R;
 public class VisualizadorMapa extends MapsActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private Marker marker;
+    private Toolbar toolbar;
+    private Button btnConfirmar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.visualizador_mapa);
+        toolbar = findViewById(R.id.toolbar_visualizar_mapa);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                finish();
+            }
+        });
+        btnConfirmar = findViewById(R.id.btnLocalizadorMapa);
+        btnConfirmar.setEnabled(false);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapVisualizador);
         mapFragment.getMapAsync(this);
+
 
     }
 
@@ -49,6 +65,7 @@ public class VisualizadorMapa extends MapsActivity implements OnMapReadyCallback
                 } else {
                     marker.setPosition(latLng);
                 }
+                btnConfirmar.setEnabled(true);
             }
         });
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
@@ -59,8 +76,18 @@ public class VisualizadorMapa extends MapsActivity implements OnMapReadyCallback
                 } else {
                     marker.setPosition(latLng);
                 }
+                btnConfirmar.setEnabled(true);
             }
         });
+
+        btnConfirmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ListaItemsPedido.latLng = marker.getPosition();
+                finish();
+            }
+        });
+
     }
 
     private void actualizarMapa() {
@@ -74,5 +101,10 @@ public class VisualizadorMapa extends MapsActivity implements OnMapReadyCallback
             return;
         }
         mMap.setMyLocationEnabled(true);
+    }
+
+    public boolean onSupportNavigateUp(){
+        onBackPressed();
+        return true;
     }
 }

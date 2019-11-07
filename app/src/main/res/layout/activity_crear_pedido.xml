@@ -84,17 +84,20 @@
 
                     <TextView
                         android:id="@+id/Long_textview"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.2"
-                        android:text="Longitud:" />
+                        android:text="Longitud:"
+                        android:textAlignment="center" />
 
                     <TextView
                         android:id="@+id/Longitud_valor"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.2" />
+                        android:layout_weight="0.2"
+                        android:text='"??"'
+                        android:textAlignment="center" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -105,16 +108,19 @@
 
                     <TextView
                         android:id="@+id/Latitud_texview"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.2"
-                        android:text="Latidud:" />
+                        android:text="Latidud:"
+                        android:textAlignment="center" />
 
                     <TextView
                         android:id="@+id/Latitud_valor"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.2" />
+                        android:layout_weight="0.2"
+                        android:text='"??"'
+                        android:textAlignment="center" />
                 </LinearLayout>
 
                 <Button
