@@ -3,7 +3,7 @@ package isi.dam.sendmeal.Domain;
 import androidx.room.TypeConverter;
 
 public enum EstadoPedido {
-    PENDIENTE(0), ENVIADO(1), ACEPTADO(2), RECHAZADO(3), EN_PREPARACION(4), EN_ENVIO(5), ENTREGADO(6), CANCELADO(-9);
+    TODOS(-1),PENDIENTE(0), ENVIADO(1), ACEPTADO(2), RECHAZADO(3), EN_PREPARACION(4), EN_ENVIO(5), ENTREGADO(6), CANCELADO(-9);
 
     EstadoPedido(Integer code){
         this.code = code;
@@ -18,6 +18,7 @@ public enum EstadoPedido {
     @TypeConverter
     public static EstadoPedido getEstadoPedido(Integer n){
         switch (n){
+            case -1: return TODOS;
             case 0: return PENDIENTE;
             case 1: return ENVIADO; 
             case 2: return ACEPTADO; 

@@ -47,7 +47,7 @@ public class ListaItemsPedido extends AppCompatActivity {
     private Button crear, agregarLocalidad;
     private ArrayList<ItemsPedido> lista = new ArrayList<ItemsPedido>();
     private TextView tvLat, tvLong;
-    public static LatLng latLng = null;
+    public static LatLng latLng;
 
 
     @Override
@@ -67,6 +67,7 @@ public class ListaItemsPedido extends AppCompatActivity {
 
         tvLat = findViewById(R.id.Latitud_valor);
         tvLong = findViewById(R.id.Longitud_valor);
+        latLng=null;
 
         total = findViewById(R.id.Precio_total_pedido);
         total.setText("0");
