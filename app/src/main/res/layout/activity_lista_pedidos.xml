@@ -87,6 +87,21 @@
                 android:src="@android:drawable/ic_input_add"
                 android:tint="@android:color/background_light" />
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/ver_en_mapa_flotante"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignStart="@+id/rvPedido"
+                android:layout_alignBottom="@+id/rvPedido"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:clickable="true"
+                android:isScrollContainer="false"
+                android:src="@android:drawable/ic_dialog_map"
+                android:tint="@android:color/background_light" />
+
         </RelativeLayout>
 
     </LinearLayout>

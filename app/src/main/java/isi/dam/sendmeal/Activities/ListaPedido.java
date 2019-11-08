@@ -3,6 +3,7 @@ package isi.dam.sendmeal.Activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,8 +27,9 @@ public class ListaPedido extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    Toolbar toolbar;
-    List<Pedido> listaPedidos;
+    private Toolbar toolbar;
+    private List<Pedido> listaPedidos = new ArrayList<>();
+    FloatingActionButton fab, fab_1;
 
 
     @Override
@@ -60,12 +62,21 @@ public class ListaPedido extends AppCompatActivity {
         Thread t1 = new Thread(cargarPedidos);
         t1.start();
 
-        FloatingActionButton fab = findViewById(R.id.agregar_flotante);
+        fab = findViewById(R.id.agregar_flotante);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i2 = new Intent(ListaPedido.this, ListaItemsPedido.class);
                 startActivity(i2);
+            }
+        });
+        fab_1 = findViewById(R.id.ver_en_mapa_flotante);
+        fab_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i3 = new Intent(ListaPedido.this, MapsActivity.class);
+                i3.putParcelableArrayListExtra("pedidos", (ArrayList<? extends Parcelable>) listaPedidos);
+                startActivity(i3);
             }
         });
 
