@@ -1,5 +1,6 @@
 package isi.dam.sendmeal.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.NotificationChannel;
@@ -22,6 +23,10 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.List;
 
@@ -57,6 +62,19 @@ public class HOME extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        FirebaseMessaging.getInstance().subscribeToTopic("general")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg ="subscrito";
+                        if (!task.isSuccessful()) {
+                            msg = "fallo_subscripcion";
+                        }
+                        Log.d("not_pedido:", msg);
+                        Toast.makeText(HOME.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         Plato_repo.getInstance().listarPlato(miHandler);
 
@@ -123,11 +141,14 @@ public class HOME extends AppCompatActivity {
             String description = "Canal de notificacion-Testing";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("001", name, importance);
+            NotificationChannel channel2 = new NotificationChannel("002", "general", importance);
             channel.setDescription(description);
+            channel2.setDescription("canal de notificacion de pedidos");
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
+            notificationManager.createNotificationChannel(channel2);
         }
     }
 

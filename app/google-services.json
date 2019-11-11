@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "965978197948",
+    "firebase_url": "https://prueba-4d6a5.firebaseio.com",
+    "project_id": "prueba-4d6a5",
+    "storage_bucket": "prueba-4d6a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965978197948:android:8a55b4c312dfd3e4b925b9",
+        "android_client_info": {
+          "package_name": "isi.dam.sendmeal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "965978197948-nthblogsdm6l016nnjdrc1a4vrjfu3dc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "isi.dam.sendmeal",
+            "certificate_hash": "6b8444bba3364b032896e846b564633272aa499d"
+          }
+        },
+        {
+          "client_id": "965978197948-k31mb1qpuk9ipi4mbv8vntge6fth9qe2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbPBfb3fMYvHOn6_8f6eUA55qe1L5FzXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965978197948-k31mb1qpuk9ipi4mbv8vntge6fth9qe2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

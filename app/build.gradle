@@ -1,4 +1,17 @@
 apply plugin: 'com.android.application'
+dependencies {
+    // ...
+
+    // Add the Firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+
+    // Add the SDK for Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+
+    // Getting a "Could not find" error? Make sure that you've added
+    // Google's Maven repository to your root-level build.gradle file
+}
+
 
 android {
     compileSdkVersion 29
@@ -40,3 +53,4 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
 }
+apply plugin: 'com.google.gms.google-services'
