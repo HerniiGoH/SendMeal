@@ -59,6 +59,7 @@
     <string name="crearPedido_subtitulo">Crear Pedido</string>
     <string name="infoPedido_subtitulo">Info Pedido</string>
     <string name="agregar_plato_pedido">Agregar Plato</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

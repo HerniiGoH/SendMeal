@@ -10,12 +10,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -40,10 +42,12 @@ public class ListaItemsPedido extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    Toolbar toolbar;
-    TextView total;
-    Button crear;
-    ArrayList<ItemsPedido> lista;
+    private Toolbar toolbar;
+    private TextView total;
+    private Button crear, agregarLocalidad;
+    private ArrayList<ItemsPedido> lista = new ArrayList<ItemsPedido>();
+    private TextView tvLat, tvLong;
+    public static LatLng latLng;
 
 
     @Override
@@ -51,6 +55,8 @@ public class ListaItemsPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_pedido);
         crear = findViewById(R.id.boton_crear_pedido);
+        crear.setEnabled(false);
+        agregarLocalidad = findViewById(R.id.Btn_Localidad);
         toolbar = findViewById(R.id.toolbar_crear_item);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +64,10 @@ public class ListaItemsPedido extends AppCompatActivity {
                 finish();
             }
         });
+
+        tvLat = findViewById(R.id.Latitud_valor);
+        tvLong = findViewById(R.id.Longitud_valor);
+        latLng=null;
 
         total = findViewById(R.id.Precio_total_pedido);
         total.setText("0");
@@ -70,10 +80,8 @@ public class ListaItemsPedido extends AppCompatActivity {
         final Pedido pedido = new Pedido();
         pedido.setEstado(EstadoPedido.PENDIENTE);
         pedido.setFecha_creacion(null);
-        pedido.setLat(0.0);
-        pedido.setLng(0.0);
-
-         lista = new ArrayList<>();
+        pedido.setLat(null);
+        pedido.setLng(null);
 
         for (Plato p : Plato_repo.getInstance().getListaPlatos()) {
             ItemsPedido item = new ItemsPedido();
@@ -90,37 +98,52 @@ public class ListaItemsPedido extends AppCompatActivity {
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Iterator<ItemsPedido> iterator = lista.iterator();
-                while(iterator.hasNext()){
-                    ItemsPedido i = iterator.next();
-                    if(i.getCantidad()==0){
-                        iterator.remove();
+                if (verificarItemsPedido(lista) && latLng!=null) {
+                    pedido.setLat(latLng.latitude);
+                    pedido.setLng(latLng.longitude);
+                    pedido.setFecha_creacion(new Date());
+                    Iterator<ItemsPedido> iterator = lista.iterator();
+                    while (iterator.hasNext()) {
+                        ItemsPedido i = iterator.next();
+                        if (i.getCantidad() == 0) {
+                            iterator.remove();
+                        }
                     }
+                    GuardarPedido guardarPedido = new GuardarPedido();
+                    guardarPedido.execute(pedido);
+                } else {
+                    Toast.makeText(ListaItemsPedido.this, "Debe ingresar al menos 1 item a su pedido y a donde sera entregado.", Toast.LENGTH_SHORT).show();
                 }
-                pedido.setFecha_creacion(new Date());
-                GuardarPedido guardarPedido = new GuardarPedido();
-                guardarPedido.execute(pedido);
+            }
+        });
+
+        agregarLocalidad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListaItemsPedido.this, VisualizadorMapa.class);
+                startActivity(intent);
             }
         });
 
     }
 
-    class GuardarItemsPedido extends AsyncTask<List<ItemsPedido>, Void, Void>{
+    class GuardarItemsPedido extends AsyncTask<List<ItemsPedido>, Void, Void> {
 
         @Override
         protected Void doInBackground(List<ItemsPedido>... lists) {
             ItemsPedidoDao itemsPedidoDao = DBClient.getInstance(ListaItemsPedido.this).getPedidoDB().itemsPedidoDao();
             PedidoDao pedidoDao = DBClient.getInstance(ListaItemsPedido.this).getPedidoDB().pedidoDao();
             List<Pedido> pedidos = pedidoDao.getall();
-            Integer id = pedidos.get(pedidos.size()-1).getIdPedido();
-            for(ItemsPedido i : lists[0]){
+            Integer id = pedidos.get(pedidos.size() - 1).getIdPedido();
+            for (ItemsPedido i : lists[0]) {
                 i.setIdPedido_Child(id);
             }
             itemsPedidoDao.insertAll(lists[0]);
             return null;
         }
+
         @Override
-        protected void onPostExecute(Void aVoid){
+        protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             finish();
         }
@@ -151,5 +174,29 @@ public class ListaItemsPedido extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    private boolean verificarItemsPedido(List<ItemsPedido> list) {
+        if(list.isEmpty()){
+            return false;
+        }
+        else{
+            for (ItemsPedido i : list) {
+                if (i.getCantidad() != 0) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(latLng!=null){
+            tvLong.setText(""+latLng.longitude);
+            tvLat.setText(""+latLng.latitude);
+            crear.setEnabled(true);
+        }
     }
 }
