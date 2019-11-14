@@ -18,6 +18,7 @@
         <activity android:name=".Activities.ListaPedido" />
         <activity android:name=".Activities.Info_Pedido" />
         <activity android:name=".Activities.VisualizadorMapa"></activity>
+        <activity android:name=".Activities.MapsActivity"></activity>
         <activity
             android:name=".Activities.CrearItem"
             android:parentActivityName=".Activities.HOME" />
@@ -34,6 +35,7 @@
         <activity
             android:name=".Activities.MainActivity"
             android:parentActivityName=".Activities.HOME" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -42,13 +44,13 @@
             android:name=".FirebaseMessagesConfig"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.goog0le.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
     </application>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
 </manifest>
