@@ -52,7 +52,7 @@ public class EditarItem extends AppCompatActivity {
             plato = Plato_repo.getInstance().getListaResultados().get(getIntent().getExtras().getInt("position"));
         }
 
-        ingresoNombre = findViewById(R.id.ingresoNombrePlato);
+        /*ingresoNombre = findViewById(R.id.ingresoNombrePlato);
         ingresoNombre.getEditText().setText(plato.getNombre());
         ingresoDescripcion = findViewById(R.id.ingresoDescripcionPlato);
         ingresoDescripcion.getEditText().setText(plato.getDescripcion());
@@ -64,7 +64,7 @@ public class EditarItem extends AppCompatActivity {
         subtitulo = findViewById(R.id.SubtituloCrear);
         subtitulo.setText("Editar Plato");
 
-        btnRegistrar = findViewById(R.id.buttonRegistrarPlato);
+        btnRegistrar = findViewById(R.id.buttonRegistrarPlato);*/
 
         if(getIntent().getExtras().getBoolean("Bool")){
             ingresoNombre.setEnabled(false);
