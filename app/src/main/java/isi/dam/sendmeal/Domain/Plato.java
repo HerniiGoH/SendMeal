@@ -17,8 +17,19 @@ public class Plato implements Parcelable {
     private Double precio;
     private Float calorias;
     private Boolean enOferta;
+    @Ignore
     private String foto;
 
+    public Plato(Integer id, String nombre, String descripcion, Double precio, Float calorias, Boolean enOferta) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.calorias = calorias;
+        this.enOferta = enOferta;
+    }
+
+    @Ignore
     public Plato(Integer id, String nombre, String descripcion, Double precio, Float calorias, String foto) {
         this.id = id;
         this.nombre = nombre;

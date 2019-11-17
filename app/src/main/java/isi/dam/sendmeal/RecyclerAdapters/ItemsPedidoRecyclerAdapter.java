@@ -1,9 +1,11 @@
 package isi.dam.sendmeal.RecyclerAdapters;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +56,8 @@ public class ItemsPedidoRecyclerAdapter extends RecyclerView.Adapter<ItemsPedido
     public void onBindViewHolder(@NonNull final ItemsPedidoViewHolder holder, final int position) {
 
         final ItemsPedido plato = dataSet.get(position);
+        byte[] b = Base64.decode(plato.getPlato().getFoto(), Base64.DEFAULT);
+        holder.imgPlato.setImageBitmap(BitmapFactory.decodeByteArray(b, 0, b.length));
         holder.titPlato.setText(plato.getPlato().getNombre());
         holder.precPlato.setText("$"+plato.getPrecioPlato().toString());
 

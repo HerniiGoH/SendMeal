@@ -81,6 +81,16 @@ public class Info_Pedido extends AppCompatActivity {
 
         listaItems = DBClient.getInstance(Info_Pedido.this).getPedidoDB().itemsPedidoDao().getAllFromPedido(pedidoSeleccionado.getIdPedido());
 
+        List<Plato> platoList = Plato_repo.getInstance().getListaPlatos();
+
+        for(ItemsPedido i : listaItems){
+            for(Plato p : platoList){
+                if(p.getId() == i.getPlato().getId()){
+                    i.setPlato(p);
+                }
+            }
+        }
+
         pedidoSeleccionado.setItems((ArrayList<ItemsPedido>) listaItems);
 
         Log.d("DEBUGGEANDO", "" + pedidoSeleccionado.getIdPedido() + " " + pedidoSeleccionado.getItems().size());
