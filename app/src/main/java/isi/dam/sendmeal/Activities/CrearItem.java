@@ -2,10 +2,16 @@ package isi.dam.sendmeal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -25,6 +31,8 @@ import isi.dam.sendmeal.DAO.Plato_repo;
 import isi.dam.sendmeal.Domain.Plato;
 import isi.dam.sendmeal.R;
 
+import static android.os.Environment.getExternalStoragePublicDirectory;
+
 public class CrearItem extends AppCompatActivity {
     private String filePath = "";
     String foto_path;
@@ -33,6 +41,7 @@ public class CrearItem extends AppCompatActivity {
     TextInputLayout ingresoNombre, ingresoDescripcion, ingresoPrecio, ingresoCalorias;
     Button btnRegistrar;
     FloatingActionButton boton_camara;
+    String pathToFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,10 @@ public class CrearItem extends AppCompatActivity {
             }
         });
 
+        if(Build.VERSION.SDK_INT>=23){
+            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+        }
+
         boton_camara = findViewById(R.id.agregar_foto_flotante);
         boton_camara.setOnClickListener(
                 new View.OnClickListener() {
@@ -54,14 +67,24 @@ public class CrearItem extends AppCompatActivity {
                     public void onClick(View view) {
                         Intent camara = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-                        File file = new File("mnt/sdcard/download/foto.pdf");
-                        String decodedBase64 = null;
-
-                        Uri outputFile = Uri.fromFile(file);
-
-                        camara.putExtra(MediaStore.EXTRA_OUTPUT, outputFile);
-
-                        startActivityForResult(camara, 0);
+                        if(camara.resolveActivity(getPackageManager())!= null){
+                            File photoFile = null;
+                            try{
+                                String name = "lalala";
+                                File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                                File image = File.createTempFile(name, ".jpg", storageDir);
+                                photoFile = image;
+                                String path = photoFile.getAbsolutePath();
+                                if(path != null){
+                                    pathToFile = photoFile.getAbsolutePath();
+                                    Uri photoUri = FileProvider.getUriForFile(CrearItem.this, "asd", photoFile);
+                                    camara.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                                    startActivityForResult(camara, 1);
+                                }
+                            }catch (Exception e){
+                                Log.d("Foto debug", e.toString());
+                            }
+                        }
                     }
                 }
 
@@ -166,7 +189,12 @@ public class CrearItem extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        if(resultCode == RESULT_OK){
+            if(requestCode == 1){
+                Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
+                //imageViewFoto.setImageBitmap(bitmap);
+            }
+        }
 
     }
 

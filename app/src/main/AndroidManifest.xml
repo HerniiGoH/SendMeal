@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="isi.dam.sendmeal">
 
     <application
@@ -9,16 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.ListaItemsPedido"></activity>
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Activities.ListaItemsPedido" />
         <activity android:name=".Activities.BusquedaItem" />
         <activity android:name=".Activities.ListaResultados" />
         <activity android:name=".Activities.EditarItem" />
         <activity android:name=".Activities.ListaItems" />
         <activity android:name=".Activities.ListaPedido" />
         <activity android:name=".Activities.Info_Pedido" />
-        <activity android:name=".Activities.VisualizadorMapa"></activity>
-        <activity android:name=".Activities.MapsActivity"></activity>
+        <activity android:name=".Activities.VisualizadorMapa" />
+        <activity android:name=".Activities.MapsActivity" />
         <activity
             android:name=".Activities.CrearItem"
             android:parentActivityName=".Activities.HOME" />
@@ -48,6 +50,17 @@
             </intent-filter>
         </service>
 
+        <provider
+            android:authorities="asd"
+            android:name="androidx.core.content.FileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths">
+            </meta-data>
+        </provider>
+
     </application>
     <uses-feature android:name="android.hardware.camera"
         android:required="true"/>
@@ -55,4 +68,5 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 </manifest>
