@@ -65,6 +65,8 @@ public class CrearItem extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
         }
 
+        imagePreview = findViewById(R.id.preview_plato);
+
         new AsyncTask<Void, Void, String>(){
             @Override
             protected String doInBackground(Void... voids) {
@@ -77,6 +79,7 @@ public class CrearItem extends AppCompatActivity {
             }
             @Override
             protected void onPostExecute(String s){
+                imagePreview.setImageBitmap(fotoPlato);
                 Log.d("Foto debug", s);
             }
         }.execute();
@@ -214,7 +217,7 @@ public class CrearItem extends AppCompatActivity {
         if(resultCode == RESULT_OK){
             if(requestCode == 1){
                 fotoPlato = BitmapFactory.decodeFile(pathToFile);
-                //imagePreview.setImageBitmap(fotoPlato);
+                imagePreview.setImageBitmap(fotoPlato);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 fotoPlato.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 byte[] b = byteArrayOutputStream.toByteArray();
