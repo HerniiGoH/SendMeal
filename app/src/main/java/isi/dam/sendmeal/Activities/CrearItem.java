@@ -5,10 +5,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -45,6 +47,7 @@ public class CrearItem extends AppCompatActivity {
     String pathToFile;
     Bitmap fotoPlato;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,23 @@ public class CrearItem extends AppCompatActivity {
         if(Build.VERSION.SDK_INT>=23){
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
         }
+
+        new AsyncTask<Void, Void, String>(){
+            @Override
+            protected String doInBackground(Void... voids) {
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                fotoPlato = BitmapFactory.decodeResource(getResources(),R.drawable.plato_01);
+                fotoPlato.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                byte[] b = byteArrayOutputStream.toByteArray();
+                photoConvert = Base64.encodeToString(b, Base64.DEFAULT);
+                return photoConvert;
+            }
+            @Override
+            protected void onPostExecute(String s){
+                Log.d("Foto debug", s);
+            }
+        }.execute();
+
 
         boton_camara = findViewById(R.id.agregar_foto_flotante);
         boton_camara.setOnClickListener(
