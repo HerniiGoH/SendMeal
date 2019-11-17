@@ -1,14 +1,18 @@
 package isi.dam.sendmeal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
+import androidx.core.widget.ImageViewCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -39,13 +43,14 @@ import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class CrearItem extends AppCompatActivity {
     String photoConvert;
-    ImageView imagePreview;
+    AppCompatImageView imagePreview;
     Toolbar toolbar;
     TextInputLayout ingresoNombre, ingresoDescripcion, ingresoPrecio, ingresoCalorias;
     Button btnRegistrar;
     FloatingActionButton boton_camara;
     String pathToFile;
     Bitmap fotoPlato;
+    File image;
 
 
     @Override
@@ -97,7 +102,7 @@ public class CrearItem extends AppCompatActivity {
                             try{
                                 String name = "lalala";
                                 File storageDir = getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                                File image = File.createTempFile(name, ".jpg", storageDir);
+                                image = File.createTempFile(name, ".jpg", storageDir);
                                 photoFile = image;
                                 String path = photoFile.getAbsolutePath();
                                 if(path != null){
@@ -216,7 +221,30 @@ public class CrearItem extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             if(requestCode == 1){
+                //File f = Environment.getExternalStoragePublicDirectory(pathToFile);
                 fotoPlato = BitmapFactory.decodeFile(pathToFile);
+                try {
+                    ExifInterface exifInterface = new ExifInterface(image.toString());
+                    if(exifInterface.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("6")){
+                        Matrix mtx = new Matrix();
+                        mtx.setRotate(90);
+                        fotoPlato = Bitmap.createBitmap(fotoPlato, 0, 0, fotoPlato.getWidth(), fotoPlato.getHeight(), mtx, true);
+                    }else if(exifInterface.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("8")){
+                        Matrix mtx = new Matrix();
+                        mtx.setRotate(270);
+                        fotoPlato = Bitmap.createBitmap(fotoPlato, 0, 0, fotoPlato.getWidth(), fotoPlato.getHeight(), mtx, true);
+                    }else if(exifInterface.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("3")){
+                        Matrix mtx = new Matrix();
+                        mtx.setRotate(180);
+                        fotoPlato = Bitmap.createBitmap(fotoPlato, 0, 0, fotoPlato.getWidth(), fotoPlato.getHeight(), mtx, true);
+                    }else if(exifInterface.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("0")){
+                        Matrix mtx = new Matrix();
+                        mtx.setRotate(90);
+                        fotoPlato = Bitmap.createBitmap(fotoPlato, 0, 0, fotoPlato.getWidth(), fotoPlato.getHeight(), mtx, true);
+                    }
+                } catch (Exception e) {
+                    Log.d("Foto debug", e.toString());
+                }
                 imagePreview.setImageBitmap(fotoPlato);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 fotoPlato.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
@@ -228,7 +256,6 @@ public class CrearItem extends AppCompatActivity {
 
             }
         }
-
     }
 
 
