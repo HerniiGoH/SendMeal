@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import isi.dam.sendmeal.DAO.Plato_repo;
@@ -34,14 +36,14 @@ import isi.dam.sendmeal.R;
 import static android.os.Environment.getExternalStoragePublicDirectory;
 
 public class CrearItem extends AppCompatActivity {
-    private String filePath = "";
-    String foto_path;
+    String photoConvert;
     ImageView imagePreview;
     Toolbar toolbar;
     TextInputLayout ingresoNombre, ingresoDescripcion, ingresoPrecio, ingresoCalorias;
     Button btnRegistrar;
     FloatingActionButton boton_camara;
     String pathToFile;
+    Bitmap fotoPlato;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,8 +193,16 @@ public class CrearItem extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             if(requestCode == 1){
-                Bitmap bitmap = BitmapFactory.decodeFile(pathToFile);
-                //imageViewFoto.setImageBitmap(bitmap);
+                fotoPlato = BitmapFactory.decodeFile(pathToFile);
+                //imagePreview.setImageBitmap(fotoPlato);
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                fotoPlato.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+                byte[] b = byteArrayOutputStream.toByteArray();
+
+                photoConvert = Base64.encodeToString(b, Base64.DEFAULT);
+
+                Log.d("Foto debug", photoConvert);
+
             }
         }
 
