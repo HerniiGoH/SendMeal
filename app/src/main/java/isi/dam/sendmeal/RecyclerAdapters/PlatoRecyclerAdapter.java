@@ -5,9 +5,12 @@ import android.content.Context;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Base64;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -64,6 +67,8 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
     public void onBindViewHolder(@NonNull final PlatoViewHolder holder, final int position) {
 
         final Plato plato = dataSet.get(position);
+        byte[] b = Base64.decode(plato.getFoto(), Base64.DEFAULT);
+        holder.imgPlato.setImageBitmap(BitmapFactory.decodeByteArray(b, 0, b.length));
         holder.titPlato.setText(plato.getNombre());
         holder.precPlato.setText("$"+plato.getPrecio().toString());
         if( dataSet.get(position).getEnOferta()){
@@ -128,6 +133,9 @@ public class PlatoRecyclerAdapter extends RecyclerView.Adapter<PlatoRecyclerAdap
             @Override
             public void onClick(final View view) {
                 View popup = LayoutInflater.from(context).inflate(R.layout.popup_plato,null);
+                ImageView imageView = popup.findViewById(R.id.imagenPlatoPopup);
+                byte[] b = Base64.decode(plato.getFoto(), Base64.DEFAULT);
+                imageView.setImageBitmap(BitmapFactory.decodeByteArray(b, 0, b.length));
                 TextView nombrePop = popup.findViewById(R.id.nombrePlatoPopup);
                 nombrePop.append(" "+plato.getNombre());
                 TextView descripcionPop = popup.findViewById(R.id.descripcionPlatoPopup);
