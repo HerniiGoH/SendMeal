@@ -17,27 +17,31 @@ public class Plato implements Parcelable {
     private Double precio;
     private Float calorias;
     private Boolean enOferta;
+    private String foto;
 
-    public Plato(Integer id, String nombre, String descripcion, Double precio, Float calorias) {
+    public Plato(Integer id, String nombre, String descripcion, Double precio, Float calorias, String foto) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.calorias = calorias;
         this.enOferta = false;
+        this.foto = foto;
     }
+
     @Ignore
-    public Plato(String nombre, String descripcion, Double precio, Float calorias) {
+    public Plato(String nombre, String descripcion, Double precio, Float calorias, String foto) {
         this.id = Plato.getId_sec();
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.calorias = calorias;
         this.enOferta = false;
-        Plato.setId_sec(id+1);
+        this.foto = foto;
+        Plato.setId_sec(id + 1);
     }
 
-    public static void setIdSeq(Integer id){
+    public static void setIdSeq(Integer id) {
         id_sec = id;
     }
 
@@ -63,6 +67,11 @@ public class Plato implements Parcelable {
             enOferta = null;
         } else {
             enOferta = new Boolean(in.readString());
+        }
+        if (in.readByte() == 0) {
+            foto = null;
+        } else {
+            foto = in.readString();
         }
     }
 
@@ -134,6 +143,14 @@ public class Plato implements Parcelable {
         this.calorias = calorias;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -183,6 +200,12 @@ public class Plato implements Parcelable {
         } else {
             parcel.writeByte((byte) 1);
             parcel.writeString(enOferta.toString());
+        }
+        if (foto == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeString(foto);
         }
     }
 

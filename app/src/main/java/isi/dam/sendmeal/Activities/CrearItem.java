@@ -132,7 +132,7 @@ public class CrearItem extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Datos Inválidos", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Datos Registrados Exitosamente", Toast.LENGTH_SHORT).show();
-                    Plato plato = new Plato(ingresoNombre.getEditText().getText().toString(), ingresoDescripcion.getEditText().getText().toString(), Double.valueOf(ingresoPrecio.getEditText().getText().toString()), Float.valueOf(ingresoCalorias.getEditText().getText().toString()));
+                    Plato plato = new Plato(ingresoNombre.getEditText().getText().toString(), ingresoDescripcion.getEditText().getText().toString(), Double.valueOf(ingresoPrecio.getEditText().getText().toString()), Float.valueOf(ingresoCalorias.getEditText().getText().toString()), photoConvert);
                     Plato_repo.getInstance().crearPlato(plato, miHandler);
                     Toast.makeText(getApplicationContext(), plato.toString(), Toast.LENGTH_LONG).show();
                 }
