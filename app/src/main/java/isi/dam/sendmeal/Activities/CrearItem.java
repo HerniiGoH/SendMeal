@@ -254,6 +254,8 @@ public class CrearItem extends AppCompatActivity {
 
                 Log.d("Foto debug", photoConvert);
 
+                image.delete();
+
             }
         }
     }
