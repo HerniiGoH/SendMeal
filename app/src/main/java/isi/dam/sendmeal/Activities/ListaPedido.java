@@ -1,5 +1,6 @@
 package isi.dam.sendmeal.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,7 +31,6 @@ public class ListaPedido extends AppCompatActivity {
     private Toolbar toolbar;
     private List<Pedido> listaPedidos = new ArrayList<>();
     FloatingActionButton fab, fab_1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

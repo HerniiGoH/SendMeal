@@ -45,8 +45,6 @@ public class VisualizadorMapa extends MapsActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapVisualizador);
         mapFragment.getMapAsync(this);
-
-
     }
 
     @Override

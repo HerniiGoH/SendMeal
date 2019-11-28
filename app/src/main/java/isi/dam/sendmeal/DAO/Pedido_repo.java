@@ -30,7 +30,7 @@ public class Pedido_repo {
     private List<Pedido> listaPedidos;
 
 
-    private Pedido_repo(){ }
+    public Pedido_repo(){ }
 
     public static Pedido_repo getInstance(){
         if(_INSTANCIA == null){

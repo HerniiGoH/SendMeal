@@ -124,6 +124,7 @@ public class CrearItem extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 ingresoNombre = findViewById(R.id.ingresoNombrePlato);
                 ingresoDescripcion = findViewById(R.id.ingresoDescripcionPlato);
                 ingresoPrecio = findViewById(R.id.ingresoPrecioPlato);
@@ -170,6 +171,7 @@ public class CrearItem extends AppCompatActivity {
 
     private boolean verificarPrecio(TextInputLayout ingresoPrecio) {
         ingresoPrecio.setError(null);
+
         try {
             String precio = ingresoPrecio.getEditText().getText().toString().trim();
             if (precio.isEmpty()) {

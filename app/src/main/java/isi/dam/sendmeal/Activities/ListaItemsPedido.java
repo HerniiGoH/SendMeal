@@ -199,4 +199,8 @@ public class ListaItemsPedido extends AppCompatActivity {
             crear.setEnabled(true);
         }
     }
+
+    public Button getCrear(){
+        return crear;
+    }
 }
